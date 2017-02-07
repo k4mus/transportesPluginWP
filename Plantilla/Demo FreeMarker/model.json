@@ -1,0 +1,11 @@
+{
+   "titulo": "Listar Usuarios",
+   "autor": "fmoreno",
+   "plugin"."tran",
+   "schema":"tran",
+   "tableName":"ot",
+   "columnas": [
+        { "name":"id_cliente", "tipo":"int", "alias":"cliente"},
+        { "name":"fecha", "tipo":"datetime", "alias":"fecha"}       
+	]		
+}

@@ -34,8 +34,8 @@ function trans_modifymenu() {
 	add_menu_page('Transportes', //page title
 	'Transportes', //menu title
 	'manage_options', //capabilities
-	'trans_list', //menu slug
-	'' //function
+	'ot_list', //menu slug
+	'ot_list' //function
 	);
 
 	//this submenu is HIDDEN, however, we need to add it anyways
@@ -62,23 +62,23 @@ function trans_modifymenu() {
 	'Transportes', //page title
 	'Orden de Transporte', //menu title
 	'manage_options', //capabilities
-	'trans_list', //menu slug
-	'sinetiks_schools_list' //function
+	'ot_list', //menu slug
+	'ot_list' //function
 	);
 	
 	add_submenu_page('trans_list', //parent slug
 	'Transportes', //page title
 	'Viaje', //menu title
 	'manage_options', //capabilities
-	'trans_list', //menu slug
-	'sinetiks_schools_list' //function
+	'sinetiks_schools_create', //menu slug
+	'sinetiks_schools_create' //function
 	);
 	
 	add_submenu_page('trans_list', //parent slug
 	'Transportes', //page title
 	'Registro de Gastos', //menu title
 	'manage_options', //capabilities
-	'trans_list', //menu slug
+	'sinetiks_schools_list', //menu slug
 	'sinetiks_schools_list' //function
 	);
 	
@@ -87,7 +87,7 @@ function trans_modifymenu() {
 	'Transportes', //page title
 	'Trabajador', //menu title
 	'manage_options', //capabilities
-	'trans_list', //menu slug
+	'sinetiks_schools_list', //menu slug
 	'sinetiks_schools_list' //function
 	);
 	
@@ -95,7 +95,7 @@ function trans_modifymenu() {
 	'Transportes', //page title
 	'Camion', //menu title
 	'manage_options', //capabilities
-	'trans_list', //menu slug
+	'sinetiks_schools_list', //menu slug
 	'sinetiks_schools_list' //function
 	);
 	
@@ -103,7 +103,7 @@ function trans_modifymenu() {
 	'Transportes', //page title
 	'Ruta', //menu title
 	'manage_options', //capabilities
-	'trans_list', //menu slug
+	'sinetiks_schools_list', //menu slug
 	'sinetiks_schools_list' //function
 	);
 	
@@ -111,5 +111,6 @@ function trans_modifymenu() {
 }
 define('ROOTDIR', plugin_dir_path(__FILE__));
 require_once(ROOTDIR . 'schools-list.php');
+require_once(ROOTDIR . 'ot-list.php');
 require_once(ROOTDIR . 'schools-create.php');
 require_once(ROOTDIR . 'schools-update.php');
