@@ -1,6 +1,6 @@
 <?php
 
-function sinetiks_schools_create() {
+function ${plugin}_${table}_create() {
     <#list columnas as col>
 	$${col.name} = $_POST["${col.name}"];
 	</#list>
@@ -12,7 +12,7 @@ function sinetiks_schools_create() {
 
         $wpdb->insert(
                 $table_name, //table
-                array(<#list columnas as col> '${col.name}' => $${col.name} ,</#list> ), //data
+                array(<#list columnas as col> '${col.name}' => $${col.name} <#if col_has_next>,</#if></#list> ), //data
                 array('%s', '%s') //data format			
         );
         $message.="${tableName} inserted";

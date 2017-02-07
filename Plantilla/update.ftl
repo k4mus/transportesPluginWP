@@ -2,7 +2,7 @@
 
 function ${plugin}_${table}_update() {
     global $wpdb;
-    $table_name = $wpdb->prefix . "${tanleName}";
+    $table_name = $wpdb->prefix . "${tableName}";
     $${indice} = $_GET["${indice}"];
 	<#list columnas as col>
 	$${col.name} = $_POST["${col.name}"];
@@ -12,9 +12,9 @@ function ${plugin}_${table}_update() {
     if (isset($_POST['update'])) {
         $wpdb->update(
                 $table_name, //table
-				array(<#list columnas as col> '${col.name}' => $${col.name},</#list>), //data
+				array(<#list columnas as col> '${col.name}' => $${col.name}<#if col_has_next>,</#if></#list>), //data
                 array('${indice}' => $${indice}), //where
-				array(<#list columnas as col>'%s',</#list>), //data format
+				array(<#list columnas as col>'%s'<#if col_has_next>,</#if></#list>), //data format
                 array('%s') //where format
         );
     }
@@ -22,7 +22,7 @@ function ${plugin}_${table}_update() {
     else if (isset($_POST['delete'])) {
         $wpdb->query($wpdb->prepare("DELETE FROM $table_name WHERE ${indice} = %s", $${indice}));
     } else {//selecting value to update	
-        $results = $wpdb->get_results($wpdb->prepare("SELECT ${indice},<#list columnas as col> ${col.name} ,</#list> from $table_name where ${indice}=%s", $${indice}));
+        $results = $wpdb->get_results($wpdb->prepare("SELECT ${indice},<#list columnas as col> ${col.name} <#if col_has_next>,</#if></#list> from $table_name where ${indice}=%s", $${indice}));
         foreach ($results as $r) {
             <#list columnas as col> 
 			$${col.name} = $r->${col.name};
