@@ -2,11 +2,11 @@
 <@pp.dropOutputFile/>
 
 <#list doc.data.procedures.procedure as proc>
-  
-  <@pp.changeOutputFile name="/ASP/"+proc.@name+".asp"/>
-  <%@ Language="VBScript" CodePage="1252" LCID="1033" %>
-  <Script Language="VBScript" RunAt="Server">
-      
+
+	<@pp.changeOutputFile name="/ASP/"+proc.@name+".asp"/>
+	<%@ Language="VBScript" CodePage="1252" LCID="1033" %>
+		<Script Language="VBScript" RunAt="Server">
+
 '++
 ' File: ${proc.@name}.asp  
 ' 
@@ -44,7 +44,7 @@ Private Sub SendResultSets(UseADTG, AdoRst, Format)
         Set AdoRst = AdoRst.NextRecordset
     Loop
 End Sub
-      
+
 ' Executes procedure "${proc.@name}"
 Private Sub ExecuteProcedure(UseADTG)
     'Set the Locale to the first one accepted by the client
@@ -68,22 +68,23 @@ Private Sub ExecuteProcedure(UseADTG)
     'Create and initialize ADO command
     Set AdoCmd = Server.CreateObject("ADODB.Command")
     Set AdoCmd.ActiveConnection = AdoCon
-    AdoCmd.CommandText = "{? = call ${proc.@name}(<#list proc.parametros.parametro as par>?<#if par_has_next>,</#if></#list>)}"
+    AdoCmd.CommandText = "{? = call ${proc.@name}(<#list proc.parametros.parametro as par>?<#if par_has_next>,</#if>
+					</#list>)}"
     AdoCmd.CommandType = adCmdText
     AdoCmd.CommandTimeout = CmdTimeout
 
     '0: Append ADO parameter "RETURN_VALUE" int (Return)
     Set AdoPar = AdoCmd.CreateParameter("RETURN_VALUE", adInteger, adParamReturnValue)
     AdoCmd.Parameters.Append AdoPar
-    <#assign icont = 1/>  
-    <#list proc.params.param  as par>
+					<#assign icont = 1/>  
+					<#list proc.params.param  as par>
   '${icont}: Append ADO parameter "${par.@name}" ${par.@sqlType} <#if par.@largo?has_content> ( ${par.@largo} )</#if> (Input)
       Set AdoPar = AdoCmd.CreateParameter("${par.@name}", ad${par.@sqlType}, adParamInput <#if par.@largo?has_content>,${par.@largo}</#if>)
     AdoPar.Value = CStr(ParamValue("${par.@name}", Empty))
     AdoCmd.Parameters.Append AdoPar
-  <#assign icont = icont+1/>
-    </#list>      
-    
+						<#assign icont = icont+1/>
+					</#list>      
+
 
     'Execute the procedure
     Set AdoRst = AdoCmd.Execute()
@@ -116,8 +117,8 @@ Private Sub ExecuteProcedure(UseADTG)
     'Release connection
     AdoCon.Close
 End Sub
-      
-      
+
+
 'Initialize response
 Response.Buffer = True
 Response.Expires = -1
@@ -151,6 +152,6 @@ If (Err.Number <> 0) Then
     End If
 End If
 
-</Script>      
-      
- </#list>
+					</Script>      
+
+				</#list>

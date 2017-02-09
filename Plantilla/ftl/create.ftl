@@ -1,6 +1,6 @@
 <?php
 
-function ${plugin}_${table}_create() {
+function ${plugin}_${tableName}_create() {
     <#list columnas as col>
 	$${col.name} = $_POST["${col.name}"];
 	</#list>

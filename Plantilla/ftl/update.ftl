@@ -1,6 +1,6 @@
 <?php
 
-function ${plugin}_${table}_update() {
+function ${plugin}_${tableName}_update() {
     global $wpdb;
     $table_name = $wpdb->prefix . "${tableName}";
     $${indice} = $_GET["${indice}"];
@@ -36,11 +36,11 @@ function ${plugin}_${table}_update() {
 
         <?php if ($_POST['delete']) { ?>
             <div class="updated"><p>${titulo} deleted</p></div>
-            <a href="<?php echo admin_url('admin.php?page=${plugin}_${table}_list') ?>">&laquo; Volver</a>
+            <a href="<?php echo admin_url('admin.php?page=${plugin}_${tableName}_list') ?>">&laquo; Volver</a>
 
         <?php } else if ($_POST['update']) { ?>
             <div class="updated"><p>${titulo} updated</p></div>
-            <a href="<?php echo admin_url('admin.php?page=${plugin}_${table}_list') ?>">&laquo; Volver</a>
+            <a href="<?php echo admin_url('admin.php?page=${plugin}_${tableName}_list') ?>">&laquo; Volver</a>
 
         <?php } else { ?>
             <form method="post" action="<?php echo $_SERVER['REQUEST_URI']; ?>">

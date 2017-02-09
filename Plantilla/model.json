@@ -1,13 +1,12 @@
 {
    "titulo": "Orden de Transporte",
    "autor": "fmoreno",
-   "plugin"."tran",
+   "plugin":"tran",
    "schema":"tran",
    "tableName":"ot",
-   "indice":"id_ot";
+   "indice":"id_ot",
    "columnas": [
-        { "name":"id_ot", "tipo":"int", "alias":"ID"},
-		{ "name":"nombreEmpresa", "tipo":"int", "alias":"empresa"},
+     	{ "name":"nombreEmpresa", "tipo":"int", "alias":"empresa"},
         { "name":"fecha", "tipo":"datetime", "alias":"fecha"}       
 	]		
 }
