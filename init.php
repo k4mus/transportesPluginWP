@@ -25,17 +25,18 @@ function ss_options_install() {
 
 // run the install scripts upon plugin activation
 register_activation_hook(__FILE__, 'ss_options_install');
-
+// run the install scripts upon plugin activation
+register_activation_hook(__FILE__, 'ot_options_install');
 //menu items
 add_action('admin_menu','trans_modifymenu');
 function trans_modifymenu() {
 	
 	//this is the main item for the menu
 	add_menu_page('Transportes', //page title
-	'Transportes', //menu title
+	'Menú Transportes', //menu title
 	'manage_options', //capabilities
-	'ot_list', //menu slug
-	'ot_list' //function
+	'menu_transportes', //menu slug
+	'sinetiks_schools_list' //function
 	);
 
 	//this submenu is HIDDEN, however, we need to add it anyways
@@ -53,64 +54,11 @@ function trans_modifymenu() {
 	'manage_options', //capability
 	'sinetiks_schools_create', //menu slug
 	'sinetiks_schools_create'); //function
-	
-///////////////////////////////////////////////////////
-	//this is the main item for the menu
-	
-	//this is the main item for the menu
-	add_submenu_page('trans_list', //parent slug
-	'Transportes', //page title
-	'Orden de Transporte', //menu title
-	'manage_options', //capabilities
-	'ot_list', //menu slug
-	'ot_list' //function
-	);
-	
-	add_submenu_page('trans_list', //parent slug
-	'Transportes', //page title
-	'Viaje', //menu title
-	'manage_options', //capabilities
-	'sinetiks_schools_create', //menu slug
-	'sinetiks_schools_create' //function
-	);
-	
-	add_submenu_page('trans_list', //parent slug
-	'Transportes', //page title
-	'Registro de Gastos', //menu title
-	'manage_options', //capabilities
-	'sinetiks_schools_list', //menu slug
-	'sinetiks_schools_list' //function
-	);
-	
-	
-	add_submenu_page('trans_list', //parent slug
-	'Transportes', //page title
-	'Trabajador', //menu title
-	'manage_options', //capabilities
-	'sinetiks_schools_list', //menu slug
-	'sinetiks_schools_list' //function
-	);
-	
-	add_submenu_page('trans_list', //parent slug
-	'Transportes', //page title
-	'Camion', //menu title
-	'manage_options', //capabilities
-	'sinetiks_schools_list', //menu slug
-	'sinetiks_schools_list' //function
-	);
-	
-	add_submenu_page('trans_list', //parent slug
-	'Transportes', //page title
-	'Ruta', //menu title
-	'manage_options', //capabilities
-	'sinetiks_schools_list', //menu slug
-	'sinetiks_schools_list' //function
-	);
-	
+
 	
 }
 define('ROOTDIR', plugin_dir_path(__FILE__));
 require_once(ROOTDIR . 'schools-list.php');
-require_once(ROOTDIR . 'ot-list.php');
 require_once(ROOTDIR . 'schools-create.php');
 require_once(ROOTDIR . 'schools-update.php');
+require_once(ROOTDIR . 'tran/ot/tran_ot_init.php');

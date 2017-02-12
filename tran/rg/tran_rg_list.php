@@ -1,21 +1,21 @@
 <?php
 
-function tran_ot_list() {
+function tran_rg_list() {
     ?>
-    <link type="text/css" href="<?php echo WP_PLUGIN_URL; ?>/tran/style-admin.css" rel="stylesheet" />
+    <link type="text/css" href="<?php echo WP_PLUGIN_URL; ?>/transportes-plugin/style-admin.css" rel="stylesheet" />
     <div class="wrap">
-        <h2>Orden de Transporte</h2>
+        <h2>Registro de Gastos</h2>
         <div class="tablenav top">
             <div class="alignleft actions">
-                <a href="<?php echo admin_url('admin.php?page=tran_ot_create'); ?>">Agregar...</a>
+                <a href="<?php echo admin_url('admin.php?page=tran_rg_create'); ?>">Agregar...</a>
             </div>
             <br class="clear">
         </div>
         <?php
         global $wpdb;
-        $table_name = $wpdb->prefix . "ot";
+        $table_name = $wpdb->prefix . "rg";
 
-        $rows = $wpdb->get_results("SELECT  col.name , col.name  from $table_name");
+        $rows = $wpdb->get_results("SELECT id_rg,  nombreEmpresa , fecha  from $table_name");
         ?>
         <table class='wp-list-table widefat fixed striped posts'>
             <tr>
@@ -26,10 +26,10 @@ function tran_ot_list() {
             </tr>
             <?php foreach ($rows as $row) { ?>
                 <tr>
-                    <td class="manage-column ss-list-width"><?php echo $row->id_ot; ?></td>
+                    <td class="manage-column ss-list-width"><?php echo $row->id_rg; ?></td>
 					<td class="manage-column ss-list-width"><?php echo $row->nombreEmpresa; ?></td>
 					<td class="manage-column ss-list-width"><?php echo $row->fecha; ?></td>
-			        <td><a href="<?php echo admin_url('admin.php?page=tran_ot_update&id=' . $row->id_ot); ?>">Update</a></td>
+			        <td><a href="<?php echo admin_url('admin.php?page=tran_rg_update&id_rg=' . $row->id_rg); ?>">Update</a></td>
                 </tr>
             <?php } ?>
         </table>
