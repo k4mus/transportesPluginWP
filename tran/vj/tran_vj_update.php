@@ -30,6 +30,10 @@ function tran_vj_update() {
     }
     ?>
     <link type="text/css" href="<?php echo WP_PLUGIN_URL; ?>/transportes-plugin/style-admin.css" rel="stylesheet" />
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css">
+	<script src="//code.jquery.com/jquery-1.12.4.js"></script>
+	<script src="//code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    
     <div class="wrap">
         <h2>Orden de Viaje</h2>
 
@@ -44,9 +48,9 @@ function tran_vj_update() {
         <?php } else { ?>
             <form method="post" action="<?php echo $_SERVER['REQUEST_URI']; ?>">
                 <table class='wp-list-table widefat fixed'>
-                    <tr><th>ID</th><td><input type="text" name="id_vj" value="<?php echo $id_vj; ?>"/></td></tr>
-					<tr><th>empresa</th><td><input type="text" name="nombreEmpresa" value="<?php echo $nombreEmpresa; ?>"/></td></tr>
-					<tr><th>fecha</th><td><input type="text" name="fecha" value="<?php echo $fecha; ?>"/></td></tr>
+                    <tr><th>ID</th><td><input type="text" name="id_vj" value="<?php echo $id_vj; ?>" disabled /></td></tr>
+					<tr><th>empresa</th><td><input type="text" name="nombreEmpresa" value="<?php echo $nombreEmpresa; ?>" class=""/></td></tr>
+					<tr><th>fecha</th><td><input type="text" name="fecha" value="<?php echo $fecha; ?>" class="datetime"/></td></tr>
 					
                 </table>
                 <input type='submit' name="update" value='Save' class='button'> &nbsp;&nbsp;
@@ -54,6 +58,11 @@ function tran_vj_update() {
             </form>
         <?php } ?>
 			<a href="<?php echo admin_url('admin.php?page=tran_vj_list') ?>">&laquo; Volver</a>
+			
     </div>
+    <script>
+		$( ".datetime" ).datepicker();
+		$( ".datetime" ).onclick(function(){$(this).datepicker('show')});
+	</script>
     <?php
 }

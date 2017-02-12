@@ -29,6 +29,8 @@ register_activation_hook(__FILE__, 'ss_options_install');
 register_activation_hook(__FILE__, 'ot_options_install');
 register_activation_hook(__FILE__, 'vj_options_install');
 register_activation_hook(__FILE__, 'rg_options_install');
+register_activation_hook(__FILE__, 'cm_options_install');
+register_activation_hook(__FILE__, 'tb_options_install');
 //menu items
 add_action('admin_menu','trans_modifymenu');
 function trans_modifymenu() {
@@ -66,3 +68,5 @@ require_once(ROOTDIR . 'schools-update.php');
 require_once(ROOTDIR . 'tran/ot/tran_ot_init.php');
 require_once(ROOTDIR . 'tran/vj/tran_vj_init.php');
 require_once(ROOTDIR . 'tran/rg/tran_rg_init.php');
+require_once(ROOTDIR . 'tran/tb/tran_tb_init.php');
+require_once(ROOTDIR . 'tran/cm/tran_cm_init.php');

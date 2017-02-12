@@ -1,9 +1,9 @@
 <?php
 
-function tran_ot_update() {
+function tran_tb_update() {
     global $wpdb;
-    $table_name = $wpdb->prefix ."ot";
-    $id_ot = $_GET["id_ot"];
+    $table_name = $wpdb->prefix ."tb";
+    $id_tb = $_GET["id_tb"];
 	$nombreEmpresa = $_POST["nombreEmpresa"];
 	$fecha = $_POST["fecha"];
 	
@@ -12,18 +12,18 @@ function tran_ot_update() {
         $wpdb->update(
                 $table_name, //table
 				array( 'nombreEmpresa' => $nombreEmpresa, 'fecha' => $fecha), //data
-                array('id_ot' => $id_ot), //where
+                array('id_tb' => $id_tb), //where
 				array('%s','%s'), //data format
                 array('%s') //where format
         );
     }
 //delete
     else if (isset($_POST['delete'])) {
-        $wpdb->query($wpdb->prepare("DELETE FROM $table_name WHERE id_ot = %s", $id_ot));
+        $wpdb->query($wpdb->prepare("DELETE FROM $table_name WHERE id_tb = %s", $id_tb));
     } else {//selecting value to update	
-        $results = $wpdb->get_results($wpdb->prepare("SELECT id_ot, nombreEmpresa , fecha  from $table_name where id_ot=%s", $id_ot));
+        $results = $wpdb->get_results($wpdb->prepare("SELECT id_tb, nombreEmpresa , fecha  from $table_name where id_tb=%s", $id_tb));
         foreach ($results as $r) {
-            $id_ot = $r->id_ot;
+            $id_tb = $r->id_tb;
 			$nombreEmpresa = $r->nombreEmpresa;
 			$fecha = $r->fecha;
         }
@@ -35,20 +35,20 @@ function tran_ot_update() {
 	<script src="//code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     
     <div class="wrap">
-        <h2>Orden de Transporte</h2>
+        <h2>Trabajadores</h2>
 
         <?php if ($_POST['delete']) { ?>
-            <div class="updated"><p>Orden de Transporte deleted</p></div>
+            <div class="updated"><p>Trabajadores deleted</p></div>
             
 
         <?php } else if ($_POST['update']) { ?>
-            <div class="updated"><p>Orden de Transporte updated</p></div>
+            <div class="updated"><p>Trabajadores updated</p></div>
             
 
         <?php } else { ?>
             <form method="post" action="<?php echo $_SERVER['REQUEST_URI']; ?>">
                 <table class='wp-list-table widefat fixed'>
-                    <tr><th>ID</th><td><input type="text" name="id_ot" value="<?php echo $id_ot; ?>" disabled /></td></tr>
+                    <tr><th>ID</th><td><input type="text" name="id_tb" value="<?php echo $id_tb; ?>" disabled /></td></tr>
 					<tr><th>empresa</th><td><input type="text" name="nombreEmpresa" value="<?php echo $nombreEmpresa; ?>" class=""/></td></tr>
 					<tr><th>fecha</th><td><input type="text" name="fecha" value="<?php echo $fecha; ?>" class="datetime"/></td></tr>
 					
@@ -57,7 +57,7 @@ function tran_ot_update() {
                 <input type='submit' name="delete" value='Delete' class='button' onclick="return confirm('&iquest;Est&aacute;s seguro de borrar este elemento?')">
             </form>
         <?php } ?>
-			<a href="<?php echo admin_url('admin.php?page=tran_ot_list') ?>">&laquo; Volver</a>
+			<a href="<?php echo admin_url('admin.php?page=tran_tb_list') ?>">&laquo; Volver</a>
 			
     </div>
     <script>
