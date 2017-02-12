@@ -35,7 +35,7 @@ function tran_rg_create() {
             </table>
             <input type='submit' name="insert" value='Save' class='button'>
         </form>
-		<a href="<?php echo admin_url('admin.php?page=tran_ot_list') ?>">&laquo; Volver</a>
+		<a href="<?php echo admin_url('admin.php?page=tran_rg_list') ?>">&laquo; Volver</a>
     </div>
     <?php
 }

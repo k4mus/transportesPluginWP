@@ -21,7 +21,7 @@ function vj_options_install() {
             	`nombreEmpresa` varchar(50) CHARACTER SET utf8 NOT NULL ,
             	`fecha` varchar(50) CHARACTER SET utf8 NOT NULL ,
             PRIMARY KEY (`id_vj`),
-            UNIQUE KEY `ix_` (`id_rg`)
+            UNIQUE KEY `ix_` (`id_vj`)
           ) AUTO_INCREMENT=0 $charset_collate; ";
 
     require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );

@@ -53,7 +53,7 @@ function tran_rg_update() {
                 <input type='submit' name="delete" value='Delete' class='button' onclick="return confirm('&iquest;Est&aacute;s seguro de borrar este elemento?')">
             </form>
         <?php } ?>
-			<a href="<?php echo admin_url('admin.php?page=tran_ot_list') ?>">&laquo; Volver</a>
+			<a href="<?php echo admin_url('admin.php?page=tran_rg_list') ?>">&laquo; Volver</a>
     </div>
     <?php
 }
