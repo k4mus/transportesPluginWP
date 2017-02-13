@@ -26,11 +26,12 @@ function tran_vj_list() {
             </tr>
             <?php foreach ($rows as $row) { ?>
                 <tr>
-                    <td class="manage-column ss-list-width"><?php echo $row->id_vj; ?></td>
+                    <td class="manage-column ss-list-width">
+						<a href="<?php echo admin_url('admin.php?page=tran_vj_update&id_vj=' . $row->id_vj); ?>"><?php echo $row->id_vj; ?></a>
+					</td>
 					<td class="manage-column ss-list-width"><?php echo $row->nombreEmpresa; ?></td>
 					<td class="manage-column ss-list-width"><?php echo $row->fecha; ?></td>
-			        <td><a href="<?php echo admin_url('admin.php?page=tran_vj_update&id_vj=' . $row->id_vj); ?>">Update</a></td>
-                </tr>
+			    </tr>
             <?php } ?>
         </table>
     </div>

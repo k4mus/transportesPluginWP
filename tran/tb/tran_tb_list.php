@@ -26,11 +26,12 @@ function tran_tb_list() {
             </tr>
             <?php foreach ($rows as $row) { ?>
                 <tr>
-                    <td class="manage-column ss-list-width"><?php echo $row->id_tb; ?></td>
+                    <td class="manage-column ss-list-width">
+						<a href="<?php echo admin_url('admin.php?page=tran_tb_update&id_tb=' . $row->id_tb); ?>"><?php echo $row->id_tb; ?></a>
+					</td>
 					<td class="manage-column ss-list-width"><?php echo $row->nombreEmpresa; ?></td>
 					<td class="manage-column ss-list-width"><?php echo $row->fecha; ?></td>
-			        <td><a href="<?php echo admin_url('admin.php?page=tran_tb_update&id_tb=' . $row->id_tb); ?>">Update</a></td>
-                </tr>
+			    </tr>
             <?php } ?>
         </table>
     </div>

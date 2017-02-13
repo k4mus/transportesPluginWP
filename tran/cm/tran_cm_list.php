@@ -26,11 +26,12 @@ function tran_cm_list() {
             </tr>
             <?php foreach ($rows as $row) { ?>
                 <tr>
-                    <td class="manage-column ss-list-width"><?php echo $row->id_cm; ?></td>
+                    <td class="manage-column ss-list-width">
+						<a href="<?php echo admin_url('admin.php?page=tran_cm_update&id_cm=' . $row->id_cm); ?>"><?php echo $row->id_cm; ?></a>
+					</td>
 					<td class="manage-column ss-list-width"><?php echo $row->nombreEmpresa; ?></td>
 					<td class="manage-column ss-list-width"><?php echo $row->fecha; ?></td>
-			        <td><a href="<?php echo admin_url('admin.php?page=tran_cm_update&id_cm=' . $row->id_cm); ?>">Update</a></td>
-                </tr>
+			    </tr>
             <?php } ?>
         </table>
     </div>
