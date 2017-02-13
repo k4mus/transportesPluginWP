@@ -122,7 +122,6 @@ function tran_ot_update() {
     </div>
     <script>
 		$( ".datetime" ).datepicker();
-		$( ".datetime" ).onclick(function(){$(this).datepicker('show')});
 	</script>
     <?php
 }

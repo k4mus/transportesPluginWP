@@ -46,6 +46,15 @@ function tran_vj_update() {
             
 
         <?php } else { ?>
+		<div id="tabs">
+		  <ul>
+			<li><a href="#tabs-1">Viaje</a></li>
+			<li><a href="#tabs-2">Orden de Transporte</a></li>
+			<li><a href="#tabs-3">Trabajadores</a></li>
+			<li><a href="#tabs-4">Vehiculos</a></li>
+			<li><a href="#tabs-5">Gastos</a></li>
+		  </ul>
+		  <div id="tabs-1">
             <form method="post" action="<?php echo $_SERVER['REQUEST_URI']; ?>">
                 <table class='wp-list-table widefat fixed'>
                     <tr><th>ID</th><td><input type="text" name="id_vj" value="<?php echo $id_vj; ?>" disabled /></td></tr>
@@ -53,16 +62,33 @@ function tran_vj_update() {
 					<tr><th>fecha</th><td><input type="text" name="fecha" value="<?php echo $fecha; ?>" class="datetime"/></td></tr>
 					
                 </table>
-                <input type='submit' name="update" value='Save' class='button'> &nbsp;&nbsp;
-                <input type='submit' name="delete" value='Delete' class='button' onclick="return confirm('&iquest;Est&aacute;s seguro de borrar este elemento?')">
+				<input type='submit' name="update" value='Save' class='button'> &nbsp;&nbsp;
+				<input type='submit' name="delete" value='Delete' class='button' onclick="return confirm('&iquest;Est&aacute;s seguro de borrar este elemento?')">
+		
             </form>
+		</div>
+		  <div id="tabs-2">
+		  
+			<?php
+			tran_ot_list();
+			?>
+
+		  </div>
+		  <div id="tabs-3">
+		  </div>
+		  <div id="tabs-4">
+		  </div>
+		  <div id="tabs-5">
+		  </div>
+		</div>
         <?php } ?>
-			<a href="<?php echo admin_url('admin.php?page=tran_vj_list') ?>">&laquo; Volver</a>
+		<a href="<?php echo admin_url('admin.php?page=tran_vj_list') ?>">&laquo; Volver</a>
 			
     </div>
     <script>
 		$( ".datetime" ).datepicker();
-		$( ".datetime" ).onclick(function(){$(this).datepicker('show')});
+		$( "#tabs" ).tabs();
+		
 	</script>
     <?php
 }

@@ -30,18 +30,7 @@ function tran_ot_list() {
 				<th class="manage-column ss-list-width">Telefono</th>
 				<th class="manage-column ss-list-width">Direccion</th>
 				<th class="manage-column ss-list-width">Ciudad</th>
-				<th class="manage-column ss-list-width">Persona Entrega</th>
-				<th class="manage-column ss-list-width">Fecha Entrega</th>
-				<th class="manage-column ss-list-width">Forma de Pago</th>
-				<th class="manage-column ss-list-width">Cuenta Corriente</th>
-				<th class="manage-column ss-list-width">Boleta/Factura</th>
-				<th class="manage-column ss-list-width">N° de Piezas</th>
-				<th class="manage-column ss-list-width">Peso(Kg)</th>
-				<th class="manage-column ss-list-width">Largo(m)</th>
-				<th class="manage-column ss-list-width">Ancho(m)</th>
-				<th class="manage-column ss-list-width">Alto(m)</th>
-				<th class="manage-column ss-list-width">Documentos asociados</th>
-				<th class="manage-column ss-list-width">Instrucciones</th>
+				
                 <th>&nbsp;</th>
             </tr>
             <?php foreach ($rows as $row) { ?>
@@ -59,18 +48,7 @@ function tran_ot_list() {
 					<td class="manage-column ss-list-width"><?php echo $row->telEmpEnt; ?></td>
 					<td class="manage-column ss-list-width"><?php echo $row->dirEmpEnt; ?></td>
 					<td class="manage-column ss-list-width"><?php echo $row->ciudEmpEnt; ?></td>
-					<td class="manage-column ss-list-width"><?php echo $row->nomPerEnt; ?></td>
-					<td class="manage-column ss-list-width"><?php echo $row->fechaEnt; ?></td>
-					<td class="manage-column ss-list-width"><?php echo $row->formaPago; ?></td>
-					<td class="manage-column ss-list-width"><?php echo $row->cuentaCte; ?></td>
-					<td class="manage-column ss-list-width"><?php echo $row->boletaFactura; ?></td>
-					<td class="manage-column ss-list-width"><?php echo $row->nroPiezas; ?></td>
-					<td class="manage-column ss-list-width"><?php echo $row->pesoCarga; ?></td>
-					<td class="manage-column ss-list-width"><?php echo $row->largoCarga; ?></td>
-					<td class="manage-column ss-list-width"><?php echo $row->anchoCarga; ?></td>
-					<td class="manage-column ss-list-width"><?php echo $row->altoCarga; ?></td>
-					<td class="manage-column ss-list-width"><?php echo $row->documentos; ?></td>
-					<td class="manage-column ss-list-width"><?php echo $row->instrucciones; ?></td>
+					
 			    </tr>
             <?php } ?>
         </table>
