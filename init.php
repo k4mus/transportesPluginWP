@@ -73,4 +73,4 @@ require_once(ROOTDIR . 'tran/rg/tran_rg_init.php');
 require_once(ROOTDIR . 'tran/tb/tran_tb_init.php');
 require_once(ROOTDIR . 'tran/vh/tran_vh_init.php');
 require_once(ROOTDIR . 'tran/rt/tran_rt_init.php');
-require_once(ROOTDIR . 'tran/rt/tran_dn_init.php');
+require_once(ROOTDIR . 'tran/dn/tran_dn_init.php');
