@@ -67,19 +67,15 @@ function tran_vj_update() {
 		
             </form>
 		</div>
-		  <div id="tabs-2">
-		  
-			<?php
-			tran_ot_list();
-			?>
-
-		  </div>
-		  <div id="tabs-3">
-		  </div>
-		  <div id="tabs-4">
-		  </div>
-		  <div id="tabs-5">
-		  </div>
+			<div id="tabs-2">
+			<?php	tran_ot_list();?>
+			</div>
+			<div id="tabs-3">
+			</div>
+			<div id="tabs-4">
+			</div>
+			<div id="tabs-5">
+			</div>
 		</div>
         <?php } ?>
 		<a href="<?php echo admin_url('admin.php?page=tran_vj_list') ?>">&laquo; Volver</a>
