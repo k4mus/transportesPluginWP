@@ -6,12 +6,14 @@ function tran_rt_update() {
     $id_rt = $_GET["id_rt"];
 	$nombreEmpresa = $_POST["nombreEmpresa"];
 	$fecha = $_POST["fecha"];
+	//volver
 	
 //update
-    if (isset($_POST['update'])) {
+    if (isset($_POST['update'])){
+		
         $wpdb->update(
                 $table_name, //table
-				array( 'nombreEmpresa' => $nombreEmpresa, 'fecha' => $fecha), //data
+				array(  'nombreEmpresa' => $nombreEmpresa, 'fecha' => $fecha), //data
                 array('id_rt' => $id_rt ), //where
 				array('%s','%s'), //data format
                 array('%s') //where format
@@ -66,7 +68,7 @@ function tran_rt_update() {
             </form>
 		</div>
         <?php } ?>
-			<a href="<?php echo admin_url('admin.php?page=tran_rt_list') ?>">&laquo; Volver</a>
+			<a href="<?php echo admin_url('admin.php?page='.$page_volver) ?>">&laquo; Volver</a>
 			
     </div>
     <script>

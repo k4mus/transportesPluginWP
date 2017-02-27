@@ -24,14 +24,17 @@ function tran_ot_create() {
 	$documentos = $_POST["documentos"];
 	$instrucciones = $_POST["instrucciones"];
 	
-    //insert
+	//volver
+	
+	 //insert
     if (isset($_POST['insert'])) {
+		
         global $wpdb;
         $table_name = $wpdb->prefix ."ot";
 
         $wpdb->insert(
                 $table_name, //table
-                array( 'NomEmpRet' => $NomEmpRet , 'telEmpRet' => $telEmpRet , 'dirEmpRet' => $dirEmpRet , 'ciudEmpRet' => $ciudEmpRet , 'nomPerRet' => $nomPerRet , 'fechaRet' => $fechaRet , 'NomEmpEnt' => $NomEmpEnt , 'telEmpEnt' => $telEmpEnt , 'dirEmpEnt' => $dirEmpEnt , 'ciudEmpEnt' => $ciudEmpEnt , 'nomPerEnt' => $nomPerEnt , 'fechaEnt' => $fechaEnt , 'formaPago' => $formaPago , 'cuentaCte' => $cuentaCte , 'boletaFactura' => $boletaFactura , 'nroPiezas' => $nroPiezas , 'pesoCarga' => $pesoCarga , 'largoCarga' => $largoCarga , 'anchoCarga' => $anchoCarga , 'altoCarga' => $altoCarga , 'documentos' => $documentos , 'instrucciones' => $instrucciones  ), //data
+                array(  'NomEmpRet' => $NomEmpRet , 'telEmpRet' => $telEmpRet , 'dirEmpRet' => $dirEmpRet , 'ciudEmpRet' => $ciudEmpRet , 'nomPerRet' => $nomPerRet , 'fechaRet' => $fechaRet , 'NomEmpEnt' => $NomEmpEnt , 'telEmpEnt' => $telEmpEnt , 'dirEmpEnt' => $dirEmpEnt , 'ciudEmpEnt' => $ciudEmpEnt , 'nomPerEnt' => $nomPerEnt , 'fechaEnt' => $fechaEnt , 'formaPago' => $formaPago , 'cuentaCte' => $cuentaCte , 'boletaFactura' => $boletaFactura , 'nroPiezas' => $nroPiezas , 'pesoCarga' => $pesoCarga , 'largoCarga' => $largoCarga , 'anchoCarga' => $anchoCarga , 'altoCarga' => $altoCarga , 'documentos' => $documentos , 'instrucciones' => $instrucciones  ), //data
                 array('%s', '%s') //data format	 		
         );
         $message.="Orden de Transporte inserted";
@@ -143,7 +146,6 @@ function tran_ot_create() {
     </div>
     <script>
 		$( ".datetime" ).datepicker();
-		$( ".datetime" ).onclick(function(){$(this).datepicker('show')});
 	</script>
     <?php
 }

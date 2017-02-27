@@ -10,13 +10,22 @@ function tran_otRt_update() {
 	$Razon = $_POST["Razon"];
 	$Gasto_ingreso = $_POST["Gasto_ingreso"];
 	$fecha = $_POST["fecha"];
+	//volver
+	if($id_ot) $page_volver= "tran_ot_update&id_ot=".$id_ot;
+	else
+	if($id_rt) $page_volver= "tran_rt_update&id_rt=".$id_rt;
+	else
+		$page_volver= "tran_otRt_list";
 	
 //update
-    if (isset($_POST['update'])) {
+    if (isset($_POST['update'])){
+		$id_ot= $_POST["id_ot"];
+		$id_rt= $_POST["id_rt"];
+		
         $wpdb->update(
                 $table_name, //table
-				array( 'Monto' => $Monto, 'Razon' => $Razon, 'Gasto_ingreso' => $Gasto_ingreso, 'fecha' => $fecha), //data
-                array('id_otRt' => $id_otRt  ,'id_ot' => $id_ot  ,'id_rt' => $id_rt ), //where
+				array( 'id_ot' => $id_ot , 'id_rt' => $id_rt ,  'Monto' => $Monto, 'Razon' => $Razon, 'Gasto_ingreso' => $Gasto_ingreso, 'fecha' => $fecha), //data
+                array('id_otRt' => $id_otRt ), //where
 				array('%s','%s','%s','%s'), //data format
                 array('%s') //where format
         );
@@ -28,6 +37,8 @@ function tran_otRt_update() {
         $results = $wpdb->get_results($wpdb->prepare("SELECT id_otRt  ,'id_ot'  ,'id_rt' , Monto , Razon , Gasto_ingreso , fecha  from $table_name where id_otRt=%s", $id_otRt));
         foreach ($results as $r) {
             $id_otRt = $r->id_otRt;
+			$id_ot = $r->id_ot;
+			$id_rt = $r->id_rt;
 			$Monto = $r->Monto;
 			$Razon = $r->Razon;
 			$Gasto_ingreso = $r->Gasto_ingreso;
@@ -64,12 +75,12 @@ function tran_otRt_update() {
 						<td><input type="text" name="id_otRt" value="<?php echo $id_otRt; ?>" disabled /></td>
 					</tr>
 					<tr>
-						<th>ID_OT</th>
-						<td><input type="text" name="id_ot" value="<?php echo $id_ot; ?>" disabled /></td>
+						<th>ID_OrdenTrans</th>
+						<td><input type="text" name="id_ot" value="<?php echo $id_ot; ?>"  <?php if ($id_ot) echo readonly  ?> /></td>
 					</tr>
 					<tr>
-						<th>ID_RT</th>
-						<td><input type="text" name="id_rt" value="<?php echo $id_rt; ?>" disabled /></td>
+						<th>ID_ruta</th>
+						<td><input type="text" name="id_rt" value="<?php echo $id_rt; ?>"  <?php if ($id_rt) echo readonly  ?> /></td>
 					</tr>
 					<tr><th>empresa</th><td><input type="text" name="Monto" value="<?php echo $Monto; ?>" class=""/></td></tr>
 					<tr><th>empresa</th><td><input type="text" name="Razon" value="<?php echo $Razon; ?>" class=""/></td></tr>
@@ -82,7 +93,7 @@ function tran_otRt_update() {
             </form>
 		</div>
         <?php } ?>
-			<a href="<?php echo admin_url('admin.php?page=tran_otRt_list') ?>">&laquo; Volver</a>
+			<a href="<?php echo admin_url('admin.php?page='.$page_volver) ?>">&laquo; Volver</a>
 			
     </div>
     <script>

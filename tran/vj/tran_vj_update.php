@@ -6,12 +6,14 @@ function tran_vj_update() {
     $id_vj = $_GET["id_vj"];
 	$nombreEmpresa = $_POST["nombreEmpresa"];
 	$fecha = $_POST["fecha"];
+	//volver
 	
 //update
-    if (isset($_POST['update'])) {
+    if (isset($_POST['update'])){
+		
         $wpdb->update(
                 $table_name, //table
-				array( 'nombreEmpresa' => $nombreEmpresa, 'fecha' => $fecha), //data
+				array(  'nombreEmpresa' => $nombreEmpresa, 'fecha' => $fecha), //data
                 array('id_vj' => $id_vj ), //where
 				array('%s','%s'), //data format
                 array('%s') //where format
@@ -49,8 +51,10 @@ function tran_vj_update() {
 		<div id="tabs">
 		  <ul>
 			<li><a href="#tabs-1">Orden de Viaje</a></li>
-			<li><a href="#tabs-2" name=otTab>Dineros</a></li>
-			<li><a href="#tabs-3" name=otTab>Trabajadores</a></li>
+			<li><a href="#tabs-2" name=dnTab>Dineros</a></li>
+			<li><a href="#tabs-3" name=tbTab>Trabajadores</a></li>
+			<li><a href="#tabs-4" name=vhTab>Vehiculos</a></li>
+			<li><a href="#tabs-5" name=otTab>Orden de Transporte</a></li>
 		  </ul>
 		  <div id="tabs-1">
 			<form method="post" action="<?php echo $_SERVER['REQUEST_URI']; ?>">
@@ -73,8 +77,14 @@ function tran_vj_update() {
 		<div id="tabs-3">
 			<?php	tran_vjTb_list($id_vj);?>
 		</div>
+		<div id="tabs-4">
+			<?php	tran_vjVh_list($id_vj);?>
+		</div>
+		<div id="tabs-5">
+			<?php	;?>
+		</div>
         <?php } ?>
-			<a href="<?php echo admin_url('admin.php?page=tran_vj_list') ?>">&laquo; Volver</a>
+			<a href="<?php echo admin_url('admin.php?page='.$page_volver) ?>">&laquo; Volver</a>
 			
     </div>
     <script>

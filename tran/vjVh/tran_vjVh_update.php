@@ -3,31 +3,42 @@
 function tran_vjVh_update() {
     global $wpdb;
     $table_name = $wpdb->prefix ."vjVh";
-    $id_ovVh = $_GET["id_ovVh"];
+    $id_vjVh = $_GET["id_vjVh"];
 	$id_vj = $_GET["id_vj"];
 	$id_vh = $_GET["id_vh"];
 	$Monto = $_POST["Monto"];
 	$Razon = $_POST["Razon"];
 	$Gasto_ingreso = $_POST["Gasto_ingreso"];
 	$fecha = $_POST["fecha"];
+	//volver
+	if($id_vj) $page_volver= "tran_vj_update&id_vj=".$id_vj;
+	else
+	if($id_vh) $page_volver= "tran_vh_update&id_vh=".$id_vh;
+	else
+		$page_volver= "tran_vjVh_list";
 	
 //update
-    if (isset($_POST['update'])) {
+    if (isset($_POST['update'])){
+		$id_vj= $_POST["id_vj"];
+		$id_vh= $_POST["id_vh"];
+		
         $wpdb->update(
                 $table_name, //table
-				array( 'Monto' => $Monto, 'Razon' => $Razon, 'Gasto_ingreso' => $Gasto_ingreso, 'fecha' => $fecha), //data
-                array('id_ovVh' => $id_ovVh  ,'id_vj' => $id_vj  ,'id_vh' => $id_vh ), //where
+				array( 'id_vj' => $id_vj , 'id_vh' => $id_vh ,  'Monto' => $Monto, 'Razon' => $Razon, 'Gasto_ingreso' => $Gasto_ingreso, 'fecha' => $fecha), //data
+                array('id_vjVh' => $id_vjVh ), //where
 				array('%s','%s','%s','%s'), //data format
                 array('%s') //where format
         );
     }
 //delete
     else if (isset($_POST['delete'])) {
-        $wpdb->query($wpdb->prepare("DELETE FROM $table_name WHERE id_ovVh = %s", $id_ovVh));
+        $wpdb->query($wpdb->prepare("DELETE FROM $table_name WHERE id_vjVh = %s", $id_vjVh));
     } else {//selecting value to update	
-        $results = $wpdb->get_results($wpdb->prepare("SELECT id_ovVh  ,'id_vj'  ,'id_vh' , Monto , Razon , Gasto_ingreso , fecha  from $table_name where id_ovVh=%s", $id_ovVh));
+        $results = $wpdb->get_results($wpdb->prepare("SELECT id_vjVh  ,'id_vj'  ,'id_vh' , Monto , Razon , Gasto_ingreso , fecha  from $table_name where id_vjVh=%s", $id_vjVh));
         foreach ($results as $r) {
-            $id_ovVh = $r->id_ovVh;
+            $id_vjVh = $r->id_vjVh;
+			$id_vj = $r->id_vj;
+			$id_vh = $r->id_vh;
 			$Monto = $r->Monto;
 			$Razon = $r->Razon;
 			$Gasto_ingreso = $r->Gasto_ingreso;
@@ -61,15 +72,15 @@ function tran_vjVh_update() {
                 <table class='wp-list-table widefat fixed' id="tabla">
                     <tr>
 						<th>ID</th>
-						<td><input type="text" name="id_ovVh" value="<?php echo $id_ovVh; ?>" disabled /></td>
+						<td><input type="text" name="id_vjVh" value="<?php echo $id_vjVh; ?>" disabled /></td>
 					</tr>
 					<tr>
-						<th>ID_VJ</th>
-						<td><input type="text" name="id_vj" value="<?php echo $id_vj; ?>" disabled /></td>
+						<th>ID_viaje</th>
+						<td><input type="text" name="id_vj" value="<?php echo $id_vj; ?>"  <?php if ($id_vj) echo readonly  ?> /></td>
 					</tr>
 					<tr>
-						<th>ID_VH</th>
-						<td><input type="text" name="id_vh" value="<?php echo $id_vh; ?>" disabled /></td>
+						<th>ID_vehiculo</th>
+						<td><input type="text" name="id_vh" value="<?php echo $id_vh; ?>"  <?php if ($id_vh) echo readonly  ?> /></td>
 					</tr>
 					<tr><th>empresa</th><td><input type="text" name="Monto" value="<?php echo $Monto; ?>" class=""/></td></tr>
 					<tr><th>empresa</th><td><input type="text" name="Razon" value="<?php echo $Razon; ?>" class=""/></td></tr>
@@ -82,7 +93,7 @@ function tran_vjVh_update() {
             </form>
 		</div>
         <?php } ?>
-			<a href="<?php echo admin_url('admin.php?page=tran_vjVh_list') ?>">&laquo; Volver</a>
+			<a href="<?php echo admin_url('admin.php?page='.$page_volver) ?>">&laquo; Volver</a>
 			
     </div>
     <script>

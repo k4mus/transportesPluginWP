@@ -18,8 +18,8 @@ function vjDn_options_install() {
 	
 	CREATE TABLE $table_name (
             `id_vjDn` MEDIUMINT NOT NULL AUTO_INCREMENT,
-			`id_vj` MEDIUMINT NOT NULL ,
-			`id_Dn` MEDIUMINT NOT NULL ,
+			`id_vj` MEDIUMINT NOT NULL,
+			`id_dn` MEDIUMINT NOT NULL,
             	`Monto` varchar(50) CHARACTER SET utf8 NOT NULL ,
             	`Razon` varchar(50) CHARACTER SET utf8 NOT NULL ,
             	`Gasto_ingreso` varchar(50) CHARACTER SET utf8 NOT NULL ,

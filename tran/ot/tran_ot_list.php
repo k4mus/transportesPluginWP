@@ -1,5 +1,5 @@
 <?php
-
+error_reporting(0);
 function tran_ot_list() {
     ?>
     <link type="text/css" href="<?php echo WP_PLUGIN_URL; ?>/transportes-plugin/style-admin.css" rel="stylesheet" />
@@ -14,12 +14,14 @@ function tran_ot_list() {
         <?php
         global $wpdb;
         $table_name = $wpdb->prefix . "ot";
-
-        $rows = $wpdb->get_results("SELECT id_ot,  NomEmpRet , telEmpRet , dirEmpRet , ciudEmpRet , nomPerRet , fechaRet , NomEmpEnt , telEmpEnt , dirEmpEnt , ciudEmpEnt , nomPerEnt , fechaEnt , formaPago , cuentaCte , boletaFactura , nroPiezas , pesoCarga , largoCarga , anchoCarga , altoCarga , documentos , instrucciones  from $table_name");
+		
+        $rows = $wpdb->get_results("SELECT id_ot,  NomEmpRet , telEmpRet , dirEmpRet , ciudEmpRet , nomPerRet , fechaRet , NomEmpEnt , telEmpEnt , dirEmpEnt , ciudEmpEnt , nomPerEnt , fechaEnt , formaPago , cuentaCte , boletaFactura , nroPiezas , pesoCarga , largoCarga , anchoCarga , altoCarga , documentos , instrucciones  from $table_name   ");
         ?>
         <table class='wp-list-table widefat fixed striped posts'>
             <tr>
 				<th class="manage-column ss-list-width">ID</th>
+			<?php
+			?>
 				<th class="manage-column ss-list-width">Nombre Empresa</th>
 				<th class="manage-column ss-list-width">Telefono</th>
 				<th class="manage-column ss-list-width">Direccion</th>
@@ -47,8 +49,10 @@ function tran_ot_list() {
             <?php foreach ($rows as $row) { ?>
                 <tr>
                     <td class="manage-column ss-list-width">
-						<a href="<?php echo admin_url('admin.php?page=tran_ot_update&id_ot=' . $row->id_ot); ?>"><?php echo $row->id_ot; ?></a>
+						<a href="<?php echo admin_url('admin.php?page=tran_ot_update&id_ot=' . $row->id_ot ); ?>"><?php echo $row->id_ot; ?></a>
 					</td>
+					<?php
+					?>
 					<td class="manage-column ss-list-width"><?php echo $row->NomEmpRet; ?></td>
 					<td class="manage-column ss-list-width"><?php echo $row->telEmpRet; ?></td>
 					<td class="manage-column ss-list-width"><?php echo $row->dirEmpRet; ?></td>

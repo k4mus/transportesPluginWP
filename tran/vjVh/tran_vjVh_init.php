@@ -17,13 +17,15 @@ function vjVh_options_install() {
 	DROP TABLE IF EXISTS `$table_name`;
 	
 	CREATE TABLE $table_name (
-            `id_ovVh` MEDIUMINT NOT NULL AUTO_INCREMENT,
+            `id_vjVh` MEDIUMINT NOT NULL AUTO_INCREMENT,
+			`id_vj` MEDIUMINT NOT NULL,
+			`id_vh` MEDIUMINT NOT NULL,
             	`Monto` varchar(50) CHARACTER SET utf8 NOT NULL ,
             	`Razon` varchar(50) CHARACTER SET utf8 NOT NULL ,
             	`Gasto_ingreso` varchar(50) CHARACTER SET utf8 NOT NULL ,
             	`fecha` varchar(50) CHARACTER SET utf8 NOT NULL ,
-            PRIMARY KEY (`id_ovVh`),
-            UNIQUE KEY `ix_` (`id_ovVh`)
+            PRIMARY KEY (`id_vjVh`),
+            UNIQUE KEY `ix_` (`id_vjVh`)
           ) AUTO_INCREMENT=0 $charset_collate; ";
 
     require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );

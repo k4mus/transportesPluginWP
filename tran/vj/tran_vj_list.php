@@ -1,5 +1,5 @@
 <?php
-
+error_reporting(0);
 function tran_vj_list() {
     ?>
     <link type="text/css" href="<?php echo WP_PLUGIN_URL; ?>/transportes-plugin/style-admin.css" rel="stylesheet" />
@@ -14,12 +14,14 @@ function tran_vj_list() {
         <?php
         global $wpdb;
         $table_name = $wpdb->prefix . "vj";
-
-        $rows = $wpdb->get_results("SELECT id_vj,  nombreEmpresa , fecha  from $table_name");
+		
+        $rows = $wpdb->get_results("SELECT id_vj,  nombreEmpresa , fecha  from $table_name   ");
         ?>
         <table class='wp-list-table widefat fixed striped posts'>
             <tr>
 				<th class="manage-column ss-list-width">ID</th>
+			<?php
+			?>
 				<th class="manage-column ss-list-width">empresa</th>
 				<th class="manage-column ss-list-width">fecha</th>
                 <th>&nbsp;</th>
@@ -27,8 +29,10 @@ function tran_vj_list() {
             <?php foreach ($rows as $row) { ?>
                 <tr>
                     <td class="manage-column ss-list-width">
-						<a href="<?php echo admin_url('admin.php?page=tran_vj_update&id_vj=' . $row->id_vj); ?>"><?php echo $row->id_vj; ?></a>
+						<a href="<?php echo admin_url('admin.php?page=tran_vj_update&id_vj=' . $row->id_vj ); ?>"><?php echo $row->id_vj; ?></a>
 					</td>
+					<?php
+					?>
 					<td class="manage-column ss-list-width"><?php echo $row->nombreEmpresa; ?></td>
 					<td class="manage-column ss-list-width"><?php echo $row->fecha; ?></td>
 			    </tr>

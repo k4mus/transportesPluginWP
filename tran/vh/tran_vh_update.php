@@ -6,12 +6,14 @@ function tran_vh_update() {
     $id_vh = $_GET["id_vh"];
 	$nombreEmpresa = $_POST["nombreEmpresa"];
 	$fecha = $_POST["fecha"];
+	//volver
 	
 //update
-    if (isset($_POST['update'])) {
+    if (isset($_POST['update'])){
+		
         $wpdb->update(
                 $table_name, //table
-				array( 'nombreEmpresa' => $nombreEmpresa, 'fecha' => $fecha), //data
+				array(  'nombreEmpresa' => $nombreEmpresa, 'fecha' => $fecha), //data
                 array('id_vh' => $id_vh ), //where
 				array('%s','%s'), //data format
                 array('%s') //where format
@@ -66,7 +68,7 @@ function tran_vh_update() {
             </form>
 		</div>
         <?php } ?>
-			<a href="<?php echo admin_url('admin.php?page=tran_vh_list') ?>">&laquo; Volver</a>
+			<a href="<?php echo admin_url('admin.php?page='.$page_volver) ?>">&laquo; Volver</a>
 			
     </div>
     <script>

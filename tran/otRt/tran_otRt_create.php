@@ -1,19 +1,31 @@
 <?php
 
 function tran_otRt_create() {
+	$id_ot = $_GET["id_ot"];
+	$id_rt = $_GET["id_rt"];
 	$Monto = $_POST["Monto"];
 	$Razon = $_POST["Razon"];
 	$Gasto_ingreso = $_POST["Gasto_ingreso"];
 	$fecha = $_POST["fecha"];
 	
-    //insert
+	//volver
+	if($id_ot) $page_volver= "tran_ot_update&id_ot=".$id_ot;
+	else
+	if($id_rt) $page_volver= "tran_rt_update&id_rt=".$id_rt;
+	else
+		$page_volver= "tran_otRt_list";
+	
+	 //insert
     if (isset($_POST['insert'])) {
+		$id_ot= $_POST["id_ot"];
+		$id_rt= $_POST["id_rt"];
+		
         global $wpdb;
         $table_name = $wpdb->prefix ."otRt";
 
         $wpdb->insert(
                 $table_name, //table
-                array( 'Monto' => $Monto , 'Razon' => $Razon , 'Gasto_ingreso' => $Gasto_ingreso , 'fecha' => $fecha  ), //data
+                array('id_ot'=>$id_ot ,'id_rt'=>$id_rt ,  'Monto' => $Monto , 'Razon' => $Razon , 'Gasto_ingreso' => $Gasto_ingreso , 'fecha' => $fecha  ), //data
                 array('%s', '%s') //data format	 		
         );
         $message.="Orden de Transporte - Ruta inserted";
@@ -30,6 +42,14 @@ function tran_otRt_create() {
         <form method="post" action="<?php echo $_SERVER['REQUEST_URI']; ?>">
             <p> </p>
             <table class='wp-list-table widefat fixed'>
+				<tr>
+                    <th class="ss-th-width">ID_OrdenTrans</th>
+                    <td><input type="text" name="id_ot" value="<?php echo $id_ot; ?>" <?php if ($id_ot) echo readonly  ?> class="ss-field-width " /></td>
+                </tr>
+				<tr>
+                    <th class="ss-th-width">ID_ruta</th>
+                    <td><input type="text" name="id_rt" value="<?php echo $id_rt; ?>" <?php if ($id_rt) echo readonly  ?> class="ss-field-width " /></td>
+                </tr>
 				<tr>
                     <th class="ss-th-width">empresa</th>
                     <td><input type="text" name="Monto" value="<?php echo $Monto; ?>" class="ss-field-width " /></td>
@@ -53,7 +73,6 @@ function tran_otRt_create() {
     </div>
     <script>
 		$( ".datetime" ).datepicker();
-		$( ".datetime" ).onclick(function(){$(this).datepicker('show')});
 	</script>
     <?php
 }

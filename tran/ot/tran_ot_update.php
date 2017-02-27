@@ -26,12 +26,14 @@ function tran_ot_update() {
 	$altoCarga = $_POST["altoCarga"];
 	$documentos = $_POST["documentos"];
 	$instrucciones = $_POST["instrucciones"];
+	//volver
 	
 //update
-    if (isset($_POST['update'])) {
+    if (isset($_POST['update'])){
+		
         $wpdb->update(
                 $table_name, //table
-				array( 'NomEmpRet' => $NomEmpRet, 'telEmpRet' => $telEmpRet, 'dirEmpRet' => $dirEmpRet, 'ciudEmpRet' => $ciudEmpRet, 'nomPerRet' => $nomPerRet, 'fechaRet' => $fechaRet, 'NomEmpEnt' => $NomEmpEnt, 'telEmpEnt' => $telEmpEnt, 'dirEmpEnt' => $dirEmpEnt, 'ciudEmpEnt' => $ciudEmpEnt, 'nomPerEnt' => $nomPerEnt, 'fechaEnt' => $fechaEnt, 'formaPago' => $formaPago, 'cuentaCte' => $cuentaCte, 'boletaFactura' => $boletaFactura, 'nroPiezas' => $nroPiezas, 'pesoCarga' => $pesoCarga, 'largoCarga' => $largoCarga, 'anchoCarga' => $anchoCarga, 'altoCarga' => $altoCarga, 'documentos' => $documentos, 'instrucciones' => $instrucciones), //data
+				array(  'NomEmpRet' => $NomEmpRet, 'telEmpRet' => $telEmpRet, 'dirEmpRet' => $dirEmpRet, 'ciudEmpRet' => $ciudEmpRet, 'nomPerRet' => $nomPerRet, 'fechaRet' => $fechaRet, 'NomEmpEnt' => $NomEmpEnt, 'telEmpEnt' => $telEmpEnt, 'dirEmpEnt' => $dirEmpEnt, 'ciudEmpEnt' => $ciudEmpEnt, 'nomPerEnt' => $nomPerEnt, 'fechaEnt' => $fechaEnt, 'formaPago' => $formaPago, 'cuentaCte' => $cuentaCte, 'boletaFactura' => $boletaFactura, 'nroPiezas' => $nroPiezas, 'pesoCarga' => $pesoCarga, 'largoCarga' => $largoCarga, 'anchoCarga' => $anchoCarga, 'altoCarga' => $altoCarga, 'documentos' => $documentos, 'instrucciones' => $instrucciones), //data
                 array('id_ot' => $id_ot ), //where
 				array('%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s'), //data format
                 array('%s') //where format
@@ -126,7 +128,7 @@ function tran_ot_update() {
             </form>
 		</div>
         <?php } ?>
-			<a href="<?php echo admin_url('admin.php?page=tran_ot_list') ?>">&laquo; Volver</a>
+			<a href="<?php echo admin_url('admin.php?page='.$page_volver) ?>">&laquo; Volver</a>
 			
     </div>
     <script>

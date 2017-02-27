@@ -10,21 +10,21 @@ function tran_vjDn_update() {
 	$Razon = $_POST["Razon"];
 	$Gasto_ingreso = $_POST["Gasto_ingreso"];
 	$fecha = $_POST["fecha"];
-	
-	if($id_vj)
-		$page_volver= "tran_vj_update&id_vj=".$id_vj;
-	else if ($id_dn)
-		$page_volver= "tran_dn_update&id_dn=".$id_dn;
+	//volver
+	if($id_vj) $page_volver= "tran_vj_update&id_vj=".$id_vj;
+	else
+	if($id_dn) $page_volver= "tran_dn_update&id_dn=".$id_dn;
 	else
 		$page_volver= "tran_vjDn_list";
+	
 //update
-    if (isset($_POST['update'])) {
-		$id_vj = $_POST["id_vj"];
-		$id_dn = $_POST["id_dn"];
+    if (isset($_POST['update'])){
+		$id_vj= $_POST["id_vj"];
+		$id_dn= $_POST["id_dn"];
 		
         $wpdb->update(
                 $table_name, //table
-				array( 'id_vj'=>$id_vj,'id_dn'=>$id_dn, 'Monto' => $Monto, 'Razon' => $Razon, 'Gasto_ingreso' => $Gasto_ingreso, 'fecha' => $fecha), //data
+				array( 'id_vj' => $id_vj , 'id_dn' => $id_dn ,  'Monto' => $Monto, 'Razon' => $Razon, 'Gasto_ingreso' => $Gasto_ingreso, 'fecha' => $fecha), //data
                 array('id_vjDn' => $id_vjDn ), //where
 				array('%s','%s','%s','%s'), //data format
                 array('%s') //where format
@@ -34,7 +34,7 @@ function tran_vjDn_update() {
     else if (isset($_POST['delete'])) {
         $wpdb->query($wpdb->prepare("DELETE FROM $table_name WHERE id_vjDn = %s", $id_vjDn));
     } else {//selecting value to update	
-        $results = $wpdb->get_results($wpdb->prepare("SELECT id_vjDn  ,id_vj  ,id_dn , Monto , Razon , Gasto_ingreso , fecha  from $table_name where id_vjDn=%s", $id_vjDn));
+        $results = $wpdb->get_results($wpdb->prepare("SELECT id_vjDn  ,'id_vj'  ,'id_dn' , Monto , Razon , Gasto_ingreso , fecha  from $table_name where id_vjDn=%s", $id_vjDn));
         foreach ($results as $r) {
             $id_vjDn = $r->id_vjDn;
 			$id_vj = $r->id_vj;
@@ -72,15 +72,15 @@ function tran_vjDn_update() {
                 <table class='wp-list-table widefat fixed' id="tabla">
                     <tr>
 						<th>ID</th>
-						<td><input type="text" name="id_vjDn" value="<?php echo $id_vjDn; ?>" readonly  /></td>
+						<td><input type="text" name="id_vjDn" value="<?php echo $id_vjDn; ?>" disabled /></td>
 					</tr>
 					<tr>
-						<th>ID_vj</th>
-						<td><input type="text" name="id_vj" value="<?php echo $id_vj; ?>" readonly  /></td>
+						<th>ID_viaje</th>
+						<td><input type="text" name="id_vj" value="<?php echo $id_vj; ?>"  <?php if ($id_vj) echo readonly  ?> /></td>
 					</tr>
 					<tr>
-						<th>ID_Dn</th>
-						<td><input type="text" name="id_dn" value="<?php echo $id_dn; ?>"   /></td>
+						<th>ID_dinero</th>
+						<td><input type="text" name="id_dn" value="<?php echo $id_dn; ?>"  <?php if ($id_dn) echo readonly  ?> /></td>
 					</tr>
 					<tr><th>Monto</th><td><input type="text" name="Monto" value="<?php echo $Monto; ?>" class=""/></td></tr>
 					<tr><th>Razon</th><td><input type="text" name="Razon" value="<?php echo $Razon; ?>" class=""/></td></tr>

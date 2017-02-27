@@ -1,32 +1,31 @@
 <?php
 
 function tran_vjDn_create() {
-	
 	$id_vj = $_GET["id_vj"];
 	$id_dn = $_GET["id_dn"];
-	
 	$Monto = $_POST["Monto"];
 	$Razon = $_POST["Razon"];
 	$Gasto_ingreso = $_POST["Gasto_ingreso"];
 	$fecha = $_POST["fecha"];
 	
-	if($id_vj)
-		$page_volver= "tran_vj_update&id_vj=".$id_vj;
-	else if ($id_dn)
-		$page_volver= "tran_dn_update&id_dn=".$id_dn;
+	//volver
+	if($id_vj) $page_volver= "tran_vj_update&id_vj=".$id_vj;
+	else
+	if($id_dn) $page_volver= "tran_dn_update&id_dn=".$id_dn;
 	else
 		$page_volver= "tran_vjDn_list";
 	
-    //insert
+	 //insert
     if (isset($_POST['insert'])) {
-		$id_dn = $_POST["id_dn"];
-		$id_vj = $_POST["id_vj"];
-		global $wpdb;
+		$id_vj= $_POST["id_vj"];
+		$id_dn= $_POST["id_dn"];
+		
+        global $wpdb;
         $table_name = $wpdb->prefix ."vjDn";
 
         $wpdb->insert(
                 $table_name, //table
-                array( 'id_vj'=>$id_vj ,'id_dn'=>$id_dn, 'Monto' => $Monto , 'Razon' => $Razon , 'Gasto_ingreso' => $Gasto_ingreso , 'fecha' => $fecha  ), //data
+                array('id_vj'=>$id_vj ,'id_dn'=>$id_dn ,  'Monto' => $Monto , 'Razon' => $Razon , 'Gasto_ingreso' => $Gasto_ingreso , 'fecha' => $fecha  ), //data
                 array('%s', '%s') //data format	 		
         );
         $message.="Orden de Viaje-Dineros inserted";
@@ -44,11 +43,11 @@ function tran_vjDn_create() {
             <p> </p>
             <table class='wp-list-table widefat fixed'>
 				<tr>
-                    <th class="ss-th-width">id_vj</th>
+                    <th class="ss-th-width">ID_viaje</th>
                     <td><input type="text" name="id_vj" value="<?php echo $id_vj; ?>" <?php if ($id_vj) echo readonly  ?> class="ss-field-width " /></td>
                 </tr>
 				<tr>
-                    <th class="ss-th-width">id_dn</th>
+                    <th class="ss-th-width">ID_dinero</th>
                     <td><input type="text" name="id_dn" value="<?php echo $id_dn; ?>" <?php if ($id_dn) echo readonly  ?> class="ss-field-width " /></td>
                 </tr>
 				<tr>
@@ -70,11 +69,10 @@ function tran_vjDn_create() {
             </table>
             <input type='submit' name="insert" value='Save' class='button'>
         </form>
-		<a href="<?php echo admin_url('admin.php?page='.$page_volver) ?>">&laquo; Volver</a>
+		<a href="<?php echo admin_url('admin.php?page=tran_vjDn_list') ?>">&laquo; Volver</a>
     </div>
     <script>
 		$( ".datetime" ).datepicker();
-		
 	</script>
     <?php
 }

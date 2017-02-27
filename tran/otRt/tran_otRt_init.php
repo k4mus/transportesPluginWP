@@ -18,6 +18,8 @@ function otRt_options_install() {
 	
 	CREATE TABLE $table_name (
             `id_otRt` MEDIUMINT NOT NULL AUTO_INCREMENT,
+			`id_ot` MEDIUMINT NOT NULL,
+			`id_rt` MEDIUMINT NOT NULL,
             	`Monto` varchar(50) CHARACTER SET utf8 NOT NULL ,
             	`Razon` varchar(50) CHARACTER SET utf8 NOT NULL ,
             	`Gasto_ingreso` varchar(50) CHARACTER SET utf8 NOT NULL ,

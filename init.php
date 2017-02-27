@@ -80,5 +80,5 @@ require_once(ROOTDIR . 'tran/rt/tran_rt_init.php');
 require_once(ROOTDIR . 'tran/vjDn/tran_vjDn_init.php');
 require_once(ROOTDIR . 'tran/vjTb/tran_vjTb_init.php');
 require_once(ROOTDIR . 'tran/vjVh/tran_vjVh_init.php');
-require_once(ROOTDIR . 'tran/vjDn/tran_vjDn.php');
+
 

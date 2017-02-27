@@ -4,14 +4,17 @@ function tran_tb_create() {
 	$nombreEmpresa = $_POST["nombreEmpresa"];
 	$fecha = $_POST["fecha"];
 	
-    //insert
+	//volver
+	
+	 //insert
     if (isset($_POST['insert'])) {
+		
         global $wpdb;
         $table_name = $wpdb->prefix ."tb";
 
         $wpdb->insert(
                 $table_name, //table
-                array( 'nombreEmpresa' => $nombreEmpresa , 'fecha' => $fecha  ), //data
+                array(  'nombreEmpresa' => $nombreEmpresa , 'fecha' => $fecha  ), //data
                 array('%s', '%s') //data format	 		
         );
         $message.="Trabajadores inserted";
@@ -43,7 +46,6 @@ function tran_tb_create() {
     </div>
     <script>
 		$( ".datetime" ).datepicker();
-		$( ".datetime" ).onclick(function(){$(this).datepicker('show')});
 	</script>
     <?php
 }
