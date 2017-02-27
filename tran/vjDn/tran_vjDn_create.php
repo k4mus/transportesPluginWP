@@ -13,8 +13,7 @@ function tran_vjDn_create() {
 	else
 	if($id_dn) $page_volver= "tran_dn_update&id_dn=".$id_dn;
 	else
-		$page_volver= "tran_vjDn_list";
-	
+	$page_volver= "tran_vjDn_list";
 	 //insert
     if (isset($_POST['insert'])) {
 		$id_vj= $_POST["id_vj"];
@@ -69,7 +68,7 @@ function tran_vjDn_create() {
             </table>
             <input type='submit' name="insert" value='Save' class='button'>
         </form>
-		<a href="<?php echo admin_url('admin.php?page=tran_vjDn_list') ?>">&laquo; Volver</a>
+		<a href="<?php echo admin_url('admin.php?page='.$page_volver) ?>">&laquo; Volver</a>
     </div>
     <script>
 		$( ".datetime" ).datepicker();

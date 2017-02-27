@@ -15,7 +15,7 @@ function tran_vjDn_update() {
 	else
 	if($id_dn) $page_volver= "tran_dn_update&id_dn=".$id_dn;
 	else
-		$page_volver= "tran_vjDn_list";
+	$page_volver= "tran_vjDn_list";
 	
 //update
     if (isset($_POST['update'])){

@@ -5,7 +5,7 @@ function tran_rt_create() {
 	$fecha = $_POST["fecha"];
 	
 	//volver
-	
+	$page_volver= "tran_rt_list";
 	 //insert
     if (isset($_POST['insert'])) {
 		
@@ -42,7 +42,7 @@ function tran_rt_create() {
             </table>
             <input type='submit' name="insert" value='Save' class='button'>
         </form>
-		<a href="<?php echo admin_url('admin.php?page=tran_rt_list') ?>">&laquo; Volver</a>
+		<a href="<?php echo admin_url('admin.php?page='.$page_volver) ?>">&laquo; Volver</a>
     </div>
     <script>
 		$( ".datetime" ).datepicker();

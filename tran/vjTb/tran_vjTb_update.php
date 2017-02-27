@@ -15,7 +15,7 @@ function tran_vjTb_update() {
 	else
 	if($id_tb) $page_volver= "tran_tb_update&id_tb=".$id_tb;
 	else
-		$page_volver= "tran_vjTb_list";
+	$page_volver= "tran_vjTb_list";
 	
 //update
     if (isset($_POST['update'])){

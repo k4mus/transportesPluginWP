@@ -27,6 +27,7 @@ function tran_ot_update() {
 	$documentos = $_POST["documentos"];
 	$instrucciones = $_POST["instrucciones"];
 	//volver
+	$page_volver= "tran_ot_list";
 	
 //update
     if (isset($_POST['update'])){

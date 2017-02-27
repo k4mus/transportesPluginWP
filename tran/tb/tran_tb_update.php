@@ -7,6 +7,7 @@ function tran_tb_update() {
 	$nombreEmpresa = $_POST["nombreEmpresa"];
 	$fecha = $_POST["fecha"];
 	//volver
+	$page_volver= "tran_tb_list";
 	
 //update
     if (isset($_POST['update'])){

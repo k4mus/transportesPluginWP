@@ -13,8 +13,7 @@ function tran_otRt_create() {
 	else
 	if($id_rt) $page_volver= "tran_rt_update&id_rt=".$id_rt;
 	else
-		$page_volver= "tran_otRt_list";
-	
+	$page_volver= "tran_otRt_list";
 	 //insert
     if (isset($_POST['insert'])) {
 		$id_ot= $_POST["id_ot"];
@@ -69,7 +68,7 @@ function tran_otRt_create() {
             </table>
             <input type='submit' name="insert" value='Save' class='button'>
         </form>
-		<a href="<?php echo admin_url('admin.php?page=tran_otRt_list') ?>">&laquo; Volver</a>
+		<a href="<?php echo admin_url('admin.php?page='.$page_volver) ?>">&laquo; Volver</a>
     </div>
     <script>
 		$( ".datetime" ).datepicker();

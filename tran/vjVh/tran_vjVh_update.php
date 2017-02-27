@@ -15,7 +15,7 @@ function tran_vjVh_update() {
 	else
 	if($id_vh) $page_volver= "tran_vh_update&id_vh=".$id_vh;
 	else
-		$page_volver= "tran_vjVh_list";
+	$page_volver= "tran_vjVh_list";
 	
 //update
     if (isset($_POST['update'])){

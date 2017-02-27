@@ -15,7 +15,7 @@ function tran_otRt_update() {
 	else
 	if($id_rt) $page_volver= "tran_rt_update&id_rt=".$id_rt;
 	else
-		$page_volver= "tran_otRt_list";
+	$page_volver= "tran_otRt_list";
 	
 //update
     if (isset($_POST['update'])){
