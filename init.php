@@ -33,6 +33,10 @@ register_activation_hook(__FILE__, 'tb_options_install');
 register_activation_hook(__FILE__, 'vh_options_install');
 register_activation_hook(__FILE__, 'rt_options_install');
 register_activation_hook(__FILE__, 'dn_options_install');
+register_activation_hook(__FILE__, 'vjDn_options_install');
+register_activation_hook(__FILE__, 'vjTb_options_install');
+register_activation_hook(__FILE__, 'vjVh_options_install');
+
 //menu items
 add_action('admin_menu','trans_modifymenu');
 function trans_modifymenu() {
@@ -73,4 +77,8 @@ require_once(ROOTDIR . 'tran/rg/tran_rg_init.php');
 require_once(ROOTDIR . 'tran/tb/tran_tb_init.php');
 require_once(ROOTDIR . 'tran/vh/tran_vh_init.php');
 require_once(ROOTDIR . 'tran/rt/tran_rt_init.php');
-require_once(ROOTDIR . 'tran/dn/tran_dn_init.php');
+require_once(ROOTDIR . 'tran/vjDn/tran_vjDn_init.php');
+require_once(ROOTDIR . 'tran/vjTb/tran_vjTb_init.php');
+require_once(ROOTDIR . 'tran/vjVh/tran_vjVh_init.php');
+require_once(ROOTDIR . 'tran/vjDn/tran_vjDn.php');
+

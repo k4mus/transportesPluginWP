@@ -35,6 +35,9 @@ function tran_tb_list() {
             <?php } ?>
         </table>
     </div>
+	<script>
+	
+	</script>
 	
 	<?php
 	}

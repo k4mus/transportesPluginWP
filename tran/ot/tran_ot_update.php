@@ -32,7 +32,7 @@ function tran_ot_update() {
         $wpdb->update(
                 $table_name, //table
 				array( 'NomEmpRet' => $NomEmpRet, 'telEmpRet' => $telEmpRet, 'dirEmpRet' => $dirEmpRet, 'ciudEmpRet' => $ciudEmpRet, 'nomPerRet' => $nomPerRet, 'fechaRet' => $fechaRet, 'NomEmpEnt' => $NomEmpEnt, 'telEmpEnt' => $telEmpEnt, 'dirEmpEnt' => $dirEmpEnt, 'ciudEmpEnt' => $ciudEmpEnt, 'nomPerEnt' => $nomPerEnt, 'fechaEnt' => $fechaEnt, 'formaPago' => $formaPago, 'cuentaCte' => $cuentaCte, 'boletaFactura' => $boletaFactura, 'nroPiezas' => $nroPiezas, 'pesoCarga' => $pesoCarga, 'largoCarga' => $largoCarga, 'anchoCarga' => $anchoCarga, 'altoCarga' => $altoCarga, 'documentos' => $documentos, 'instrucciones' => $instrucciones), //data
-                array('id_ot' => $id_ot), //where
+                array('id_ot' => $id_ot ), //where
 				array('%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s'), //data format
                 array('%s') //where format
         );
@@ -41,7 +41,7 @@ function tran_ot_update() {
     else if (isset($_POST['delete'])) {
         $wpdb->query($wpdb->prepare("DELETE FROM $table_name WHERE id_ot = %s", $id_ot));
     } else {//selecting value to update	
-        $results = $wpdb->get_results($wpdb->prepare("SELECT id_ot, NomEmpRet , telEmpRet , dirEmpRet , ciudEmpRet , nomPerRet , fechaRet , NomEmpEnt , telEmpEnt , dirEmpEnt , ciudEmpEnt , nomPerEnt , fechaEnt , formaPago , cuentaCte , boletaFactura , nroPiezas , pesoCarga , largoCarga , anchoCarga , altoCarga , documentos , instrucciones  from $table_name where id_ot=%s", $id_ot));
+        $results = $wpdb->get_results($wpdb->prepare("SELECT id_ot , NomEmpRet , telEmpRet , dirEmpRet , ciudEmpRet , nomPerRet , fechaRet , NomEmpEnt , telEmpEnt , dirEmpEnt , ciudEmpEnt , nomPerEnt , fechaEnt , formaPago , cuentaCte , boletaFactura , nroPiezas , pesoCarga , largoCarga , anchoCarga , altoCarga , documentos , instrucciones  from $table_name where id_ot=%s", $id_ot));
         foreach ($results as $r) {
             $id_ot = $r->id_ot;
 			$NomEmpRet = $r->NomEmpRet;
@@ -71,24 +71,32 @@ function tran_ot_update() {
     ?>
     <link type="text/css" href="<?php echo WP_PLUGIN_URL; ?>/transportes-plugin/style-admin.css" rel="stylesheet" />
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/free-jqgrid/4.13.6/css/ui.jqgrid.min.css">
 	<script src="//code.jquery.com/jquery-1.12.4.js"></script>
 	<script src="//code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/free-jqgrid/4.13.6/js/jquery.jqgrid.min.js"></script>
     <div class="wrap">
-        <h2>Orden de Transporte</h2>
+        <h2></h2>
 
         <?php if ($_POST['delete']) { ?>
             <div class="updated"><p>Orden de Transporte deleted</p></div>
-            
-
+        
         <?php } else if ($_POST['update']) { ?>
             <div class="updated"><p>Orden de Transporte updated</p></div>
-            
-
+        
         <?php } else { ?>
-            <form method="post" action="<?php echo $_SERVER['REQUEST_URI']; ?>">
-                <table class='wp-list-table widefat fixed'>
-                    <tr><th>ID</th><td><input type="text" name="id_ot" value="<?php echo $id_ot; ?>" disabled /></td></tr>
+		
+		<div id="tabs">
+		  <ul>
+			<li><a href="#tabs-1">Orden de Transporte</a></li>
+		  </ul>
+		  <div id="tabs-1">
+			<form method="post" action="<?php echo $_SERVER['REQUEST_URI']; ?>">
+                <table class='wp-list-table widefat fixed' id="tabla">
+                    <tr>
+						<th>ID</th>
+						<td><input type="text" name="id_ot" value="<?php echo $id_ot; ?>" disabled /></td>
+					</tr>
 					<tr><th>Nombre Empresa</th><td><input type="text" name="NomEmpRet" value="<?php echo $NomEmpRet; ?>" class=""/></td></tr>
 					<tr><th>Telefono</th><td><input type="text" name="telEmpRet" value="<?php echo $telEmpRet; ?>" class=""/></td></tr>
 					<tr><th>Direccion</th><td><input type="text" name="dirEmpRet" value="<?php echo $dirEmpRet; ?>" class=""/></td></tr>
@@ -111,17 +119,20 @@ function tran_ot_update() {
 					<tr><th>Alto(m)</th><td><input type="text" name="altoCarga" value="<?php echo $altoCarga; ?>" class=""/></td></tr>
 					<tr><th>Documentos asociados</th><td><input type="text" name="documentos" value="<?php echo $documentos; ?>" class=""/></td></tr>
 					<tr><th>Instrucciones</th><td><input type="text" name="instrucciones" value="<?php echo $instrucciones; ?>" class=""/></td></tr>
-					
                 </table>
+				<div id='pager'></div>
                 <input type='submit' name="update" value='Save' class='button'> &nbsp;&nbsp;
                 <input type='submit' name="delete" value='Delete' class='button' onclick="return confirm('&iquest;Est&aacute;s seguro de borrar este elemento?')">
             </form>
+		</div>
         <?php } ?>
 			<a href="<?php echo admin_url('admin.php?page=tran_ot_list') ?>">&laquo; Volver</a>
 			
     </div>
     <script>
 		$( ".datetime" ).datepicker();
+		$( "#tabs" ).tabs();
+		
 	</script>
     <?php
 }

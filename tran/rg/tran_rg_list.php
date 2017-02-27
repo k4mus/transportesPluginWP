@@ -35,6 +35,9 @@ function tran_rg_list() {
             <?php } ?>
         </table>
     </div>
+	<script>
+	
+	</script>
 	
 	<?php
 	}

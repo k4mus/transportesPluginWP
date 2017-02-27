@@ -1,30 +1,36 @@
 <?php
 
-function tran_vj_update() {
+function tran_otRt_update() {
     global $wpdb;
-    $table_name = $wpdb->prefix ."vj";
-    $id_vj = $_GET["id_vj"];
-	$nombreEmpresa = $_POST["nombreEmpresa"];
+    $table_name = $wpdb->prefix ."otRt";
+    $id_otRt = $_GET["id_otRt"];
+	$id_ot = $_GET["id_ot"];
+	$id_rt = $_GET["id_rt"];
+	$Monto = $_POST["Monto"];
+	$Razon = $_POST["Razon"];
+	$Gasto_ingreso = $_POST["Gasto_ingreso"];
 	$fecha = $_POST["fecha"];
 	
 //update
     if (isset($_POST['update'])) {
         $wpdb->update(
                 $table_name, //table
-				array( 'nombreEmpresa' => $nombreEmpresa, 'fecha' => $fecha), //data
-                array('id_vj' => $id_vj ), //where
-				array('%s','%s'), //data format
+				array( 'Monto' => $Monto, 'Razon' => $Razon, 'Gasto_ingreso' => $Gasto_ingreso, 'fecha' => $fecha), //data
+                array('id_otRt' => $id_otRt  ,'id_ot' => $id_ot  ,'id_rt' => $id_rt ), //where
+				array('%s','%s','%s','%s'), //data format
                 array('%s') //where format
         );
     }
 //delete
     else if (isset($_POST['delete'])) {
-        $wpdb->query($wpdb->prepare("DELETE FROM $table_name WHERE id_vj = %s", $id_vj));
+        $wpdb->query($wpdb->prepare("DELETE FROM $table_name WHERE id_otRt = %s", $id_otRt));
     } else {//selecting value to update	
-        $results = $wpdb->get_results($wpdb->prepare("SELECT id_vj , nombreEmpresa , fecha  from $table_name where id_vj=%s", $id_vj));
+        $results = $wpdb->get_results($wpdb->prepare("SELECT id_otRt  ,'id_ot'  ,'id_rt' , Monto , Razon , Gasto_ingreso , fecha  from $table_name where id_otRt=%s", $id_otRt));
         foreach ($results as $r) {
-            $id_vj = $r->id_vj;
-			$nombreEmpresa = $r->nombreEmpresa;
+            $id_otRt = $r->id_otRt;
+			$Monto = $r->Monto;
+			$Razon = $r->Razon;
+			$Gasto_ingreso = $r->Gasto_ingreso;
 			$fecha = $r->fecha;
         }
     }
@@ -39,27 +45,35 @@ function tran_vj_update() {
         <h2></h2>
 
         <?php if ($_POST['delete']) { ?>
-            <div class="updated"><p>Orden de Viaje deleted</p></div>
+            <div class="updated"><p>Orden de Transporte - Ruta deleted</p></div>
         
         <?php } else if ($_POST['update']) { ?>
-            <div class="updated"><p>Orden de Viaje updated</p></div>
+            <div class="updated"><p>Orden de Transporte - Ruta updated</p></div>
         
         <?php } else { ?>
 		
 		<div id="tabs">
 		  <ul>
-			<li><a href="#tabs-1">Orden de Viaje</a></li>
-			<li><a href="#tabs-2" name=otTab>Dineros</a></li>
-			<li><a href="#tabs-3" name=otTab>Trabajadores</a></li>
+			<li><a href="#tabs-1">Orden de Transporte - Ruta</a></li>
 		  </ul>
 		  <div id="tabs-1">
 			<form method="post" action="<?php echo $_SERVER['REQUEST_URI']; ?>">
                 <table class='wp-list-table widefat fixed' id="tabla">
                     <tr>
 						<th>ID</th>
-						<td><input type="text" name="id_vj" value="<?php echo $id_vj; ?>" disabled /></td>
+						<td><input type="text" name="id_otRt" value="<?php echo $id_otRt; ?>" disabled /></td>
 					</tr>
-					<tr><th>empresa</th><td><input type="text" name="nombreEmpresa" value="<?php echo $nombreEmpresa; ?>" class=""/></td></tr>
+					<tr>
+						<th>ID_OT</th>
+						<td><input type="text" name="id_ot" value="<?php echo $id_ot; ?>" disabled /></td>
+					</tr>
+					<tr>
+						<th>ID_RT</th>
+						<td><input type="text" name="id_rt" value="<?php echo $id_rt; ?>" disabled /></td>
+					</tr>
+					<tr><th>empresa</th><td><input type="text" name="Monto" value="<?php echo $Monto; ?>" class=""/></td></tr>
+					<tr><th>empresa</th><td><input type="text" name="Razon" value="<?php echo $Razon; ?>" class=""/></td></tr>
+					<tr><th>empresa</th><td><input type="text" name="Gasto_ingreso" value="<?php echo $Gasto_ingreso; ?>" class=""/></td></tr>
 					<tr><th>fecha</th><td><input type="text" name="fecha" value="<?php echo $fecha; ?>" class="datetime"/></td></tr>
                 </table>
 				<div id='pager'></div>
@@ -67,14 +81,8 @@ function tran_vj_update() {
                 <input type='submit' name="delete" value='Delete' class='button' onclick="return confirm('&iquest;Est&aacute;s seguro de borrar este elemento?')">
             </form>
 		</div>
-		<div id="tabs-2">
-			<?php	tran_vjDn_list($id_vj);?>
-		</div>
-		<div id="tabs-3">
-			<?php	tran_vjTb_list($id_vj);?>
-		</div>
         <?php } ?>
-			<a href="<?php echo admin_url('admin.php?page=tran_vj_list') ?>">&laquo; Volver</a>
+			<a href="<?php echo admin_url('admin.php?page=tran_otRt_list') ?>">&laquo; Volver</a>
 			
     </div>
     <script>
