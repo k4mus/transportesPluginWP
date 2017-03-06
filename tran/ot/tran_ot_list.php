@@ -15,24 +15,27 @@ function tran_ot_list() {
         global $wpdb;
         $table_name = $wpdb->prefix . "ot";
 		
-        $rows = $wpdb->get_results("SELECT id_ot,  NomEmpRet , telEmpRet , dirEmpRet , ciudEmpRet , nomPerRet , fechaRet , NomEmpEnt , telEmpEnt , dirEmpEnt , ciudEmpEnt , nomPerEnt , fechaEnt , formaPago , cuentaCte , boletaFactura , nroPiezas , pesoCarga , largoCarga , anchoCarga , altoCarga , documentos , instrucciones  from $table_name   ");
+        $rows = $wpdb->get_results("SELECT id_ot,  rutEmpOrig , nomEmporig , telEmpOrig , id_rt , dirEmpOrig , ciudEmpOrig , nomPerOrig , fechaOrig , rutEmpDest , nomEmpDest , telEmpDest , dirEmpDest , ciudEmpDest , nomPerDest , fechaDest , formaPago , cuentaCte , boletaFactura , nroPiezas , pesoCarga , largoCarga , anchoCarga , altoCarga , documentos , instrucciones  from $table_name   ");
         ?>
         <table class='wp-list-table widefat fixed striped posts'>
             <tr>
 				<th class="manage-column ss-list-width">ID</th>
 			<?php
 			?>
-				<th class="manage-column ss-list-width">Nombre Empresa</th>
-				<th class="manage-column ss-list-width">Telefono</th>
-				<th class="manage-column ss-list-width">Direccion</th>
-				<th class="manage-column ss-list-width">Ciudad</th>
-				<th class="manage-column ss-list-width">Entrega</th>
-				<th class="manage-column ss-list-width">Fecha</th>
-				<th class="manage-column ss-list-width">Nombre Empresa</th>
-				<th class="manage-column ss-list-width">Telefono</th>
-				<th class="manage-column ss-list-width">Direccion</th>
-				<th class="manage-column ss-list-width">Ciudad</th>
-				<th class="manage-column ss-list-width">Persona Entrega</th>
+				<th class="manage-column ss-list-width">Rut Empresa Origen</th>
+				<th class="manage-column ss-list-width">Nombre Empresa Origen</th>
+				<th class="manage-column ss-list-width">Telefono Origen</th>
+				<th class="manage-column ss-list-width">Ruta</th>
+				<th class="manage-column ss-list-width">Direccion Origen</th>
+				<th class="manage-column ss-list-width">Ciudad Origen</th>
+				<th class="manage-column ss-list-width">Persona que Entrega </th>
+				<th class="manage-column ss-list-width">Fecha Entrega</th>
+				<th class="manage-column ss-list-width">Rut Empresa Destino</th>
+				<th class="manage-column ss-list-width">Nombre Empresa Destino</th>
+				<th class="manage-column ss-list-width">Telefono Destino</th>
+				<th class="manage-column ss-list-width">Direccion Destino</th>
+				<th class="manage-column ss-list-width">Ciudad Destino</th>
+				<th class="manage-column ss-list-width">Persona que Retira</th>
 				<th class="manage-column ss-list-width">Fecha Entrega</th>
 				<th class="manage-column ss-list-width">Forma de Pago</th>
 				<th class="manage-column ss-list-width">Cuenta Corriente</th>
@@ -53,18 +56,21 @@ function tran_ot_list() {
 					</td>
 					<?php
 					?>
-					<td class="manage-column ss-list-width"><?php echo $row->NomEmpRet; ?></td>
-					<td class="manage-column ss-list-width"><?php echo $row->telEmpRet; ?></td>
-					<td class="manage-column ss-list-width"><?php echo $row->dirEmpRet; ?></td>
-					<td class="manage-column ss-list-width"><?php echo $row->ciudEmpRet; ?></td>
-					<td class="manage-column ss-list-width"><?php echo $row->nomPerRet; ?></td>
-					<td class="manage-column ss-list-width"><?php echo $row->fechaRet; ?></td>
-					<td class="manage-column ss-list-width"><?php echo $row->NomEmpEnt; ?></td>
-					<td class="manage-column ss-list-width"><?php echo $row->telEmpEnt; ?></td>
-					<td class="manage-column ss-list-width"><?php echo $row->dirEmpEnt; ?></td>
-					<td class="manage-column ss-list-width"><?php echo $row->ciudEmpEnt; ?></td>
-					<td class="manage-column ss-list-width"><?php echo $row->nomPerEnt; ?></td>
-					<td class="manage-column ss-list-width"><?php echo $row->fechaEnt; ?></td>
+					<td class="manage-column ss-list-width"><?php echo $row->rutEmpOrig; ?></td>
+					<td class="manage-column ss-list-width"><?php echo $row->nomEmporig; ?></td>
+					<td class="manage-column ss-list-width"><?php echo $row->telEmpOrig; ?></td>
+					<td class="manage-column ss-list-width"><?php echo $row->id_rt; ?></td>
+					<td class="manage-column ss-list-width"><?php echo $row->dirEmpOrig; ?></td>
+					<td class="manage-column ss-list-width"><?php echo $row->ciudEmpOrig; ?></td>
+					<td class="manage-column ss-list-width"><?php echo $row->nomPerOrig; ?></td>
+					<td class="manage-column ss-list-width"><?php echo $row->fechaOrig; ?></td>
+					<td class="manage-column ss-list-width"><?php echo $row->rutEmpDest; ?></td>
+					<td class="manage-column ss-list-width"><?php echo $row->nomEmpDest; ?></td>
+					<td class="manage-column ss-list-width"><?php echo $row->telEmpDest; ?></td>
+					<td class="manage-column ss-list-width"><?php echo $row->dirEmpDest; ?></td>
+					<td class="manage-column ss-list-width"><?php echo $row->ciudEmpDest; ?></td>
+					<td class="manage-column ss-list-width"><?php echo $row->nomPerDest; ?></td>
+					<td class="manage-column ss-list-width"><?php echo $row->fechaDest; ?></td>
 					<td class="manage-column ss-list-width"><?php echo $row->formaPago; ?></td>
 					<td class="manage-column ss-list-width"><?php echo $row->cuentaCte; ?></td>
 					<td class="manage-column ss-list-width"><?php echo $row->boletaFactura; ?></td>

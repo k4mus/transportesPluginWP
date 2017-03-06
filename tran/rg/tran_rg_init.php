@@ -18,8 +18,8 @@ function rg_options_install() {
 	
 	CREATE TABLE $table_name (
             `id_rg` MEDIUMINT NOT NULL AUTO_INCREMENT,
-            	`nombreEmpresa` varchar(50) CHARACTER SET utf8 NOT NULL ,
-            	`fecha` varchar(50) CHARACTER SET utf8 NOT NULL ,
+				`nombreEmpresa` varchar(50) CHARACTER SET utf8,
+				`fecha` varchar(11) CHARACTER SET utf8 NOT NULL ,
             PRIMARY KEY (`id_rg`),
             UNIQUE KEY `ix_` (`id_rg`)
           ) AUTO_INCREMENT=0 $charset_collate; ";

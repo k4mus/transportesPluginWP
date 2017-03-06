@@ -17,6 +17,7 @@ function tran_vjTb_update() {
 	else
 	$page_volver= "tran_vjTb_list";
 	
+	
 //update
     if (isset($_POST['update'])){
 		$id_vj= $_POST["id_vj"];
@@ -52,6 +53,7 @@ function tran_vjTb_update() {
 	<script src="//code.jquery.com/jquery-1.12.4.js"></script>
 	<script src="//code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/free-jqgrid/4.13.6/js/jquery.jqgrid.min.js"></script>
+	<script src="<?php echo WP_PLUGIN_URL; ?>/transportes-plugin/js/combobox.js"></script>
     <div class="wrap">
         <h2></h2>
 
@@ -82,10 +84,18 @@ function tran_vjTb_update() {
 						<th>ID_TB</th>
 						<td><input type="text" name="id_tb" value="<?php echo $id_tb; ?>"  <?php if ($id_tb) echo readonly  ?> /></td>
 					</tr>
-					<tr><th>empresa</th><td><input type="text" name="Monto" value="<?php echo $Monto; ?>" class=""/></td></tr>
-					<tr><th>empresa</th><td><input type="text" name="Razon" value="<?php echo $Razon; ?>" class=""/></td></tr>
-					<tr><th>empresa</th><td><input type="text" name="Gasto_ingreso" value="<?php echo $Gasto_ingreso; ?>" class=""/></td></tr>
-					<tr><th>fecha</th><td><input type="text" name="fecha" value="<?php echo $fecha; ?>" class="datetime"/></td></tr>
+					<tr><th>empresa</th>
+					<td><input type="text" name="Monto" value="<?php echo $Monto; ?>" class="ss-field-width " /></td>
+					</tr>
+					<tr><th>empresa</th>
+					<td><input type="text" name="Razon" value="<?php echo $Razon; ?>" class="ss-field-width " /></td>
+					</tr>
+					<tr><th>empresa</th>
+					<td><input type="text" name="Gasto_ingreso" value="<?php echo $Gasto_ingreso; ?>" class="ss-field-width " /></td>
+					</tr>
+					<tr><th>fecha</th>
+					<td><input type="text" name="fecha" value="<?php echo $fecha; ?>" class="ss-field-width datetime" /></td>
+					</tr>
                 </table>
 				<div id='pager'></div>
                 <input type='submit' name="update" value='Save' class='button'> &nbsp;&nbsp;

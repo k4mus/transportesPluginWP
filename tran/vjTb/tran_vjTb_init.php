@@ -20,12 +20,12 @@ function vjTb_options_install() {
             `id_vjTb` MEDIUMINT NOT NULL AUTO_INCREMENT,
 			`id_vj` MEDIUMINT NOT NULL,
 			`id_tb` MEDIUMINT NOT NULL,
-            	`Monto` varchar(50) CHARACTER SET utf8 NOT NULL ,
-            	`Razon` varchar(50) CHARACTER SET utf8 NOT NULL ,
-            	`Gasto_ingreso` varchar(50) CHARACTER SET utf8 NOT NULL ,
-            	`fecha` varchar(50) CHARACTER SET utf8 NOT NULL ,
+				`Monto` varchar(50) CHARACTER SET utf8,
+				`Razon` varchar(50) CHARACTER SET utf8,
+				`Gasto_ingreso` varchar(50) CHARACTER SET utf8,
+				`fecha` varchar(11) CHARACTER SET utf8 NOT NULL ,
             PRIMARY KEY (`id_vjTb`),
-            UNIQUE KEY `ix_` (`id_ovTb`)
+            UNIQUE KEY `ix_` (`id_vjTb`)
           ) AUTO_INCREMENT=0 $charset_collate; ";
 
     require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );

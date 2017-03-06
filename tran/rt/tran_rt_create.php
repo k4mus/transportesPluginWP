@@ -1,8 +1,14 @@
 <?php
 
 function tran_rt_create() {
-	$nombreEmpresa = $_POST["nombreEmpresa"];
-	$fecha = $_POST["fecha"];
+	$name_rt = $_POST["name_rt"];
+	$ciudad_orig = $_POST["ciudad_orig"];
+	$comuna_orig = $_POST["comuna_orig"];
+	$ciudad_dest = $_POST["ciudad_dest"];
+	$comuna_orig = $_POST["comuna_orig"];
+	$kms = $_POST["kms"];
+	$precioBase = $_POST["precioBase"];
+	$precioExtencion = $_POST["precioExtencion"];
 	
 	//volver
 	$page_volver= "tran_rt_list";
@@ -14,7 +20,7 @@ function tran_rt_create() {
 
         $wpdb->insert(
                 $table_name, //table
-                array(  'nombreEmpresa' => $nombreEmpresa , 'fecha' => $fecha  ), //data
+                array(  'name_rt' => $name_rt , 'ciudad_orig' => $ciudad_orig , 'comuna_orig' => $comuna_orig , 'ciudad_dest' => $ciudad_dest , 'comuna_orig' => $comuna_orig , 'kms' => $kms , 'precioBase' => $precioBase , 'precioExtencion' => $precioExtencion  ), //data
                 array('%s', '%s') //data format	 		
         );
         $message.="Rutas inserted";
@@ -24,6 +30,7 @@ function tran_rt_create() {
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css">
 	<script src="//code.jquery.com/jquery-1.12.4.js"></script>
 	<script src="//code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+	<script src="<?php echo WP_PLUGIN_URL; ?>/transportes-plugin/js/combobox.js"></script>
     
     <div class="wrap">
         <h2>Add New Rutas</h2>
@@ -32,12 +39,36 @@ function tran_rt_create() {
             <p> </p>
             <table class='wp-list-table widefat fixed'>
 				<tr>
-                    <th class="ss-th-width">empresa</th>
-                    <td><input type="text" name="nombreEmpresa" value="<?php echo $nombreEmpresa; ?>" class="ss-field-width " /></td>
+                    <th class="ss-th-width">Nombre Ruta</th>
+					<td><input type="text" name="name_rt" value="<?php echo $name_rt; ?>" class="ss-field-width " /></td>
                 </tr>
 				<tr>
-                    <th class="ss-th-width">fecha</th>
-                    <td><input type="text" name="fecha" value="<?php echo $fecha; ?>" class="ss-field-width datetime" /></td>
+                    <th class="ss-th-width">Ciudad Origen</th>
+					<td><input type="text" name="ciudad_orig" value="<?php echo $ciudad_orig; ?>" class="ss-field-width " /></td>
+                </tr>
+				<tr>
+                    <th class="ss-th-width">Comuna Origen</th>
+					<td><input type="text" name="comuna_orig" value="<?php echo $comuna_orig; ?>" class="ss-field-width " /></td>
+                </tr>
+				<tr>
+                    <th class="ss-th-width">Ciudad Destino</th>
+					<td><input type="text" name="ciudad_dest" value="<?php echo $ciudad_dest; ?>" class="ss-field-width " /></td>
+                </tr>
+				<tr>
+                    <th class="ss-th-width">Comuna Destino</th>
+					<td><input type="text" name="comuna_orig" value="<?php echo $comuna_orig; ?>" class="ss-field-width " /></td>
+                </tr>
+				<tr>
+                    <th class="ss-th-width">Kms Aprox.</th>
+					<td><input type="text" name="kms" value="<?php echo $kms; ?>" class="ss-field-width int" /></td>
+                </tr>
+				<tr>
+                    <th class="ss-th-width">Precio</th>
+					<td><input type="text" name="precioBase" value="<?php echo $precioBase; ?>" class="ss-field-width int" /></td>
+                </tr>
+				<tr>
+                    <th class="ss-th-width">Precio Extención</th>
+					<td><input type="text" name="precioExtencion" value="<?php echo $precioExtencion; ?>" class="ss-field-width int" /></td>
                 </tr>
             </table>
             <input type='submit' name="insert" value='Save' class='button'>
@@ -46,6 +77,8 @@ function tran_rt_create() {
     </div>
     <script>
 		$( ".datetime" ).datepicker();
+		$( ".int" ).spinner();
+		
 	</script>
     <?php
 }

@@ -34,6 +34,7 @@ function tran_otRt_create() {
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css">
 	<script src="//code.jquery.com/jquery-1.12.4.js"></script>
 	<script src="//code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+	<script src="<?php echo WP_PLUGIN_URL; ?>/transportes-plugin/js/combobox.js"></script>
     
     <div class="wrap">
         <h2>Add New Orden de Transporte - Ruta</h2>
@@ -51,19 +52,19 @@ function tran_otRt_create() {
                 </tr>
 				<tr>
                     <th class="ss-th-width">empresa</th>
-                    <td><input type="text" name="Monto" value="<?php echo $Monto; ?>" class="ss-field-width " /></td>
+					<td><input type="text" name="Monto" value="<?php echo $Monto; ?>" class="ss-field-width " /></td>
                 </tr>
 				<tr>
                     <th class="ss-th-width">empresa</th>
-                    <td><input type="text" name="Razon" value="<?php echo $Razon; ?>" class="ss-field-width " /></td>
+					<td><input type="text" name="Razon" value="<?php echo $Razon; ?>" class="ss-field-width " /></td>
                 </tr>
 				<tr>
                     <th class="ss-th-width">empresa</th>
-                    <td><input type="text" name="Gasto_ingreso" value="<?php echo $Gasto_ingreso; ?>" class="ss-field-width " /></td>
+					<td><input type="text" name="Gasto_ingreso" value="<?php echo $Gasto_ingreso; ?>" class="ss-field-width " /></td>
                 </tr>
 				<tr>
                     <th class="ss-th-width">fecha</th>
-                    <td><input type="text" name="fecha" value="<?php echo $fecha; ?>" class="ss-field-width datetime" /></td>
+					<td><input type="text" name="fecha" value="<?php echo $fecha; ?>" class="ss-field-width datetime" /></td>
                 </tr>
             </table>
             <input type='submit' name="insert" value='Save' class='button'>
@@ -72,6 +73,8 @@ function tran_otRt_create() {
     </div>
     <script>
 		$( ".datetime" ).datepicker();
+		$( ".int" ).spinner();
+		
 	</script>
     <?php
 }

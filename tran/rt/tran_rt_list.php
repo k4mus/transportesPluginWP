@@ -15,15 +15,21 @@ function tran_rt_list() {
         global $wpdb;
         $table_name = $wpdb->prefix . "rt";
 		
-        $rows = $wpdb->get_results("SELECT id_rt,  nombreEmpresa , fecha  from $table_name   ");
+        $rows = $wpdb->get_results("SELECT id_rt,  name_rt , ciudad_orig , comuna_orig , ciudad_dest , comuna_orig , kms , precioBase , precioExtencion  from $table_name   ");
         ?>
         <table class='wp-list-table widefat fixed striped posts'>
             <tr>
 				<th class="manage-column ss-list-width">ID</th>
 			<?php
 			?>
-				<th class="manage-column ss-list-width">empresa</th>
-				<th class="manage-column ss-list-width">fecha</th>
+				<th class="manage-column ss-list-width">Nombre Ruta</th>
+				<th class="manage-column ss-list-width">Ciudad Origen</th>
+				<th class="manage-column ss-list-width">Comuna Origen</th>
+				<th class="manage-column ss-list-width">Ciudad Destino</th>
+				<th class="manage-column ss-list-width">Comuna Destino</th>
+				<th class="manage-column ss-list-width">Kms Aprox.</th>
+				<th class="manage-column ss-list-width">Precio</th>
+				<th class="manage-column ss-list-width">Precio Extención</th>
                 <th>&nbsp;</th>
             </tr>
             <?php foreach ($rows as $row) { ?>
@@ -33,8 +39,14 @@ function tran_rt_list() {
 					</td>
 					<?php
 					?>
-					<td class="manage-column ss-list-width"><?php echo $row->nombreEmpresa; ?></td>
-					<td class="manage-column ss-list-width"><?php echo $row->fecha; ?></td>
+					<td class="manage-column ss-list-width"><?php echo $row->name_rt; ?></td>
+					<td class="manage-column ss-list-width"><?php echo $row->ciudad_orig; ?></td>
+					<td class="manage-column ss-list-width"><?php echo $row->comuna_orig; ?></td>
+					<td class="manage-column ss-list-width"><?php echo $row->ciudad_dest; ?></td>
+					<td class="manage-column ss-list-width"><?php echo $row->comuna_orig; ?></td>
+					<td class="manage-column ss-list-width"><?php echo $row->kms; ?></td>
+					<td class="manage-column ss-list-width"><?php echo $row->precioBase; ?></td>
+					<td class="manage-column ss-list-width"><?php echo $row->precioExtencion; ?></td>
 			    </tr>
             <?php } ?>
         </table>

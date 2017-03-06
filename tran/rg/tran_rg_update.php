@@ -9,6 +9,7 @@ function tran_rg_update() {
 	//volver
 	$page_volver= "tran_rg_list";
 	
+	
 //update
     if (isset($_POST['update'])){
 		
@@ -38,6 +39,7 @@ function tran_rg_update() {
 	<script src="//code.jquery.com/jquery-1.12.4.js"></script>
 	<script src="//code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/free-jqgrid/4.13.6/js/jquery.jqgrid.min.js"></script>
+	<script src="<?php echo WP_PLUGIN_URL; ?>/transportes-plugin/js/combobox.js"></script>
     <div class="wrap">
         <h2></h2>
 
@@ -60,8 +62,12 @@ function tran_rg_update() {
 						<th>ID</th>
 						<td><input type="text" name="id_rg" value="<?php echo $id_rg; ?>" disabled /></td>
 					</tr>
-					<tr><th>empresa</th><td><input type="text" name="nombreEmpresa" value="<?php echo $nombreEmpresa; ?>" class=""/></td></tr>
-					<tr><th>fecha</th><td><input type="text" name="fecha" value="<?php echo $fecha; ?>" class="datetime"/></td></tr>
+					<tr><th>empresa</th>
+					<td><input type="text" name="nombreEmpresa" value="<?php echo $nombreEmpresa; ?>" class="ss-field-width " /></td>
+					</tr>
+					<tr><th>fecha</th>
+					<td><input type="text" name="fecha" value="<?php echo $fecha; ?>" class="ss-field-width datetime" /></td>
+					</tr>
                 </table>
 				<div id='pager'></div>
                 <input type='submit' name="update" value='Save' class='button'> &nbsp;&nbsp;

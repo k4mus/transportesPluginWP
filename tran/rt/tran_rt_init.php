@@ -18,8 +18,14 @@ function rt_options_install() {
 	
 	CREATE TABLE $table_name (
             `id_rt` MEDIUMINT NOT NULL AUTO_INCREMENT,
-            	`nombreEmpresa` varchar(50) CHARACTER SET utf8 NOT NULL ,
-            	`fecha` varchar(50) CHARACTER SET utf8 NOT NULL ,
+				`name_rt` varchar(50) CHARACTER SET utf8,
+				`ciudad_orig` varchar(50) CHARACTER SET utf8,
+				`comuna_orig` varchar(50) CHARACTER SET utf8,
+				`ciudad_dest` varchar(50) CHARACTER SET utf8,
+				`comuna_orig` varchar(50) CHARACTER SET utf8,
+				`kms` MEDIUMINT,
+				`precioBase` MEDIUMINT,
+				`precioExtencion` MEDIUMINT,
             PRIMARY KEY (`id_rt`),
             UNIQUE KEY `ix_` (`id_rt`)
           ) AUTO_INCREMENT=0 $charset_collate; ";

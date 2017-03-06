@@ -20,10 +20,10 @@ function otRt_options_install() {
             `id_otRt` MEDIUMINT NOT NULL AUTO_INCREMENT,
 			`id_ot` MEDIUMINT NOT NULL,
 			`id_rt` MEDIUMINT NOT NULL,
-            	`Monto` varchar(50) CHARACTER SET utf8 NOT NULL ,
-            	`Razon` varchar(50) CHARACTER SET utf8 NOT NULL ,
-            	`Gasto_ingreso` varchar(50) CHARACTER SET utf8 NOT NULL ,
-            	`fecha` varchar(50) CHARACTER SET utf8 NOT NULL ,
+				`Monto` varchar(50) CHARACTER SET utf8,
+				`Razon` varchar(50) CHARACTER SET utf8,
+				`Gasto_ingreso` varchar(50) CHARACTER SET utf8,
+				`fecha` varchar(11) CHARACTER SET utf8 NOT NULL ,
             PRIMARY KEY (`id_otRt`),
             UNIQUE KEY `ix_` (`id_otRt`)
           ) AUTO_INCREMENT=0 $charset_collate; ";
