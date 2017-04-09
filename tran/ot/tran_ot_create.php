@@ -26,11 +26,13 @@ function tran_ot_create() {
 	$altoCarga = $_POST["altoCarga"];
 	$documentos = $_POST["documentos"];
 	$instrucciones = $_POST["instrucciones"];
-	global $wpdb;
+	
 	//volver
 	$page_volver= "tran_ot_list";
 	 //insert
+	global $wpdb;
 	
+	$rows_rt = $wpdb->get_results("SELECT id_rt, name_rt from ".$wpdb->prefix ."rt");  
     if (isset($_POST['insert'])) {
 		
         
@@ -41,12 +43,9 @@ function tran_ot_create() {
                 array(  'rutEmpOrig' => $rutEmpOrig , 'nomEmporig' => $nomEmporig , 'telEmpOrig' => $telEmpOrig , 'id_rt' => $id_rt , 'dirEmpOrig' => $dirEmpOrig , 'ciudEmpOrig' => $ciudEmpOrig , 'nomPerOrig' => $nomPerOrig , 'fechaOrig' => $fechaOrig , 'rutEmpDest' => $rutEmpDest , 'nomEmpDest' => $nomEmpDest , 'telEmpDest' => $telEmpDest , 'dirEmpDest' => $dirEmpDest , 'ciudEmpDest' => $ciudEmpDest , 'nomPerDest' => $nomPerDest , 'fechaDest' => $fechaDest , 'formaPago' => $formaPago , 'cuentaCte' => $cuentaCte , 'boletaFactura' => $boletaFactura , 'nroPiezas' => $nroPiezas , 'pesoCarga' => $pesoCarga , 'largoCarga' => $largoCarga , 'anchoCarga' => $anchoCarga , 'altoCarga' => $altoCarga , 'documentos' => $documentos , 'instrucciones' => $instrucciones  ), //data
                 array('%s', '%s') //data format	 		
         );
-        $message.="Orden de Transporte inserted";
-		$id_ot =$wpdb->insert_id;
+        $id_ot =$wpdb->insert_id;
+		$message.="Orden de Transporte inserted: ".$id_ot;
     }
-	else{
-		$rows_rt = $wpdb->get_results("SELECT id_rt, name_rt from ".$wpdb->prefix ."rt");  
-	}
     ?>
     <link type="text/css" href="<?php echo WP_PLUGIN_URL; ?>/transportes-plugin/style-admin.css" rel="stylesheet" />
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css">
@@ -56,8 +55,7 @@ function tran_ot_create() {
     
     <div class="wrap">
         <h2>Add New Orden de Transporte</h2>
-        <?php if (isset($message)): ?><div class="updated"><p><?php echo $message; ?></p></div>
-		<?php
+        <?php if (isset($message)): ?><div class="updated"><p><?php echo $message; ?></p></div><?php 
 		echo '<script type="text/javascript">
            window.location = "'.admin_url('admin.php?page=tran_ot_update&id_ot='.$id_ot).'"
 		</script>';
@@ -66,7 +64,7 @@ function tran_ot_create() {
 		  <ul>
 			<li><a href="#tabs-1">Orden de Transporte</a></li>
 		  </ul>
-		  <div id="tabs-1">
+		<div id="tabs-1">
         <form method="post" action="<?php echo $_SERVER['REQUEST_URI']; ?>">
             <p> </p>
             <table class='wp-list-table widefat fixed'>
@@ -80,15 +78,13 @@ function tran_ot_create() {
                 </tr>
 				<tr>
                     <th class="ss-th-width">Telefono Origen</th>
-					<td><input type="text" name="telEmpOrig" value="<?php echo $telEmpOrig; ?>" class="ss-field-width int" /></td>
+					<td><input type="text" name="telEmpOrig" value="<?php echo $telEmpOrig; ?>" class="ss-field-width numero" /></td>
                 </tr>
 				<tr>
                     <th class="ss-th-width">Ruta</th>
 					<td><select type="text" id= "id_rt" name="id_rt" value="<?php echo $id_rt; ?>  " class="combobox">
 						<option value="">Select one...</option>
-						<?php 
-						
-						foreach ($rows_rt as $row_rt) { ?>
+						<?php foreach ($rows_rt as $row_rt) { ?>
 						<option value="<?php echo $row_rt->id_rt; ?>"><?php echo $row_rt->name_rt; ?></option>
 						<?php } ?>
 						</select>
@@ -108,7 +104,7 @@ function tran_ot_create() {
                 </tr>
 				<tr>
                     <th class="ss-th-width">Fecha Entrega</th>
-					<td><input type="text" name="fechaOrig" value="<?php echo $fechaOrig; ?>" class="ss-field-width datetime" /></td>
+					<td><input type="text" name="fechaOrig" value="<?php echo $fechaOrig; ?>" class="ss-field-width fecha" /></td>
                 </tr>
 				<tr>
                     <th class="ss-th-width">Rut Empresa Destino</th>
@@ -136,7 +132,7 @@ function tran_ot_create() {
                 </tr>
 				<tr>
                     <th class="ss-th-width">Fecha Entrega</th>
-					<td><input type="text" name="fechaDest" value="<?php echo $fechaDest; ?>" class="ss-field-width datetime" /></td>
+					<td><input type="text" name="fechaDest" value="<?php echo $fechaDest; ?>" class="ss-field-width fecha" /></td>
                 </tr>
 				<tr>
                     <th class="ss-th-width">Forma de Pago</th>
@@ -149,29 +145,29 @@ function tran_ot_create() {
 				<tr>
                     <th class="ss-th-width">Boleta/Factura</th>
 					<td>
-						<input type="radio" name="boletaFactura" value="Boleta" checked/>Boleta
+						<input type="radio" name="boletaFactura" value="Boleta"/>Boleta
 						<input type="radio" name="boletaFactura" value="Factura"/>Factura
 					</td>
                 </tr>
 				<tr>
                     <th class="ss-th-width">N° de Piezas</th>
-					<td><input type="text" name="nroPiezas" value="<?php echo $nroPiezas; ?>" class="ss-field-width int" /></td>
+					<td><input type="text" name="nroPiezas" value="<?php echo $nroPiezas; ?>" class="ss-field-width numero" /></td>
                 </tr>
 				<tr>
                     <th class="ss-th-width">Peso(Kg)</th>
-					<td><input type="text" name="pesoCarga" value="<?php echo $pesoCarga; ?>" class="ss-field-width int" /></td>
+					<td><input type="text" name="pesoCarga" value="<?php echo $pesoCarga; ?>" class="ss-field-width numero" /></td>
                 </tr>
 				<tr>
                     <th class="ss-th-width">Largo(m)</th>
-					<td><input type="text" name="largoCarga" value="<?php echo $largoCarga; ?>" class="ss-field-width int" /></td>
+					<td><input type="text" name="largoCarga" value="<?php echo $largoCarga; ?>" class="ss-field-width numero" /></td>
                 </tr>
 				<tr>
                     <th class="ss-th-width">Ancho(m)</th>
-					<td><input type="text" name="anchoCarga" value="<?php echo $anchoCarga; ?>" class="ss-field-width int" /></td>
+					<td><input type="text" name="anchoCarga" value="<?php echo $anchoCarga; ?>" class="ss-field-width numero" /></td>
                 </tr>
 				<tr>
                     <th class="ss-th-width">Alto(m)</th>
-					<td><input type="text" name="altoCarga" value="<?php echo $altoCarga; ?>" class="ss-field-width int" /></td>
+					<td><input type="text" name="altoCarga" value="<?php echo $altoCarga; ?>" class="ss-field-width numero" /></td>
                 </tr>
 				<tr>
                     <th class="ss-th-width">Documentos asociados</th>
@@ -188,9 +184,11 @@ function tran_ot_create() {
 		</div>
 		<a href="<?php echo admin_url('admin.php?page='.$page_volver) ?>">&laquo; Volver</a>
     </div>
+	
+	
     <script>
-		$( ".datetime" ).datepicker();
-		$( ".int" ).spinner();
+		$( ".fecha" ).datepicker();
+		$( ".numero" ).spinner();
 		$("#tabs" ).tabs();
 		
 	</script>

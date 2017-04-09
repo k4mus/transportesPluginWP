@@ -3,6 +3,12 @@ error_reporting(0);
 function tran_ot_list() {
     ?>
     <link type="text/css" href="<?php echo WP_PLUGIN_URL; ?>/transportes-plugin/style-admin.css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.13/datatables.min.css"/>
+ 	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css">
+	<script src="//code.jquery.com/jquery-1.12.4.js"></script>
+	<script src="//code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+	<script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.13/datatables.min.js"></script>
+    
     <div class="wrap">
         <h2>Orden de Transporte</h2>
         <div class="tablenav top">
@@ -17,7 +23,8 @@ function tran_ot_list() {
 		
         $rows = $wpdb->get_results("SELECT id_ot,  rutEmpOrig , nomEmporig , telEmpOrig , id_rt , dirEmpOrig , ciudEmpOrig , nomPerOrig , fechaOrig , rutEmpDest , nomEmpDest , telEmpDest , dirEmpDest , ciudEmpDest , nomPerDest , fechaDest , formaPago , cuentaCte , boletaFactura , nroPiezas , pesoCarga , largoCarga , anchoCarga , altoCarga , documentos , instrucciones  from $table_name   ");
         ?>
-        <table class='wp-list-table widefat fixed striped posts'>
+        <table id ="table_ot" $table_name class='wp-list-table widefat fixed striped posts'>
+            <thead>
             <tr>
 				<th class="manage-column ss-list-width">ID</th>
 			<?php
@@ -47,10 +54,11 @@ function tran_ot_list() {
 				<th class="manage-column ss-list-width">Alto(m)</th>
 				<th class="manage-column ss-list-width">Documentos asociados</th>
 				<th class="manage-column ss-list-width">Instrucciones</th>
-                <th>&nbsp;</th>
             </tr>
+            </thead>
+            <tbody>
             <?php foreach ($rows as $row) { ?>
-                <tr>
+            	<tr>
                     <td class="manage-column ss-list-width">
 						<a href="<?php echo admin_url('admin.php?page=tran_ot_update&id_ot=' . $row->id_ot ); ?>"><?php echo $row->id_ot; ?></a>
 					</td>
@@ -83,10 +91,11 @@ function tran_ot_list() {
 					<td class="manage-column ss-list-width"><?php echo $row->instrucciones; ?></td>
 			    </tr>
             <?php } ?>
+            </tbody>
         </table>
     </div>
 	<script>
-	
+	$('#table_ot').DataTable();
 	</script>
 	
 	<?php

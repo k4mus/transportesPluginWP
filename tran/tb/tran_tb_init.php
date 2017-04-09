@@ -18,8 +18,10 @@ function tb_options_install() {
 	
 	CREATE TABLE $table_name (
             `id_tb` MEDIUMINT NOT NULL AUTO_INCREMENT,
-				`nombreEmpresa` varchar(50) CHARACTER SET utf8,
-				`fecha` varchar(11) CHARACTER SET utf8 NOT NULL ,
+				`name` varchar(50) CHARACTER SET utf8,
+				`rut` varchar(50) CHARACTER SET utf8,
+				`fechaIng` varchar(11) CHARACTER SET utf8 NOT NULL ,
+				`cargo` varchar(50) CHARACTER SET utf8,
             PRIMARY KEY (`id_tb`),
             UNIQUE KEY `ix_` (`id_tb`)
           ) AUTO_INCREMENT=0 $charset_collate; ";

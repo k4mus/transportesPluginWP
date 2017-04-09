@@ -4,8 +4,10 @@ function tran_tb_update() {
     global $wpdb;
     $table_name = $wpdb->prefix ."tb";
     $id_tb = $_GET["id_tb"];
-	$nombreEmpresa = $_POST["nombreEmpresa"];
-	$fecha = $_POST["fecha"];
+	$name = $_POST["name"];
+	$rut = $_POST["rut"];
+	$fechaIng = $_POST["fechaIng"];
+	$cargo = $_POST["cargo"];
 	//volver
 	$page_volver= "tran_tb_list";
 	
@@ -15,9 +17,9 @@ function tran_tb_update() {
 		
         $wpdb->update(
                 $table_name, //table
-				array(  'nombreEmpresa' => $nombreEmpresa, 'fecha' => $fecha), //data
+				array(  'name' => $name, 'rut' => $rut, 'fechaIng' => $fechaIng, 'cargo' => $cargo), //data
                 array('id_tb' => $id_tb ), //where
-				array('%s','%s'), //data format
+				array('%s','%s','%s','%s'), //data format
                 array('%s') //where format
         );
     }
@@ -25,11 +27,13 @@ function tran_tb_update() {
     else if (isset($_POST['delete'])) {
         $wpdb->query($wpdb->prepare("DELETE FROM $table_name WHERE id_tb = %s", $id_tb));
     } else {//selecting value to update	
-        $results = $wpdb->get_results($wpdb->prepare("SELECT id_tb , nombreEmpresa , fecha  from $table_name where id_tb=%s", $id_tb));
+        $results = $wpdb->get_results($wpdb->prepare("SELECT id_tb , name , rut , fechaIng , cargo  from $table_name where id_tb=%s", $id_tb));
         foreach ($results as $r) {
             $id_tb = $r->id_tb;
-			$nombreEmpresa = $r->nombreEmpresa;
-			$fecha = $r->fecha;
+			$name = $r->name;
+			$rut = $r->rut;
+			$fechaIng = $r->fechaIng;
+			$cargo = $r->cargo;
         }
     }
     ?>
@@ -62,11 +66,21 @@ function tran_tb_update() {
 						<th>ID</th>
 						<td><input type="text" name="id_tb" value="<?php echo $id_tb; ?>" disabled /></td>
 					</tr>
-					<tr><th>empresa</th>
-					<td><input type="text" name="nombreEmpresa" value="<?php echo $nombreEmpresa; ?>" class="ss-field-width " /></td>
+                    
+					<th class="ss-th-width">Código Trabajador</th> 
+					<td><input type="text" name="name" value="<?php echo $name; ?>" class="ss-field-width " /></td>
 					</tr>
-					<tr><th>fecha</th>
-					<td><input type="text" name="fecha" value="<?php echo $fecha; ?>" class="ss-field-width datetime" /></td>
+					<th class="ss-th-width">Rut Trabajador</th> 
+					<td><input type="text" name="rut" value="<?php echo $rut; ?>" class="ss-field-width rut" /></td>
+					</tr>
+					<th class="ss-th-width">Fecha Ingreso</th> 
+					<td><input type="text" name="fechaIng" value="<?php echo $fechaIng; ?>" class="ss-field-width fecha" /></td>
+					</tr>
+					<th class="ss-th-width">Cargo</th> 
+					<td>
+						<input type="radio" name="cargo" value="Chofer" <?php if ($cargo=="Chofer") echo 'checked' ?> />Chofer
+						<input type="radio" name="cargo" value="Pioneta" <?php if ($cargo=="Pioneta") echo 'checked' ?> />Pioneta
+					</td>
 					</tr>
                 </table>
 				<div id='pager'></div>
@@ -79,8 +93,12 @@ function tran_tb_update() {
 			
     </div>
     <script>
-		$( ".datetime" ).datepicker();
+		$( ".fecha" ).datepicker();
 		$( "#tabs" ).tabs();
+		$('.combobox').each( function( index, element ){
+			$("option[value="+$(this).attr("value")+"]", this).attr('selected','selected');
+		});
+		$( ".numero" ).spinner();
 		
 	</script>
     <?php

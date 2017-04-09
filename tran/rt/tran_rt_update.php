@@ -15,6 +15,10 @@ function tran_rt_update() {
 	//volver
 	$page_volver= "tran_rt_list";
 	
+	$rows_ciudad = $wpdb->get_results("SELECT id_ciudad, name_ciudad from ".$wpdb->prefix ."ciudad");  
+	$rows_comuna = $wpdb->get_results("SELECT id_comuna, name_comuna from ".$wpdb->prefix ."comuna");  
+	$rows_ciudad = $wpdb->get_results("SELECT id_ciudad, name_ciudad from ".$wpdb->prefix ."ciudad");  
+	$rows_comuna = $wpdb->get_results("SELECT id_comuna, name_comuna from ".$wpdb->prefix ."comuna");  
 	
 //update
     if (isset($_POST['update'])){
@@ -74,29 +78,54 @@ function tran_rt_update() {
 						<th>ID</th>
 						<td><input type="text" name="id_rt" value="<?php echo $id_rt; ?>" disabled /></td>
 					</tr>
-					<tr><th>Nombre Ruta</th>
+                    
+					<th class="ss-th-width">Nombre Ruta</th> 
 					<td><input type="text" name="name_rt" value="<?php echo $name_rt; ?>" class="ss-field-width " /></td>
 					</tr>
-					<tr><th>Ciudad Origen</th>
-					<td><input type="text" name="ciudad_orig" value="<?php echo $ciudad_orig; ?>" class="ss-field-width " /></td>
+					<th class="ss-th-width">Ciudad Origen</th> 
+					<td><select type="text" id= "ciudad_orig" name="ciudad_orig" value="<?php echo $ciudad_orig; ?>  " class="combobox">
+						<option value="">Select one...</option>
+						<?php foreach ($rows_ciudad as $row_ciudad) { ?>
+						<option value="<?php echo $row_ciudad->id_ciudad; ?>"><?php echo $row_ciudad->name_ciudad; ?></option>
+						<?php } ?>
+						</select>
+					</td>
 					</tr>
-					<tr><th>Comuna Origen</th>
-					<td><input type="text" name="comuna_orig" value="<?php echo $comuna_orig; ?>" class="ss-field-width " /></td>
+					<th class="ss-th-width">Comuna Origen</th> 
+					<td><select type="text" id= "comuna_orig" name="comuna_orig" value="<?php echo $comuna_orig; ?>  " class="combobox">
+						<option value="">Select one...</option>
+						<?php foreach ($rows_comuna as $row_comuna) { ?>
+						<option value="<?php echo $row_comuna->id_comuna; ?>"><?php echo $row_comuna->name_comuna; ?></option>
+						<?php } ?>
+						</select>
+					</td>
 					</tr>
-					<tr><th>Ciudad Destino</th>
-					<td><input type="text" name="ciudad_dest" value="<?php echo $ciudad_dest; ?>" class="ss-field-width " /></td>
+					<th class="ss-th-width">Ciudad Destino</th> 
+					<td><select type="text" id= "ciudad_dest" name="ciudad_dest" value="<?php echo $ciudad_dest; ?>  " class="combobox">
+						<option value="">Select one...</option>
+						<?php foreach ($rows_ciudad as $row_ciudad) { ?>
+						<option value="<?php echo $row_ciudad->id_ciudad; ?>"><?php echo $row_ciudad->name_ciudad; ?></option>
+						<?php } ?>
+						</select>
+					</td>
 					</tr>
-					<tr><th>Comuna Destino</th>
-					<td><input type="text" name="comuna_orig" value="<?php echo $comuna_orig; ?>" class="ss-field-width " /></td>
+					<th class="ss-th-width">Comuna Destino</th> 
+					<td><select type="text" id= "comuna_orig" name="comuna_orig" value="<?php echo $comuna_orig; ?>  " class="combobox">
+						<option value="">Select one...</option>
+						<?php foreach ($rows_comuna as $row_comuna) { ?>
+						<option value="<?php echo $row_comuna->id_comuna; ?>"><?php echo $row_comuna->name_comuna; ?></option>
+						<?php } ?>
+						</select>
+					</td>
 					</tr>
-					<tr><th>Kms Aprox.</th>
-					<td><input type="text" name="kms" value="<?php echo $kms; ?>" class="ss-field-width int" /></td>
+					<th class="ss-th-width">Kms Aprox.</th> 
+					<td><input type="text" name="kms" value="<?php echo $kms; ?>" class="ss-field-width numero" /></td>
 					</tr>
-					<tr><th>Precio</th>
-					<td><input type="text" name="precioBase" value="<?php echo $precioBase; ?>" class="ss-field-width int" /></td>
+					<th class="ss-th-width">Precio</th> 
+					<td><input type="text" name="precioBase" value="<?php echo $precioBase; ?>" class="ss-field-width numero" /></td>
 					</tr>
-					<tr><th>Precio Extención</th>
-					<td><input type="text" name="precioExtencion" value="<?php echo $precioExtencion; ?>" class="ss-field-width int" /></td>
+					<th class="ss-th-width">Precio Extención</th> 
+					<td><input type="text" name="precioExtencion" value="<?php echo $precioExtencion; ?>" class="ss-field-width numero" /></td>
 					</tr>
                 </table>
 				<div id='pager'></div>
@@ -109,8 +138,12 @@ function tran_rt_update() {
 			
     </div>
     <script>
-		$( ".datetime" ).datepicker();
+		$( ".fecha" ).datepicker();
 		$( "#tabs" ).tabs();
+		$('.combobox').each( function( index, element ){
+			$("option[value="+$(this).attr("value")+"]", this).attr('selected','selected');
+		});
+		$( ".numero" ).spinner();
 		
 	</script>
     <?php

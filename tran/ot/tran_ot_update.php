@@ -96,10 +96,7 @@ function tran_ot_update() {
         <?php } else if ($_POST['update']) { ?>
             <div class="updated"><p>Orden de Transporte updated</p></div>
         
-        <?php } else { 
-		
-		?>
-		
+        <?php } else { ?>
 		
 		<div id="tabs">
 		  <ul>
@@ -112,16 +109,17 @@ function tran_ot_update() {
 						<th>ID</th>
 						<td><input type="text" name="id_ot" value="<?php echo $id_ot; ?>" disabled /></td>
 					</tr>
-					<tr><th>Rut Empresa Origen</th>
+                    
+					<th class="ss-th-width">Rut Empresa Origen</th> 
 					<td><input type="text" name="rutEmpOrig" value="<?php echo $rutEmpOrig; ?>" class="ss-field-width rut" /></td>
 					</tr>
-					<tr><th>Nombre Empresa Origen</th>
+					<th class="ss-th-width">Nombre Empresa Origen</th> 
 					<td><input type="text" name="nomEmporig" value="<?php echo $nomEmporig; ?>" class="ss-field-width " /></td>
 					</tr>
-					<tr><th>Telefono Origen</th>
-					<td><input type="text" name="telEmpOrig" value="<?php echo $telEmpOrig; ?>" class="ss-field-width phone" /></td>
+					<th class="ss-th-width">Telefono Origen</th> 
+					<td><input type="text" name="telEmpOrig" value="<?php echo $telEmpOrig; ?>" class="ss-field-width numero" /></td>
 					</tr>
-					<tr><th>Ruta</th>
+					<th class="ss-th-width">Ruta</th> 
 					<td><select type="text" id= "id_rt" name="id_rt" value="<?php echo $id_rt; ?>  " class="combobox">
 						<option value="">Select one...</option>
 						<?php foreach ($rows_rt as $row_rt) { ?>
@@ -130,70 +128,70 @@ function tran_ot_update() {
 						</select>
 					</td>
 					</tr>
-					<tr><th>Direccion Origen</th>
+					<th class="ss-th-width">Direccion Origen</th> 
 					<td><input type="text" name="dirEmpOrig" value="<?php echo $dirEmpOrig; ?>" class="ss-field-width " /></td>
 					</tr>
-					<tr><th>Ciudad Origen</th>
+					<th class="ss-th-width">Ciudad Origen</th> 
 					<td><input type="text" name="ciudEmpOrig" value="<?php echo $ciudEmpOrig; ?>" class="ss-field-width " /></td>
 					</tr>
-					<tr><th>Persona que Entrega </th>
+					<th class="ss-th-width">Persona que Entrega </th> 
 					<td><input type="text" name="nomPerOrig" value="<?php echo $nomPerOrig; ?>" class="ss-field-width " /></td>
 					</tr>
-					<tr><th>Fecha Entrega</th>
-					<td><input type="text" name="fechaOrig" value="<?php echo $fechaOrig; ?>" class="ss-field-width datetime" /></td>
+					<th class="ss-th-width">Fecha Entrega</th> 
+					<td><input type="text" name="fechaOrig" value="<?php echo $fechaOrig; ?>" class="ss-field-width fecha" /></td>
 					</tr>
-					<tr><th>Rut Empresa Destino</th>
+					<th class="ss-th-width">Rut Empresa Destino</th> 
 					<td><input type="text" name="rutEmpDest" value="<?php echo $rutEmpDest; ?>" class="ss-field-width " /></td>
 					</tr>
-					<tr><th>Nombre Empresa Destino</th>
+					<th class="ss-th-width">Nombre Empresa Destino</th> 
 					<td><input type="text" name="nomEmpDest" value="<?php echo $nomEmpDest; ?>" class="ss-field-width " /></td>
 					</tr>
-					<tr><th>Telefono Destino</th>
+					<th class="ss-th-width">Telefono Destino</th> 
 					<td><input type="text" name="telEmpDest" value="<?php echo $telEmpDest; ?>" class="ss-field-width " /></td>
 					</tr>
-					<tr><th>Direccion Destino</th>
+					<th class="ss-th-width">Direccion Destino</th> 
 					<td><input type="text" name="dirEmpDest" value="<?php echo $dirEmpDest; ?>" class="ss-field-width " /></td>
 					</tr>
-					<tr><th>Ciudad Destino</th>
+					<th class="ss-th-width">Ciudad Destino</th> 
 					<td><input type="text" name="ciudEmpDest" value="<?php echo $ciudEmpDest; ?>" class="ss-field-width " /></td>
 					</tr>
-					<tr><th>Persona que Retira</th>
+					<th class="ss-th-width">Persona que Retira</th> 
 					<td><input type="text" name="nomPerDest" value="<?php echo $nomPerDest; ?>" class="ss-field-width " /></td>
 					</tr>
-					<tr><th>Fecha Entrega</th>
-					<td><input type="text" name="fechaDest" value="<?php echo $fechaDest; ?>" class="ss-field-width datetime" /></td>
+					<th class="ss-th-width">Fecha Entrega</th> 
+					<td><input type="text" name="fechaDest" value="<?php echo $fechaDest; ?>" class="ss-field-width fecha" /></td>
 					</tr>
-					<tr><th>Forma de Pago</th>
+					<th class="ss-th-width">Forma de Pago</th> 
 					<td><input type="text" name="formaPago" value="<?php echo $formaPago; ?>" class="ss-field-width " /></td>
 					</tr>
-					<tr><th>Cuenta Corriente</th>
+					<th class="ss-th-width">Cuenta Corriente</th> 
 					<td><input type="text" name="cuentaCte" value="<?php echo $cuentaCte; ?>" class="ss-field-width " /></td>
 					</tr>
-					<tr><th>Boleta/Factura</th>
+					<th class="ss-th-width">Boleta/Factura</th> 
 					<td>
-						<input type="radio" name="boletaFactura" value="Boleta"  <?php if ($boletaFactura=="Boleta") echo 'checked' ?>/>Boleta
+						<input type="radio" name="boletaFactura" value="Boleta" <?php if ($boletaFactura=="Boleta") echo 'checked' ?> />Boleta
 						<input type="radio" name="boletaFactura" value="Factura" <?php if ($boletaFactura=="Factura") echo 'checked' ?> />Factura
 					</td>
 					</tr>
-					<tr><th>N° de Piezas</th>
-					<td><input type="text" name="nroPiezas" value="<?php echo $nroPiezas; ?>" class="ss-field-width int" /></td>
+					<th class="ss-th-width">N° de Piezas</th> 
+					<td><input type="text" name="nroPiezas" value="<?php echo $nroPiezas; ?>" class="ss-field-width numero" /></td>
 					</tr>
-					<tr><th>Peso(Kg)</th>
-					<td><input type="text" name="pesoCarga" value="<?php echo $pesoCarga; ?>" class="ss-field-width int" /></td>
+					<th class="ss-th-width">Peso(Kg)</th> 
+					<td><input type="text" name="pesoCarga" value="<?php echo $pesoCarga; ?>" class="ss-field-width numero" /></td>
 					</tr>
-					<tr><th>Largo(m)</th>
-					<td><input type="text" name="largoCarga" value="<?php echo $largoCarga; ?>" class="ss-field-width int" /></td>
+					<th class="ss-th-width">Largo(m)</th> 
+					<td><input type="text" name="largoCarga" value="<?php echo $largoCarga; ?>" class="ss-field-width numero" /></td>
 					</tr>
-					<tr><th>Ancho(m)</th>
-					<td><input type="text" name="anchoCarga" value="<?php echo $anchoCarga; ?>" class="ss-field-width int" /></td>
+					<th class="ss-th-width">Ancho(m)</th> 
+					<td><input type="text" name="anchoCarga" value="<?php echo $anchoCarga; ?>" class="ss-field-width numero" /></td>
 					</tr>
-					<tr><th>Alto(m)</th>
-					<td><input type="text" name="altoCarga" value="<?php echo $altoCarga; ?>" class="ss-field-width int" /></td>
+					<th class="ss-th-width">Alto(m)</th> 
+					<td><input type="text" name="altoCarga" value="<?php echo $altoCarga; ?>" class="ss-field-width numero" /></td>
 					</tr>
-					<tr><th>Documentos asociados</th>
+					<th class="ss-th-width">Documentos asociados</th> 
 					<td><input type="text" name="documentos" value="<?php echo $documentos; ?>" class="ss-field-width " /></td>
 					</tr>
-					<tr><th>Instrucciones</th>
+					<th class="ss-th-width">Instrucciones</th> 
 					<td><input type="text" name="instrucciones" value="<?php echo $instrucciones; ?>" class="ss-field-width " /></td>
 					</tr>
                 </table>
@@ -207,25 +205,12 @@ function tran_ot_update() {
 			
     </div>
     <script>
-		$(".datetime").datepicker();
-		$("#tabs" ).tabs();
+		$( ".fecha" ).datepicker();
+		$( "#tabs" ).tabs();
 		$('.combobox').each( function( index, element ){
 			$("option[value="+$(this).attr("value")+"]", this).attr('selected','selected');
 		});
-		$( ".int" ).spinner();
-		$(".phone").mask("(99) 9999?9-9999");
-
-		$(".phone").on("blur", function() {
-			var last = $(this).val().substr( $(this).val().indexOf("-") + 1 );
-
-			if( last.length == 3 ) {
-				var move = $(this).val().substr( $(this).val().indexOf("-") - 1, 1 );
-				var lastfour = move + last;
-				var first = $(this).val().substr( 0, 9 );
-
-				$(this).val( first + '-' + lastfour );
-			}
-		});
+		$( ".numero" ).spinner();
 		
 	</script>
     <?php

@@ -5,7 +5,8 @@
 .ss-field-width {width:75%}
 .custom-combobox {
 position: relative;
-display: inline-block;
+display: inline;
+padding: .5em 2em .3em .3em;
 }
 .custom-combobox-toggle {
 position: absolute;

@@ -84,17 +84,18 @@ function tran_vjTb_update() {
 						<th>ID_TB</th>
 						<td><input type="text" name="id_tb" value="<?php echo $id_tb; ?>"  <?php if ($id_tb) echo readonly  ?> /></td>
 					</tr>
-					<tr><th>empresa</th>
+                    
+					<th class="ss-th-width">empresa</th> 
 					<td><input type="text" name="Monto" value="<?php echo $Monto; ?>" class="ss-field-width " /></td>
 					</tr>
-					<tr><th>empresa</th>
+					<th class="ss-th-width">empresa</th> 
 					<td><input type="text" name="Razon" value="<?php echo $Razon; ?>" class="ss-field-width " /></td>
 					</tr>
-					<tr><th>empresa</th>
+					<th class="ss-th-width">empresa</th> 
 					<td><input type="text" name="Gasto_ingreso" value="<?php echo $Gasto_ingreso; ?>" class="ss-field-width " /></td>
 					</tr>
-					<tr><th>fecha</th>
-					<td><input type="text" name="fecha" value="<?php echo $fecha; ?>" class="ss-field-width datetime" /></td>
+					<th class="ss-th-width">fecha</th> 
+					<td><input type="text" name="fecha" value="<?php echo $fecha; ?>" class="ss-field-width fecha" /></td>
 					</tr>
                 </table>
 				<div id='pager'></div>
@@ -107,8 +108,12 @@ function tran_vjTb_update() {
 			
     </div>
     <script>
-		$( ".datetime" ).datepicker();
+		$( ".fecha" ).datepicker();
 		$( "#tabs" ).tabs();
+		$('.combobox').each( function( index, element ){
+			$("option[value="+$(this).attr("value")+"]", this).attr('selected','selected');
+		});
+		$( ".numero" ).spinner();
 		
 	</script>
     <?php

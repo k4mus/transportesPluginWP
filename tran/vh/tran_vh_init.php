@@ -18,8 +18,26 @@ function vh_options_install() {
 	
 	CREATE TABLE $table_name (
             `id_vh` MEDIUMINT NOT NULL AUTO_INCREMENT,
-				`nombreEmpresa` varchar(50) CHARACTER SET utf8,
-				`fecha` varchar(11) CHARACTER SET utf8 NOT NULL ,
+				`name` varchar(50) CHARACTER SET utf8,
+				`tipo` varchar(50) CHARACTER SET utf8,
+				`Tonelaje` MEDIUMINT,
+				`Patente` varchar(50) CHARACTER SET utf8,
+				`Marca` varchar(50) CHARACTER SET utf8,
+				`Modelo` varchar(50) CHARACTER SET utf8,
+				`Año` varchar(50) CHARACTER SET utf8,
+				`FechaCompra` varchar(11) CHARACTER SET utf8 NOT NULL ,
+				`estanque` MEDIUMINT,
+				`zona` varchar(50) CHARACTER SET utf8,
+				`rendimiento` MEDIUMINT,
+				`fecUltMantencion` varchar(11) CHARACTER SET utf8 NOT NULL ,
+				`fecRevTecnica` varchar(11) CHARACTER SET utf8 NOT NULL ,
+				`fecGases` varchar(11) CHARACTER SET utf8 NOT NULL ,
+				`fecPermCirculacion` varchar(11) CHARACTER SET utf8 NOT NULL ,
+				`fecCambioAceite` varchar(11) CHARACTER SET utf8 NOT NULL ,
+				`fecCambioFiltro` varchar(11) CHARACTER SET utf8 NOT NULL ,
+				`neumaticoRepuesto` varchar(50) CHARACTER SET utf8,
+				`herramientas` varchar(50) CHARACTER SET utf8,
+				`chalecoReflectante` varchar(50) CHARACTER SET utf8,
             PRIMARY KEY (`id_vh`),
             UNIQUE KEY `ix_` (`id_vh`)
           ) AUTO_INCREMENT=0 $charset_collate; ";

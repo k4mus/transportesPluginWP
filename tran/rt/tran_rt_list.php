@@ -3,6 +3,12 @@ error_reporting(0);
 function tran_rt_list() {
     ?>
     <link type="text/css" href="<?php echo WP_PLUGIN_URL; ?>/transportes-plugin/style-admin.css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.13/datatables.min.css"/>
+ 	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css">
+	<script src="//code.jquery.com/jquery-1.12.4.js"></script>
+	<script src="//code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+	<script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.13/datatables.min.js"></script>
+    
     <div class="wrap">
         <h2>Rutas</h2>
         <div class="tablenav top">
@@ -17,7 +23,8 @@ function tran_rt_list() {
 		
         $rows = $wpdb->get_results("SELECT id_rt,  name_rt , ciudad_orig , comuna_orig , ciudad_dest , comuna_orig , kms , precioBase , precioExtencion  from $table_name   ");
         ?>
-        <table class='wp-list-table widefat fixed striped posts'>
+        <table id ="table_rt" $table_name class='wp-list-table widefat fixed striped posts'>
+            <thead>
             <tr>
 				<th class="manage-column ss-list-width">ID</th>
 			<?php
@@ -30,10 +37,11 @@ function tran_rt_list() {
 				<th class="manage-column ss-list-width">Kms Aprox.</th>
 				<th class="manage-column ss-list-width">Precio</th>
 				<th class="manage-column ss-list-width">Precio Extención</th>
-                <th>&nbsp;</th>
             </tr>
+            </thead>
+            <tbody>
             <?php foreach ($rows as $row) { ?>
-                <tr>
+            	<tr>
                     <td class="manage-column ss-list-width">
 						<a href="<?php echo admin_url('admin.php?page=tran_rt_update&id_rt=' . $row->id_rt ); ?>"><?php echo $row->id_rt; ?></a>
 					</td>
@@ -49,10 +57,11 @@ function tran_rt_list() {
 					<td class="manage-column ss-list-width"><?php echo $row->precioExtencion; ?></td>
 			    </tr>
             <?php } ?>
+            </tbody>
         </table>
     </div>
 	<script>
-	
+	$('#table_rt').DataTable();
 	</script>
 	
 	<?php
