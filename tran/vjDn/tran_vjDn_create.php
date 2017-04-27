@@ -5,7 +5,6 @@ function tran_vjDn_create() {
 	$id_dn = $_GET["id_dn"];
 	$Monto = $_POST["Monto"];
 	$Razon = $_POST["Razon"];
-	$Gasto_ingreso = $_POST["Gasto_ingreso"];
 	$fecha = $_POST["fecha"];
 	
 	//volver
@@ -16,7 +15,9 @@ function tran_vjDn_create() {
 	$page_volver= "tran_vjDn_list";
 	 //insert
 	global $wpdb;
-	
+	$rows_vj = $wpdb->get_results("SELECT id_vj, name_vj from ".$wpdb->prefix ."vj");  
+	$rows_dn = $wpdb->get_results("SELECT id_dn, name_dn from ".$wpdb->prefix ."dn");  
+    
     if (isset($_POST['insert'])) {
 		$id_vj= $_POST["id_vj"];
 		$id_dn= $_POST["id_dn"];
@@ -26,15 +27,16 @@ function tran_vjDn_create() {
 
         $wpdb->insert(
                 $table_name, //table
-                array('id_vj'=>$id_vj ,'id_dn'=>$id_dn ,  'Monto' => $Monto , 'Razon' => $Razon , 'Gasto_ingreso' => $Gasto_ingreso , 'fecha' => $fecha  ), //data
+                array('id_vj'=>$id_vj ,'id_dn'=>$id_dn ,  'Monto' => $Monto , 'Razon' => $Razon , 'fecha' => $fecha  ), //data
                 array('%s', '%s') //data format	 		
         );
         $id_vjDn =$wpdb->insert_id;
 		$message.="Orden de Viaje-Dineros inserted: ".$id_vjDn;
     }
     ?>
-    <link type="text/css" href="<?php echo WP_PLUGIN_URL; ?>/transportes-plugin/style-admin.css" rel="stylesheet" />
+    
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css">
+	<link type="text/css" href="<?php echo WP_PLUGIN_URL; ?>/transportes-plugin/style-admin.css" rel="stylesheet" />
 	<script src="//code.jquery.com/jquery-1.12.4.js"></script>
 	<script src="//code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 	<script src="<?php echo WP_PLUGIN_URL; ?>/transportes-plugin/js/combobox.js"></script>
@@ -55,24 +57,32 @@ function tran_vjDn_create() {
             <p> </p>
             <table class='wp-list-table widefat fixed'>
 				<tr>
-                    <th class="ss-th-width">ID_viaje</th>
-                    <td><input type="text" name="id_vj" value="<?php echo $id_vj; ?>" <?php if ($id_vj) echo readonly  ?> class="ss-field-width " /></td>
+                    <th class="ss-th-width">viaje</th>
+                    <td><select type="text" id= "id_vj" name="id_vj" value="<?php echo $id_vj; ?>" <?php if ($id_vj) echo readonly  ?> class="combobox">
+						<option value="">Select one...</option>
+						<?php foreach ($rows_vj as $row_vj) { ?>
+						<option value="<?php echo $row_vj->id_vj; ?>"><?php if ( $row_vj->name_vj)echo $row_vj->name_vj;  else echo $row_vj->id_vj; ?></option>
+						<?php } ?>
+						</select>
+					</td>
                 </tr>
 				<tr>
-                    <th class="ss-th-width">ID_dinero</th>
-                    <td><input type="text" name="id_dn" value="<?php echo $id_dn; ?>" <?php if ($id_dn) echo readonly  ?> class="ss-field-width " /></td>
+                    <th class="ss-th-width">dinero</th>
+                    <td><select type="text" id= "id_dn" name="id_dn" value="<?php echo $id_dn; ?>" <?php if ($id_dn) echo readonly  ?> class="combobox">
+						<option value="">Select one...</option>
+						<?php foreach ($rows_dn as $row_dn) { ?>
+						<option value="<?php echo $row_dn->id_dn; ?>"><?php if ( $row_dn->name_dn)echo $row_dn->name_dn;  else echo $row_dn->id_dn; ?></option>
+						<?php } ?>
+						</select>
+					</td>
                 </tr>
 				<tr>
                     <th class="ss-th-width">Monto</th>
-					<td><input type="text" name="Monto" value="<?php echo $Monto; ?>" class="ss-field-width " /></td>
+					<td><input type="text" name="Monto" value="<?php echo $Monto; ?>" class="ss-field-width numero" /></td>
                 </tr>
 				<tr>
                     <th class="ss-th-width">Razon</th>
 					<td><input type="text" name="Razon" value="<?php echo $Razon; ?>" class="ss-field-width " /></td>
-                </tr>
-				<tr>
-                    <th class="ss-th-width">Gasto_ingreso</th>
-					<td><input type="text" name="Gasto_ingreso" value="<?php echo $Gasto_ingreso; ?>" class="ss-field-width " /></td>
                 </tr>
 				<tr>
                     <th class="ss-th-width">fecha</th>
@@ -91,6 +101,9 @@ function tran_vjDn_create() {
 		$( ".fecha" ).datepicker();
 		$( ".numero" ).spinner();
 		$("#tabs" ).tabs();
+		$('.combobox').each( function( index, element ){
+			$("option[value="+$(this).attr("value")+"]", this).attr('selected','selected');
+		});
 		
 	</script>
     <?php

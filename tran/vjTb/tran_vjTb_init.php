@@ -20,7 +20,7 @@ function vjTb_options_install() {
             `id_vjTb` MEDIUMINT NOT NULL AUTO_INCREMENT,
 			`id_vj` MEDIUMINT NOT NULL,
 			`id_tb` MEDIUMINT NOT NULL,
-				`Monto` varchar(50) CHARACTER SET utf8,
+				`Rol` varchar(50) CHARACTER SET utf8,
 				`Razon` varchar(50) CHARACTER SET utf8,
 				`Gasto_ingreso` varchar(50) CHARACTER SET utf8,
 				`fecha` varchar(11) CHARACTER SET utf8 NOT NULL ,

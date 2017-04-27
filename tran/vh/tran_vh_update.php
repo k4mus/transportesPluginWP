@@ -4,7 +4,7 @@ function tran_vh_update() {
     global $wpdb;
     $table_name = $wpdb->prefix ."vh";
     $id_vh = $_GET["id_vh"];
-	$name = $_POST["name"];
+	$name_vh = $_POST["name_vh"];
 	$tipo = $_POST["tipo"];
 	$Tonelaje = $_POST["Tonelaje"];
 	$Patente = $_POST["Patente"];
@@ -33,7 +33,7 @@ function tran_vh_update() {
 		
         $wpdb->update(
                 $table_name, //table
-				array(  'name' => $name, 'tipo' => $tipo, 'Tonelaje' => $Tonelaje, 'Patente' => $Patente, 'Marca' => $Marca, 'Modelo' => $Modelo, 'Año' => $Año, 'FechaCompra' => $FechaCompra, 'estanque' => $estanque, 'zona' => $zona, 'rendimiento' => $rendimiento, 'fecUltMantencion' => $fecUltMantencion, 'fecRevTecnica' => $fecRevTecnica, 'fecGases' => $fecGases, 'fecPermCirculacion' => $fecPermCirculacion, 'fecCambioAceite' => $fecCambioAceite, 'fecCambioFiltro' => $fecCambioFiltro, 'neumaticoRepuesto' => $neumaticoRepuesto, 'herramientas' => $herramientas, 'chalecoReflectante' => $chalecoReflectante), //data
+				array(  'name_vh' => $name_vh, 'tipo' => $tipo, 'Tonelaje' => $Tonelaje, 'Patente' => $Patente, 'Marca' => $Marca, 'Modelo' => $Modelo, 'Año' => $Año, 'FechaCompra' => $FechaCompra, 'estanque' => $estanque, 'zona' => $zona, 'rendimiento' => $rendimiento, 'fecUltMantencion' => $fecUltMantencion, 'fecRevTecnica' => $fecRevTecnica, 'fecGases' => $fecGases, 'fecPermCirculacion' => $fecPermCirculacion, 'fecCambioAceite' => $fecCambioAceite, 'fecCambioFiltro' => $fecCambioFiltro, 'neumaticoRepuesto' => $neumaticoRepuesto, 'herramientas' => $herramientas, 'chalecoReflectante' => $chalecoReflectante), //data
                 array('id_vh' => $id_vh ), //where
 				array('%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s'), //data format
                 array('%s') //where format
@@ -43,10 +43,10 @@ function tran_vh_update() {
     else if (isset($_POST['delete'])) {
         $wpdb->query($wpdb->prepare("DELETE FROM $table_name WHERE id_vh = %s", $id_vh));
     } else {//selecting value to update	
-        $results = $wpdb->get_results($wpdb->prepare("SELECT id_vh , name , tipo , Tonelaje , Patente , Marca , Modelo , Año , FechaCompra , estanque , zona , rendimiento , fecUltMantencion , fecRevTecnica , fecGases , fecPermCirculacion , fecCambioAceite , fecCambioFiltro , neumaticoRepuesto , herramientas , chalecoReflectante  from $table_name where id_vh=%s", $id_vh));
+        $results = $wpdb->get_results($wpdb->prepare("SELECT id_vh , name_vh , tipo , Tonelaje , Patente , Marca , Modelo , Año , FechaCompra , estanque , zona , rendimiento , fecUltMantencion , fecRevTecnica , fecGases , fecPermCirculacion , fecCambioAceite , fecCambioFiltro , neumaticoRepuesto , herramientas , chalecoReflectante  from $table_name where id_vh=%s", $id_vh));
         foreach ($results as $r) {
             $id_vh = $r->id_vh;
-			$name = $r->name;
+			$name_vh = $r->name_vh;
 			$tipo = $r->tipo;
 			$Tonelaje = $r->Tonelaje;
 			$Patente = $r->Patente;
@@ -69,9 +69,10 @@ function tran_vh_update() {
         }
     }
     ?>
-    <link type="text/css" href="<?php echo WP_PLUGIN_URL; ?>/transportes-plugin/style-admin.css" rel="stylesheet" />
+    
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/free-jqgrid/4.13.6/css/ui.jqgrid.min.css">
+	<link type="text/css" href="<?php echo WP_PLUGIN_URL; ?>/transportes-plugin/style-admin.css" rel="stylesheet" />
 	<script src="//code.jquery.com/jquery-1.12.4.js"></script>
 	<script src="//code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/free-jqgrid/4.13.6/js/jquery.jqgrid.min.js"></script>
@@ -100,7 +101,7 @@ function tran_vh_update() {
 					</tr>
                     
 					<th class="ss-th-width">Código Vehiculo</th> 
-					<td><input type="text" name="name" value="<?php echo $name; ?>" class="ss-field-width " /></td>
+					<td><input type="text" name="name_vh" value="<?php echo $name_vh; ?>" class="ss-field-width " /></td>
 					</tr>
 					<th class="ss-th-width">tipo</th> 
 					<td>

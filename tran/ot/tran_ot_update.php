@@ -4,6 +4,7 @@ function tran_ot_update() {
     global $wpdb;
     $table_name = $wpdb->prefix ."ot";
     $id_ot = $_GET["id_ot"];
+	$name_ot = $_POST["name_ot"];
 	$rutEmpOrig = $_POST["rutEmpOrig"];
 	$nomEmporig = $_POST["nomEmporig"];
 	$telEmpOrig = $_POST["telEmpOrig"];
@@ -39,9 +40,9 @@ function tran_ot_update() {
 		
         $wpdb->update(
                 $table_name, //table
-				array(  'rutEmpOrig' => $rutEmpOrig, 'nomEmporig' => $nomEmporig, 'telEmpOrig' => $telEmpOrig, 'id_rt' => $id_rt, 'dirEmpOrig' => $dirEmpOrig, 'ciudEmpOrig' => $ciudEmpOrig, 'nomPerOrig' => $nomPerOrig, 'fechaOrig' => $fechaOrig, 'rutEmpDest' => $rutEmpDest, 'nomEmpDest' => $nomEmpDest, 'telEmpDest' => $telEmpDest, 'dirEmpDest' => $dirEmpDest, 'ciudEmpDest' => $ciudEmpDest, 'nomPerDest' => $nomPerDest, 'fechaDest' => $fechaDest, 'formaPago' => $formaPago, 'cuentaCte' => $cuentaCte, 'boletaFactura' => $boletaFactura, 'nroPiezas' => $nroPiezas, 'pesoCarga' => $pesoCarga, 'largoCarga' => $largoCarga, 'anchoCarga' => $anchoCarga, 'altoCarga' => $altoCarga, 'documentos' => $documentos, 'instrucciones' => $instrucciones), //data
+				array(  'name_ot' => $name_ot, 'rutEmpOrig' => $rutEmpOrig, 'nomEmporig' => $nomEmporig, 'telEmpOrig' => $telEmpOrig, 'id_rt' => $id_rt, 'dirEmpOrig' => $dirEmpOrig, 'ciudEmpOrig' => $ciudEmpOrig, 'nomPerOrig' => $nomPerOrig, 'fechaOrig' => $fechaOrig, 'rutEmpDest' => $rutEmpDest, 'nomEmpDest' => $nomEmpDest, 'telEmpDest' => $telEmpDest, 'dirEmpDest' => $dirEmpDest, 'ciudEmpDest' => $ciudEmpDest, 'nomPerDest' => $nomPerDest, 'fechaDest' => $fechaDest, 'formaPago' => $formaPago, 'cuentaCte' => $cuentaCte, 'boletaFactura' => $boletaFactura, 'nroPiezas' => $nroPiezas, 'pesoCarga' => $pesoCarga, 'largoCarga' => $largoCarga, 'anchoCarga' => $anchoCarga, 'altoCarga' => $altoCarga, 'documentos' => $documentos, 'instrucciones' => $instrucciones), //data
                 array('id_ot' => $id_ot ), //where
-				array('%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s'), //data format
+				array('%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s'), //data format
                 array('%s') //where format
         );
     }
@@ -49,9 +50,10 @@ function tran_ot_update() {
     else if (isset($_POST['delete'])) {
         $wpdb->query($wpdb->prepare("DELETE FROM $table_name WHERE id_ot = %s", $id_ot));
     } else {//selecting value to update	
-        $results = $wpdb->get_results($wpdb->prepare("SELECT id_ot , rutEmpOrig , nomEmporig , telEmpOrig , id_rt , dirEmpOrig , ciudEmpOrig , nomPerOrig , fechaOrig , rutEmpDest , nomEmpDest , telEmpDest , dirEmpDest , ciudEmpDest , nomPerDest , fechaDest , formaPago , cuentaCte , boletaFactura , nroPiezas , pesoCarga , largoCarga , anchoCarga , altoCarga , documentos , instrucciones  from $table_name where id_ot=%s", $id_ot));
+        $results = $wpdb->get_results($wpdb->prepare("SELECT id_ot , name_ot , rutEmpOrig , nomEmporig , telEmpOrig , id_rt , dirEmpOrig , ciudEmpOrig , nomPerOrig , fechaOrig , rutEmpDest , nomEmpDest , telEmpDest , dirEmpDest , ciudEmpDest , nomPerDest , fechaDest , formaPago , cuentaCte , boletaFactura , nroPiezas , pesoCarga , largoCarga , anchoCarga , altoCarga , documentos , instrucciones  from $table_name where id_ot=%s", $id_ot));
         foreach ($results as $r) {
             $id_ot = $r->id_ot;
+			$name_ot = $r->name_ot;
 			$rutEmpOrig = $r->rutEmpOrig;
 			$nomEmporig = $r->nomEmporig;
 			$telEmpOrig = $r->telEmpOrig;
@@ -80,9 +82,10 @@ function tran_ot_update() {
         }
     }
     ?>
-    <link type="text/css" href="<?php echo WP_PLUGIN_URL; ?>/transportes-plugin/style-admin.css" rel="stylesheet" />
+    
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/free-jqgrid/4.13.6/css/ui.jqgrid.min.css">
+	<link type="text/css" href="<?php echo WP_PLUGIN_URL; ?>/transportes-plugin/style-admin.css" rel="stylesheet" />
 	<script src="//code.jquery.com/jquery-1.12.4.js"></script>
 	<script src="//code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/free-jqgrid/4.13.6/js/jquery.jqgrid.min.js"></script>
@@ -110,6 +113,9 @@ function tran_ot_update() {
 						<td><input type="text" name="id_ot" value="<?php echo $id_ot; ?>" disabled /></td>
 					</tr>
                     
+					<th class="ss-th-width">Codigo OT</th> 
+					<td><input type="text" name="name_ot" value="<?php echo $name_ot; ?>" class="ss-field-width t" /></td>
+					</tr>
 					<th class="ss-th-width">Rut Empresa Origen</th> 
 					<td><input type="text" name="rutEmpOrig" value="<?php echo $rutEmpOrig; ?>" class="ss-field-width rut" /></td>
 					</tr>
@@ -123,7 +129,7 @@ function tran_ot_update() {
 					<td><select type="text" id= "id_rt" name="id_rt" value="<?php echo $id_rt; ?>  " class="combobox">
 						<option value="">Select one...</option>
 						<?php foreach ($rows_rt as $row_rt) { ?>
-						<option value="<?php echo $row_rt->id_rt; ?>"><?php echo $row_rt->name_rt; ?></option>
+						<option value="<?php echo $row_rt->id_rt; ?>"><?php if ($id_rt)echo $row_rt->name_rt;  else $row_rt->id_rt; ?></option>
 						<?php } ?>
 						</select>
 					</td>

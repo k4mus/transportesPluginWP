@@ -18,7 +18,7 @@ function vh_options_install() {
 	
 	CREATE TABLE $table_name (
             `id_vh` MEDIUMINT NOT NULL AUTO_INCREMENT,
-				`name` varchar(50) CHARACTER SET utf8,
+				`name_vh` varchar(50) CHARACTER SET utf8,
 				`tipo` varchar(50) CHARACTER SET utf8,
 				`Tonelaje` MEDIUMINT,
 				`Patente` varchar(50) CHARACTER SET utf8,

@@ -18,6 +18,7 @@ function vj_options_install() {
 	
 	CREATE TABLE $table_name (
             `id_vj` MEDIUMINT NOT NULL AUTO_INCREMENT,
+				`name_vj` varchar(50) CHARACTER SET utf8,
 				`nombreEmpresa` varchar(50) CHARACTER SET utf8,
 				`fecha` varchar(11) CHARACTER SET utf8 NOT NULL ,
             PRIMARY KEY (`id_vj`),

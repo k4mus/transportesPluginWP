@@ -8,6 +8,10 @@ position: relative;
 display: inline;
 padding: .5em 2em .3em .3em;
 }
+.ui-button {
+    padding: 2em 2em .5em .2em;
+    display: inline;
+}
 .custom-combobox-toggle {
 position: absolute;
 top: 0;

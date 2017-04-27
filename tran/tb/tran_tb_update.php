@@ -4,7 +4,7 @@ function tran_tb_update() {
     global $wpdb;
     $table_name = $wpdb->prefix ."tb";
     $id_tb = $_GET["id_tb"];
-	$name = $_POST["name"];
+	$name_tb = $_POST["name_tb"];
 	$rut = $_POST["rut"];
 	$fechaIng = $_POST["fechaIng"];
 	$cargo = $_POST["cargo"];
@@ -17,7 +17,7 @@ function tran_tb_update() {
 		
         $wpdb->update(
                 $table_name, //table
-				array(  'name' => $name, 'rut' => $rut, 'fechaIng' => $fechaIng, 'cargo' => $cargo), //data
+				array(  'name_tb' => $name_tb, 'rut' => $rut, 'fechaIng' => $fechaIng, 'cargo' => $cargo), //data
                 array('id_tb' => $id_tb ), //where
 				array('%s','%s','%s','%s'), //data format
                 array('%s') //where format
@@ -27,19 +27,20 @@ function tran_tb_update() {
     else if (isset($_POST['delete'])) {
         $wpdb->query($wpdb->prepare("DELETE FROM $table_name WHERE id_tb = %s", $id_tb));
     } else {//selecting value to update	
-        $results = $wpdb->get_results($wpdb->prepare("SELECT id_tb , name , rut , fechaIng , cargo  from $table_name where id_tb=%s", $id_tb));
+        $results = $wpdb->get_results($wpdb->prepare("SELECT id_tb , name_tb , rut , fechaIng , cargo  from $table_name where id_tb=%s", $id_tb));
         foreach ($results as $r) {
             $id_tb = $r->id_tb;
-			$name = $r->name;
+			$name_tb = $r->name_tb;
 			$rut = $r->rut;
 			$fechaIng = $r->fechaIng;
 			$cargo = $r->cargo;
         }
     }
     ?>
-    <link type="text/css" href="<?php echo WP_PLUGIN_URL; ?>/transportes-plugin/style-admin.css" rel="stylesheet" />
+    
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/free-jqgrid/4.13.6/css/ui.jqgrid.min.css">
+	<link type="text/css" href="<?php echo WP_PLUGIN_URL; ?>/transportes-plugin/style-admin.css" rel="stylesheet" />
 	<script src="//code.jquery.com/jquery-1.12.4.js"></script>
 	<script src="//code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/free-jqgrid/4.13.6/js/jquery.jqgrid.min.js"></script>
@@ -68,7 +69,7 @@ function tran_tb_update() {
 					</tr>
                     
 					<th class="ss-th-width">Código Trabajador</th> 
-					<td><input type="text" name="name" value="<?php echo $name; ?>" class="ss-field-width " /></td>
+					<td><input type="text" name="name_tb" value="<?php echo $name_tb; ?>" class="ss-field-width " /></td>
 					</tr>
 					<th class="ss-th-width">Rut Trabajador</th> 
 					<td><input type="text" name="rut" value="<?php echo $rut; ?>" class="ss-field-width rut" /></td>

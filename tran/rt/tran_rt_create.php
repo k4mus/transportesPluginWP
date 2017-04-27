@@ -14,7 +14,7 @@ function tran_rt_create() {
 	$page_volver= "tran_rt_list";
 	 //insert
 	global $wpdb;
-	
+    
 	$rows_ciudad = $wpdb->get_results("SELECT id_ciudad, name_ciudad from ".$wpdb->prefix ."ciudad");  
 	$rows_comuna = $wpdb->get_results("SELECT id_comuna, name_comuna from ".$wpdb->prefix ."comuna");  
 	$rows_ciudad = $wpdb->get_results("SELECT id_ciudad, name_ciudad from ".$wpdb->prefix ."ciudad");  
@@ -33,8 +33,9 @@ function tran_rt_create() {
 		$message.="Rutas inserted: ".$id_rt;
     }
     ?>
-    <link type="text/css" href="<?php echo WP_PLUGIN_URL; ?>/transportes-plugin/style-admin.css" rel="stylesheet" />
+    
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css">
+	<link type="text/css" href="<?php echo WP_PLUGIN_URL; ?>/transportes-plugin/style-admin.css" rel="stylesheet" />
 	<script src="//code.jquery.com/jquery-1.12.4.js"></script>
 	<script src="//code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 	<script src="<?php echo WP_PLUGIN_URL; ?>/transportes-plugin/js/combobox.js"></script>
@@ -59,11 +60,11 @@ function tran_rt_create() {
 					<td><input type="text" name="name_rt" value="<?php echo $name_rt; ?>" class="ss-field-width " /></td>
                 </tr>
 				<tr>
-                    <th class="ss-th-width">Ciudad Origen</th>
+                    <th class="ss-th-width">Provincia Origen</th>
 					<td><select type="text" id= "ciudad_orig" name="ciudad_orig" value="<?php echo $ciudad_orig; ?>  " class="combobox">
 						<option value="">Select one...</option>
 						<?php foreach ($rows_ciudad as $row_ciudad) { ?>
-						<option value="<?php echo $row_ciudad->id_ciudad; ?>"><?php echo $row_ciudad->name_ciudad; ?></option>
+						<option value="<?php echo $row_ciudad->id_ciudad; ?>"><?php if ($ciudad_orig)echo $row_ciudad->name_ciudad;  else $row_ciudad->id_ciudad; ?></option>
 						<?php } ?>
 						</select>
 					</td>
@@ -73,17 +74,17 @@ function tran_rt_create() {
 					<td><select type="text" id= "comuna_orig" name="comuna_orig" value="<?php echo $comuna_orig; ?>  " class="combobox">
 						<option value="">Select one...</option>
 						<?php foreach ($rows_comuna as $row_comuna) { ?>
-						<option value="<?php echo $row_comuna->id_comuna; ?>"><?php echo $row_comuna->name_comuna; ?></option>
+						<option value="<?php echo $row_comuna->id_comuna; ?>"><?php if ($comuna_orig)echo $row_comuna->name_comuna;  else $row_comuna->id_comuna; ?></option>
 						<?php } ?>
 						</select>
 					</td>
                 </tr>
 				<tr>
-                    <th class="ss-th-width">Ciudad Destino</th>
+                    <th class="ss-th-width">Provincia Destino</th>
 					<td><select type="text" id= "ciudad_dest" name="ciudad_dest" value="<?php echo $ciudad_dest; ?>  " class="combobox">
 						<option value="">Select one...</option>
 						<?php foreach ($rows_ciudad as $row_ciudad) { ?>
-						<option value="<?php echo $row_ciudad->id_ciudad; ?>"><?php echo $row_ciudad->name_ciudad; ?></option>
+						<option value="<?php echo $row_ciudad->id_ciudad; ?>"><?php if ($ciudad_dest)echo $row_ciudad->name_ciudad;  else $row_ciudad->id_ciudad; ?></option>
 						<?php } ?>
 						</select>
 					</td>
@@ -93,7 +94,7 @@ function tran_rt_create() {
 					<td><select type="text" id= "comuna_orig" name="comuna_orig" value="<?php echo $comuna_orig; ?>  " class="combobox">
 						<option value="">Select one...</option>
 						<?php foreach ($rows_comuna as $row_comuna) { ?>
-						<option value="<?php echo $row_comuna->id_comuna; ?>"><?php echo $row_comuna->name_comuna; ?></option>
+						<option value="<?php echo $row_comuna->id_comuna; ?>"><?php if ($comuna_orig)echo $row_comuna->name_comuna;  else $row_comuna->id_comuna; ?></option>
 						<?php } ?>
 						</select>
 					</td>
@@ -123,6 +124,9 @@ function tran_rt_create() {
 		$( ".fecha" ).datepicker();
 		$( ".numero" ).spinner();
 		$("#tabs" ).tabs();
+		$('.combobox').each( function( index, element ){
+			$("option[value="+$(this).attr("value")+"]", this).attr('selected','selected');
+		});
 		
 	</script>
     <?php

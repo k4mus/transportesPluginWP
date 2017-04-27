@@ -2,9 +2,10 @@
 error_reporting(0);
 function tran_ot_list() {
     ?>
-    <link type="text/css" href="<?php echo WP_PLUGIN_URL; ?>/transportes-plugin/style-admin.css" rel="stylesheet" />
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.13/datatables.min.css"/>
  	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css">
+	<link type="text/css" href="<?php echo WP_PLUGIN_URL; ?>/transportes-plugin/style-admin.css" rel="stylesheet" />
+    
 	<script src="//code.jquery.com/jquery-1.12.4.js"></script>
 	<script src="//code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 	<script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.13/datatables.min.js"></script>
@@ -19,9 +20,9 @@ function tran_ot_list() {
         </div>
         <?php
         global $wpdb;
-        $table_name = $wpdb->prefix . "ot";
+        $table_name = $wpdb->prefix ."ot";
 		
-        $rows = $wpdb->get_results("SELECT id_ot,  rutEmpOrig , nomEmporig , telEmpOrig , id_rt , dirEmpOrig , ciudEmpOrig , nomPerOrig , fechaOrig , rutEmpDest , nomEmpDest , telEmpDest , dirEmpDest , ciudEmpDest , nomPerDest , fechaDest , formaPago , cuentaCte , boletaFactura , nroPiezas , pesoCarga , largoCarga , anchoCarga , altoCarga , documentos , instrucciones  from $table_name   ");
+        $rows = $wpdb->get_results("SELECT id_ot, $table_name.name_ot ,$table_name.rutEmpOrig ,$table_name.nomEmporig ,$table_name.telEmpOrig ,$table_name.id_rt ,$table_name.dirEmpOrig ,$table_name.ciudEmpOrig ,$table_name.nomPerOrig ,$table_name.fechaOrig ,$table_name.rutEmpDest ,$table_name.nomEmpDest ,$table_name.telEmpDest ,$table_name.dirEmpDest ,$table_name.ciudEmpDest ,$table_name.nomPerDest ,$table_name.fechaDest ,$table_name.formaPago ,$table_name.cuentaCte ,$table_name.boletaFactura ,$table_name.nroPiezas ,$table_name.pesoCarga ,$table_name.largoCarga ,$table_name.anchoCarga ,$table_name.altoCarga ,$table_name.documentos ,$table_name.instrucciones  from $table_name   ");
         ?>
         <table id ="table_ot" $table_name class='wp-list-table widefat fixed striped posts'>
             <thead>
@@ -29,6 +30,7 @@ function tran_ot_list() {
 				<th class="manage-column ss-list-width">ID</th>
 			<?php
 			?>
+				<th class="manage-column ss-list-width">Codigo OT</th>
 				<th class="manage-column ss-list-width">Rut Empresa Origen</th>
 				<th class="manage-column ss-list-width">Nombre Empresa Origen</th>
 				<th class="manage-column ss-list-width">Telefono Origen</th>
@@ -64,6 +66,7 @@ function tran_ot_list() {
 					</td>
 					<?php
 					?>
+					<td class="manage-column ss-list-width"><?php echo $row->name_ot; ?></td>
 					<td class="manage-column ss-list-width"><?php echo $row->rutEmpOrig; ?></td>
 					<td class="manage-column ss-list-width"><?php echo $row->nomEmporig; ?></td>
 					<td class="manage-column ss-list-width"><?php echo $row->telEmpOrig; ?></td>

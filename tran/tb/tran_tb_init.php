@@ -18,7 +18,7 @@ function tb_options_install() {
 	
 	CREATE TABLE $table_name (
             `id_tb` MEDIUMINT NOT NULL AUTO_INCREMENT,
-				`name` varchar(50) CHARACTER SET utf8,
+				`name_tb` varchar(50) CHARACTER SET utf8,
 				`rut` varchar(50) CHARACTER SET utf8,
 				`fechaIng` varchar(11) CHARACTER SET utf8 NOT NULL ,
 				`cargo` varchar(50) CHARACTER SET utf8,

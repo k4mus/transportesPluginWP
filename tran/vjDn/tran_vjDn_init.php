@@ -20,9 +20,8 @@ function vjDn_options_install() {
             `id_vjDn` MEDIUMINT NOT NULL AUTO_INCREMENT,
 			`id_vj` MEDIUMINT NOT NULL,
 			`id_dn` MEDIUMINT NOT NULL,
-				`Monto` varchar(50) CHARACTER SET utf8,
+				`Monto` MEDIUMINT,
 				`Razon` varchar(50) CHARACTER SET utf8,
-				`Gasto_ingreso` varchar(50) CHARACTER SET utf8,
 				`fecha` varchar(11) CHARACTER SET utf8 NOT NULL ,
             PRIMARY KEY (`id_vjDn`),
             UNIQUE KEY `ix_` (`id_vjDn`)

@@ -49,9 +49,10 @@ function tran_rt_update() {
         }
     }
     ?>
-    <link type="text/css" href="<?php echo WP_PLUGIN_URL; ?>/transportes-plugin/style-admin.css" rel="stylesheet" />
+    
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/free-jqgrid/4.13.6/css/ui.jqgrid.min.css">
+	<link type="text/css" href="<?php echo WP_PLUGIN_URL; ?>/transportes-plugin/style-admin.css" rel="stylesheet" />
 	<script src="//code.jquery.com/jquery-1.12.4.js"></script>
 	<script src="//code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/free-jqgrid/4.13.6/js/jquery.jqgrid.min.js"></script>
@@ -82,11 +83,11 @@ function tran_rt_update() {
 					<th class="ss-th-width">Nombre Ruta</th> 
 					<td><input type="text" name="name_rt" value="<?php echo $name_rt; ?>" class="ss-field-width " /></td>
 					</tr>
-					<th class="ss-th-width">Ciudad Origen</th> 
+					<th class="ss-th-width">Provincia Origen</th> 
 					<td><select type="text" id= "ciudad_orig" name="ciudad_orig" value="<?php echo $ciudad_orig; ?>  " class="combobox">
 						<option value="">Select one...</option>
 						<?php foreach ($rows_ciudad as $row_ciudad) { ?>
-						<option value="<?php echo $row_ciudad->id_ciudad; ?>"><?php echo $row_ciudad->name_ciudad; ?></option>
+						<option value="<?php echo $row_ciudad->id_ciudad; ?>"><?php if ($ciudad_orig)echo $row_ciudad->name_ciudad;  else $row_ciudad->id_ciudad; ?></option>
 						<?php } ?>
 						</select>
 					</td>
@@ -95,16 +96,16 @@ function tran_rt_update() {
 					<td><select type="text" id= "comuna_orig" name="comuna_orig" value="<?php echo $comuna_orig; ?>  " class="combobox">
 						<option value="">Select one...</option>
 						<?php foreach ($rows_comuna as $row_comuna) { ?>
-						<option value="<?php echo $row_comuna->id_comuna; ?>"><?php echo $row_comuna->name_comuna; ?></option>
+						<option value="<?php echo $row_comuna->id_comuna; ?>"><?php if ($comuna_orig)echo $row_comuna->name_comuna;  else $row_comuna->id_comuna; ?></option>
 						<?php } ?>
 						</select>
 					</td>
 					</tr>
-					<th class="ss-th-width">Ciudad Destino</th> 
+					<th class="ss-th-width">Provincia Destino</th> 
 					<td><select type="text" id= "ciudad_dest" name="ciudad_dest" value="<?php echo $ciudad_dest; ?>  " class="combobox">
 						<option value="">Select one...</option>
 						<?php foreach ($rows_ciudad as $row_ciudad) { ?>
-						<option value="<?php echo $row_ciudad->id_ciudad; ?>"><?php echo $row_ciudad->name_ciudad; ?></option>
+						<option value="<?php echo $row_ciudad->id_ciudad; ?>"><?php if ($ciudad_dest)echo $row_ciudad->name_ciudad;  else $row_ciudad->id_ciudad; ?></option>
 						<?php } ?>
 						</select>
 					</td>
@@ -113,7 +114,7 @@ function tran_rt_update() {
 					<td><select type="text" id= "comuna_orig" name="comuna_orig" value="<?php echo $comuna_orig; ?>  " class="combobox">
 						<option value="">Select one...</option>
 						<?php foreach ($rows_comuna as $row_comuna) { ?>
-						<option value="<?php echo $row_comuna->id_comuna; ?>"><?php echo $row_comuna->name_comuna; ?></option>
+						<option value="<?php echo $row_comuna->id_comuna; ?>"><?php if ($comuna_orig)echo $row_comuna->name_comuna;  else $row_comuna->id_comuna; ?></option>
 						<?php } ?>
 						</select>
 					</td>

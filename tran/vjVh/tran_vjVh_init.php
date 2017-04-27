@@ -20,10 +20,10 @@ function vjVh_options_install() {
             `id_vjVh` MEDIUMINT NOT NULL AUTO_INCREMENT,
 			`id_vj` MEDIUMINT NOT NULL,
 			`id_vh` MEDIUMINT NOT NULL,
-				`Monto` varchar(50) CHARACTER SET utf8,
-				`Razon` varchar(50) CHARACTER SET utf8,
-				`Gasto_ingreso` varchar(50) CHARACTER SET utf8,
+				`km` varchar(50) CHARACTER SET utf8,
 				`fecha` varchar(11) CHARACTER SET utf8 NOT NULL ,
+				`estanque` varchar(50) CHARACTER SET utf8,
+				`obvservacion` varchar(50) CHARACTER SET utf8,
             PRIMARY KEY (`id_vjVh`),
             UNIQUE KEY `ix_` (`id_vjVh`)
           ) AUTO_INCREMENT=0 $charset_collate; ";

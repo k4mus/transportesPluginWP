@@ -6,10 +6,10 @@ function tran_vjVh_update() {
     $id_vjVh = $_GET["id_vjVh"];
 	$id_vj = $_GET["id_vj"];
 	$id_vh = $_GET["id_vh"];
-	$Monto = $_POST["Monto"];
-	$Razon = $_POST["Razon"];
-	$Gasto_ingreso = $_POST["Gasto_ingreso"];
+	$km = $_POST["km"];
 	$fecha = $_POST["fecha"];
+	$estanque = $_POST["estanque"];
+	$obvservacion = $_POST["obvservacion"];
 	//volver
 	if($id_vj) $page_volver= "tran_vj_update&id_vj=".$id_vj;
 	else
@@ -18,6 +18,8 @@ function tran_vjVh_update() {
 	$page_volver= "tran_vjVh_list";
 	
 	
+	$rows_vj = $wpdb->get_results("SELECT id_vj, name_vj from ".$wpdb->prefix ."vj");  
+	$rows_vh = $wpdb->get_results("SELECT id_vh, name_vh from ".$wpdb->prefix ."vh");  
 //update
     if (isset($_POST['update'])){
 		$id_vj= $_POST["id_vj"];
@@ -25,7 +27,7 @@ function tran_vjVh_update() {
 		
         $wpdb->update(
                 $table_name, //table
-				array( 'id_vj' => $id_vj , 'id_vh' => $id_vh ,  'Monto' => $Monto, 'Razon' => $Razon, 'Gasto_ingreso' => $Gasto_ingreso, 'fecha' => $fecha), //data
+				array( 'id_vj' => $id_vj , 'id_vh' => $id_vh ,  'km' => $km, 'fecha' => $fecha, 'estanque' => $estanque, 'obvservacion' => $obvservacion), //data
                 array('id_vjVh' => $id_vjVh ), //where
 				array('%s','%s','%s','%s'), //data format
                 array('%s') //where format
@@ -35,21 +37,22 @@ function tran_vjVh_update() {
     else if (isset($_POST['delete'])) {
         $wpdb->query($wpdb->prepare("DELETE FROM $table_name WHERE id_vjVh = %s", $id_vjVh));
     } else {//selecting value to update	
-        $results = $wpdb->get_results($wpdb->prepare("SELECT id_vjVh  ,'id_vj'  ,'id_vh' , Monto , Razon , Gasto_ingreso , fecha  from $table_name where id_vjVh=%s", $id_vjVh));
+        $results = $wpdb->get_results($wpdb->prepare("SELECT id_vjVh  ,id_vj  ,id_vh , km , fecha , estanque , obvservacion  from $table_name where id_vjVh=%s", $id_vjVh));
         foreach ($results as $r) {
             $id_vjVh = $r->id_vjVh;
 			$id_vj = $r->id_vj;
 			$id_vh = $r->id_vh;
-			$Monto = $r->Monto;
-			$Razon = $r->Razon;
-			$Gasto_ingreso = $r->Gasto_ingreso;
+			$km = $r->km;
 			$fecha = $r->fecha;
+			$estanque = $r->estanque;
+			$obvservacion = $r->obvservacion;
         }
     }
     ?>
-    <link type="text/css" href="<?php echo WP_PLUGIN_URL; ?>/transportes-plugin/style-admin.css" rel="stylesheet" />
+    
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/free-jqgrid/4.13.6/css/ui.jqgrid.min.css">
+	<link type="text/css" href="<?php echo WP_PLUGIN_URL; ?>/transportes-plugin/style-admin.css" rel="stylesheet" />
 	<script src="//code.jquery.com/jquery-1.12.4.js"></script>
 	<script src="//code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/free-jqgrid/4.13.6/js/jquery.jqgrid.min.js"></script>
@@ -78,24 +81,41 @@ function tran_vjVh_update() {
 					</tr>
 					<tr>
 						<th>ID_viaje</th>
-						<td><input type="text" name="id_vj" value="<?php echo $id_vj; ?>"  <?php if ($id_vj) echo readonly  ?> /></td>
+						<td><select type="text" id= "id_vj" name="id_vj" value="<?php echo $id_vj; ?>" <?php if ($id_vj) echo readonly  ?> class="combobox">
+							<option value="">Select one...</option>
+							<?php foreach ($rows_vj as $row_vj) { ?>
+							<option value="<?php echo $row_vj->id_vj; ?>"><?php if ($id_vj)echo $row_vj->name_vj;  else $row_vj->id_vj; ?></option>
+							<?php } ?>
+							</select>
+						</td>
 					</tr>
 					<tr>
 						<th>ID_vehiculo</th>
-						<td><input type="text" name="id_vh" value="<?php echo $id_vh; ?>"  <?php if ($id_vh) echo readonly  ?> /></td>
+						<td><select type="text" id= "id_vh" name="id_vh" value="<?php echo $id_vh; ?>" <?php if ($id_vh) echo readonly  ?> class="combobox">
+							<option value="">Select one...</option>
+							<?php foreach ($rows_vh as $row_vh) { ?>
+							<option value="<?php echo $row_vh->id_vh; ?>"><?php if ($id_vh)echo $row_vh->name_vh;  else $row_vh->id_vh; ?></option>
+							<?php } ?>
+							</select>
+						</td>
 					</tr>
                     
-					<th class="ss-th-width">empresa</th> 
-					<td><input type="text" name="Monto" value="<?php echo $Monto; ?>" class="ss-field-width " /></td>
-					</tr>
-					<th class="ss-th-width">empresa</th> 
-					<td><input type="text" name="Razon" value="<?php echo $Razon; ?>" class="ss-field-width " /></td>
-					</tr>
-					<th class="ss-th-width">empresa</th> 
-					<td><input type="text" name="Gasto_ingreso" value="<?php echo $Gasto_ingreso; ?>" class="ss-field-width " /></td>
+					<th class="ss-th-width">Kilomentros al inicio</th> 
+					<td><input type="text" name="km" value="<?php echo $km; ?>" class="ss-field-width " /></td>
 					</tr>
 					<th class="ss-th-width">fecha</th> 
 					<td><input type="text" name="fecha" value="<?php echo $fecha; ?>" class="ss-field-width fecha" /></td>
+					</tr>
+					<th class="ss-th-width">Estanque</th> 
+					<td>
+						<input type="radio" name="estanque" value="1/4" <?php if ($estanque=="1/4") echo 'checked' ?> />1/4
+						<input type="radio" name="estanque" value="1/2" <?php if ($estanque=="1/2") echo 'checked' ?> />1/2
+						<input type="radio" name="estanque" value="3/4" <?php if ($estanque=="3/4") echo 'checked' ?> />3/4
+						<input type="radio" name="estanque" value="lleno" <?php if ($estanque=="lleno") echo 'checked' ?> />lleno
+					</td>
+					</tr>
+					<th class="ss-th-width">Obvservación</th> 
+					<td><input type="text" name="obvservacion" value="<?php echo $obvservacion; ?>" class="ss-field-width " /></td>
 					</tr>
                 </table>
 				<div id='pager'></div>

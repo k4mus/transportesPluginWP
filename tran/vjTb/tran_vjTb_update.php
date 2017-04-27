@@ -6,7 +6,7 @@ function tran_vjTb_update() {
     $id_vjTb = $_GET["id_vjTb"];
 	$id_vj = $_GET["id_vj"];
 	$id_tb = $_GET["id_tb"];
-	$Monto = $_POST["Monto"];
+	$Rol = $_POST["Rol"];
 	$Razon = $_POST["Razon"];
 	$Gasto_ingreso = $_POST["Gasto_ingreso"];
 	$fecha = $_POST["fecha"];
@@ -18,6 +18,8 @@ function tran_vjTb_update() {
 	$page_volver= "tran_vjTb_list";
 	
 	
+	$rows_vj = $wpdb->get_results("SELECT id_vj, name_vj from ".$wpdb->prefix ."vj");  
+	$rows_tb = $wpdb->get_results("SELECT id_tb, name_tb from ".$wpdb->prefix ."tb");  
 //update
     if (isset($_POST['update'])){
 		$id_vj= $_POST["id_vj"];
@@ -25,7 +27,7 @@ function tran_vjTb_update() {
 		
         $wpdb->update(
                 $table_name, //table
-				array( 'id_vj' => $id_vj , 'id_tb' => $id_tb ,  'Monto' => $Monto, 'Razon' => $Razon, 'Gasto_ingreso' => $Gasto_ingreso, 'fecha' => $fecha), //data
+				array( 'id_vj' => $id_vj , 'id_tb' => $id_tb ,  'Rol' => $Rol, 'Razon' => $Razon, 'Gasto_ingreso' => $Gasto_ingreso, 'fecha' => $fecha), //data
                 array('id_vjTb' => $id_vjTb ), //where
 				array('%s','%s','%s','%s'), //data format
                 array('%s') //where format
@@ -35,21 +37,22 @@ function tran_vjTb_update() {
     else if (isset($_POST['delete'])) {
         $wpdb->query($wpdb->prepare("DELETE FROM $table_name WHERE id_vjTb = %s", $id_vjTb));
     } else {//selecting value to update	
-        $results = $wpdb->get_results($wpdb->prepare("SELECT id_vjTb  ,'id_vj'  ,'id_tb' , Monto , Razon , Gasto_ingreso , fecha  from $table_name where id_vjTb=%s", $id_vjTb));
+        $results = $wpdb->get_results($wpdb->prepare("SELECT id_vjTb  ,id_vj  ,id_tb , Rol , Razon , Gasto_ingreso , fecha  from $table_name where id_vjTb=%s", $id_vjTb));
         foreach ($results as $r) {
             $id_vjTb = $r->id_vjTb;
 			$id_vj = $r->id_vj;
 			$id_tb = $r->id_tb;
-			$Monto = $r->Monto;
+			$Rol = $r->Rol;
 			$Razon = $r->Razon;
 			$Gasto_ingreso = $r->Gasto_ingreso;
 			$fecha = $r->fecha;
         }
     }
     ?>
-    <link type="text/css" href="<?php echo WP_PLUGIN_URL; ?>/transportes-plugin/style-admin.css" rel="stylesheet" />
+    
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/free-jqgrid/4.13.6/css/ui.jqgrid.min.css">
+	<link type="text/css" href="<?php echo WP_PLUGIN_URL; ?>/transportes-plugin/style-admin.css" rel="stylesheet" />
 	<script src="//code.jquery.com/jquery-1.12.4.js"></script>
 	<script src="//code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/free-jqgrid/4.13.6/js/jquery.jqgrid.min.js"></script>
@@ -78,15 +81,27 @@ function tran_vjTb_update() {
 					</tr>
 					<tr>
 						<th>ID_VJ</th>
-						<td><input type="text" name="id_vj" value="<?php echo $id_vj; ?>"  <?php if ($id_vj) echo readonly  ?> /></td>
+						<td><select type="text" id= "id_vj" name="id_vj" value="<?php echo $id_vj; ?>" <?php if ($id_vj) echo readonly  ?> class="combobox">
+							<option value="">Select one...</option>
+							<?php foreach ($rows_vj as $row_vj) { ?>
+							<option value="<?php echo $row_vj->id_vj; ?>"><?php if ($id_vj)echo $row_vj->name_vj;  else $row_vj->id_vj; ?></option>
+							<?php } ?>
+							</select>
+						</td>
 					</tr>
 					<tr>
 						<th>ID_TB</th>
-						<td><input type="text" name="id_tb" value="<?php echo $id_tb; ?>"  <?php if ($id_tb) echo readonly  ?> /></td>
+						<td><select type="text" id= "id_tb" name="id_tb" value="<?php echo $id_tb; ?>" <?php if ($id_tb) echo readonly  ?> class="combobox">
+							<option value="">Select one...</option>
+							<?php foreach ($rows_tb as $row_tb) { ?>
+							<option value="<?php echo $row_tb->id_tb; ?>"><?php if ($id_tb)echo $row_tb->name_tb;  else $row_tb->id_tb; ?></option>
+							<?php } ?>
+							</select>
+						</td>
 					</tr>
                     
 					<th class="ss-th-width">empresa</th> 
-					<td><input type="text" name="Monto" value="<?php echo $Monto; ?>" class="ss-field-width " /></td>
+					<td><input type="text" name="Rol" value="<?php echo $Rol; ?>" class="ss-field-width " /></td>
 					</tr>
 					<th class="ss-th-width">empresa</th> 
 					<td><input type="text" name="Razon" value="<?php echo $Razon; ?>" class="ss-field-width " /></td>

@@ -18,6 +18,8 @@ function tran_otRt_update() {
 	$page_volver= "tran_otRt_list";
 	
 	
+	$rows_ot = $wpdb->get_results("SELECT id_ot, name_ot from ".$wpdb->prefix ."ot");  
+	$rows_rt = $wpdb->get_results("SELECT id_rt, name_rt from ".$wpdb->prefix ."rt");  
 //update
     if (isset($_POST['update'])){
 		$id_ot= $_POST["id_ot"];
@@ -35,7 +37,7 @@ function tran_otRt_update() {
     else if (isset($_POST['delete'])) {
         $wpdb->query($wpdb->prepare("DELETE FROM $table_name WHERE id_otRt = %s", $id_otRt));
     } else {//selecting value to update	
-        $results = $wpdb->get_results($wpdb->prepare("SELECT id_otRt  ,'id_ot'  ,'id_rt' , Monto , Razon , Gasto_ingreso , fecha  from $table_name where id_otRt=%s", $id_otRt));
+        $results = $wpdb->get_results($wpdb->prepare("SELECT id_otRt  ,id_ot  ,id_rt , Monto , Razon , Gasto_ingreso , fecha  from $table_name where id_otRt=%s", $id_otRt));
         foreach ($results as $r) {
             $id_otRt = $r->id_otRt;
 			$id_ot = $r->id_ot;
@@ -47,9 +49,10 @@ function tran_otRt_update() {
         }
     }
     ?>
-    <link type="text/css" href="<?php echo WP_PLUGIN_URL; ?>/transportes-plugin/style-admin.css" rel="stylesheet" />
+    
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/free-jqgrid/4.13.6/css/ui.jqgrid.min.css">
+	<link type="text/css" href="<?php echo WP_PLUGIN_URL; ?>/transportes-plugin/style-admin.css" rel="stylesheet" />
 	<script src="//code.jquery.com/jquery-1.12.4.js"></script>
 	<script src="//code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/free-jqgrid/4.13.6/js/jquery.jqgrid.min.js"></script>
@@ -78,20 +81,32 @@ function tran_otRt_update() {
 					</tr>
 					<tr>
 						<th>ID_OrdenTrans</th>
-						<td><input type="text" name="id_ot" value="<?php echo $id_ot; ?>"  <?php if ($id_ot) echo readonly  ?> /></td>
+						<td><select type="text" id= "id_ot" name="id_ot" value="<?php echo $id_ot; ?>" <?php if ($id_ot) echo readonly  ?> class="combobox">
+							<option value="">Select one...</option>
+							<?php foreach ($rows_ot as $row_ot) { ?>
+							<option value="<?php echo $row_ot->id_ot; ?>"><?php if ($id_ot)echo $row_ot->name_ot;  else $row_ot->id_ot; ?></option>
+							<?php } ?>
+							</select>
+						</td>
 					</tr>
 					<tr>
 						<th>ID_ruta</th>
-						<td><input type="text" name="id_rt" value="<?php echo $id_rt; ?>"  <?php if ($id_rt) echo readonly  ?> /></td>
+						<td><select type="text" id= "id_rt" name="id_rt" value="<?php echo $id_rt; ?>" <?php if ($id_rt) echo readonly  ?> class="combobox">
+							<option value="">Select one...</option>
+							<?php foreach ($rows_rt as $row_rt) { ?>
+							<option value="<?php echo $row_rt->id_rt; ?>"><?php if ($id_rt)echo $row_rt->name_rt;  else $row_rt->id_rt; ?></option>
+							<?php } ?>
+							</select>
+						</td>
 					</tr>
                     
-					<th class="ss-th-width">empresa</th> 
+					<th class="ss-th-width">Monto</th> 
 					<td><input type="text" name="Monto" value="<?php echo $Monto; ?>" class="ss-field-width " /></td>
 					</tr>
-					<th class="ss-th-width">empresa</th> 
+					<th class="ss-th-width">Razon</th> 
 					<td><input type="text" name="Razon" value="<?php echo $Razon; ?>" class="ss-field-width " /></td>
 					</tr>
-					<th class="ss-th-width">empresa</th> 
+					<th class="ss-th-width">Gasto</th> 
 					<td><input type="text" name="Gasto_ingreso" value="<?php echo $Gasto_ingreso; ?>" class="ss-field-width " /></td>
 					</tr>
 					<th class="ss-th-width">fecha</th> 

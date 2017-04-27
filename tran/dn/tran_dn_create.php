@@ -1,14 +1,14 @@
 <?php
 
 function tran_dn_create() {
-	$nombreEmpresa = $_POST["nombreEmpresa"];
-	$fecha = $_POST["fecha"];
+	$name_dn = $_POST["name_dn"];
+	$signo = $_POST["signo"];
 	
 	//volver
 	$page_volver= "tran_dn_list";
 	 //insert
 	global $wpdb;
-	
+    
     if (isset($_POST['insert'])) {
 		
         
@@ -16,15 +16,16 @@ function tran_dn_create() {
 
         $wpdb->insert(
                 $table_name, //table
-                array(  'nombreEmpresa' => $nombreEmpresa , 'fecha' => $fecha  ), //data
+                array(  'name_dn' => $name_dn , 'signo' => $signo  ), //data
                 array('%s', '%s') //data format	 		
         );
         $id_dn =$wpdb->insert_id;
 		$message.="Dineros inserted: ".$id_dn;
     }
     ?>
-    <link type="text/css" href="<?php echo WP_PLUGIN_URL; ?>/transportes-plugin/style-admin.css" rel="stylesheet" />
+    
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css">
+	<link type="text/css" href="<?php echo WP_PLUGIN_URL; ?>/transportes-plugin/style-admin.css" rel="stylesheet" />
 	<script src="//code.jquery.com/jquery-1.12.4.js"></script>
 	<script src="//code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 	<script src="<?php echo WP_PLUGIN_URL; ?>/transportes-plugin/js/combobox.js"></script>
@@ -45,12 +46,15 @@ function tran_dn_create() {
             <p> </p>
             <table class='wp-list-table widefat fixed'>
 				<tr>
-                    <th class="ss-th-width">empresa</th>
-					<td><input type="text" name="nombreEmpresa" value="<?php echo $nombreEmpresa; ?>" class="ss-field-width " /></td>
+                    <th class="ss-th-width">Concepto</th>
+					<td><input type="text" name="name_dn" value="<?php echo $name_dn; ?>" class="ss-field-width " /></td>
                 </tr>
 				<tr>
-                    <th class="ss-th-width">fecha</th>
-					<td><input type="text" name="fecha" value="<?php echo $fecha; ?>" class="ss-field-width fecha" /></td>
+                    <th class="ss-th-width">gasto/ingreso</th>
+					<td>
+						<input type="radio" name="signo" value="1"/>1
+						<input type="radio" name="signo" value="-1"/>-1
+					</td>
                 </tr>
             </table>
             <input type='submit' name="insert" value='Save' class='button'>
@@ -65,6 +69,9 @@ function tran_dn_create() {
 		$( ".fecha" ).datepicker();
 		$( ".numero" ).spinner();
 		$("#tabs" ).tabs();
+		$('.combobox').each( function( index, element ){
+			$("option[value="+$(this).attr("value")+"]", this).attr('selected','selected');
+		});
 		
 	</script>
     <?php

@@ -8,7 +8,6 @@ function tran_vjDn_update() {
 	$id_dn = $_GET["id_dn"];
 	$Monto = $_POST["Monto"];
 	$Razon = $_POST["Razon"];
-	$Gasto_ingreso = $_POST["Gasto_ingreso"];
 	$fecha = $_POST["fecha"];
 	//volver
 	if($id_vj) $page_volver= "tran_vj_update&id_vj=".$id_vj;
@@ -18,6 +17,8 @@ function tran_vjDn_update() {
 	$page_volver= "tran_vjDn_list";
 	
 	
+	$rows_vj = $wpdb->get_results("SELECT id_vj, name_vj from ".$wpdb->prefix ."vj");  
+	$rows_dn = $wpdb->get_results("SELECT id_dn, name_dn from ".$wpdb->prefix ."dn");  
 //update
     if (isset($_POST['update'])){
 		$id_vj= $_POST["id_vj"];
@@ -25,9 +26,9 @@ function tran_vjDn_update() {
 		
         $wpdb->update(
                 $table_name, //table
-				array( 'id_vj' => $id_vj , 'id_dn' => $id_dn ,  'Monto' => $Monto, 'Razon' => $Razon, 'Gasto_ingreso' => $Gasto_ingreso, 'fecha' => $fecha), //data
+				array( 'id_vj' => $id_vj , 'id_dn' => $id_dn ,  'Monto' => $Monto, 'Razon' => $Razon, 'fecha' => $fecha), //data
                 array('id_vjDn' => $id_vjDn ), //where
-				array('%s','%s','%s','%s'), //data format
+				array('%s','%s','%s'), //data format
                 array('%s') //where format
         );
     }
@@ -35,21 +36,21 @@ function tran_vjDn_update() {
     else if (isset($_POST['delete'])) {
         $wpdb->query($wpdb->prepare("DELETE FROM $table_name WHERE id_vjDn = %s", $id_vjDn));
     } else {//selecting value to update	
-        $results = $wpdb->get_results($wpdb->prepare("SELECT id_vjDn  ,'id_vj'  ,'id_dn' , Monto , Razon , Gasto_ingreso , fecha  from $table_name where id_vjDn=%s", $id_vjDn));
+        $results = $wpdb->get_results($wpdb->prepare("SELECT id_vjDn  ,id_vj  ,id_dn , Monto , Razon , fecha  from $table_name where id_vjDn=%s", $id_vjDn));
         foreach ($results as $r) {
             $id_vjDn = $r->id_vjDn;
 			$id_vj = $r->id_vj;
 			$id_dn = $r->id_dn;
 			$Monto = $r->Monto;
 			$Razon = $r->Razon;
-			$Gasto_ingreso = $r->Gasto_ingreso;
 			$fecha = $r->fecha;
         }
     }
     ?>
-    <link type="text/css" href="<?php echo WP_PLUGIN_URL; ?>/transportes-plugin/style-admin.css" rel="stylesheet" />
+    
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/free-jqgrid/4.13.6/css/ui.jqgrid.min.css">
+	<link type="text/css" href="<?php echo WP_PLUGIN_URL; ?>/transportes-plugin/style-admin.css" rel="stylesheet" />
 	<script src="//code.jquery.com/jquery-1.12.4.js"></script>
 	<script src="//code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/free-jqgrid/4.13.6/js/jquery.jqgrid.min.js"></script>
@@ -77,22 +78,31 @@ function tran_vjDn_update() {
 						<td><input type="text" name="id_vjDn" value="<?php echo $id_vjDn; ?>" disabled /></td>
 					</tr>
 					<tr>
-						<th>ID_viaje</th>
-						<td><input type="text" name="id_vj" value="<?php echo $id_vj; ?>"  <?php if ($id_vj) echo readonly  ?> /></td>
+						<th>viaje</th>
+						<td><select type="text" id= "id_vj" name="id_vj" value="<?php echo $id_vj; ?>" <?php if ($id_vj) echo readonly  ?> class="combobox">
+							<option value="">Select one...</option>
+							<?php foreach ($rows_vj as $row_vj) { ?>
+							<option value="<?php echo $row_vj->id_vj; ?>"><?php if ($id_vj)echo $row_vj->name_vj;  else $row_vj->id_vj; ?></option>
+							<?php } ?>
+							</select>
+						</td>
 					</tr>
 					<tr>
-						<th>ID_dinero</th>
-						<td><input type="text" name="id_dn" value="<?php echo $id_dn; ?>"  <?php if ($id_dn) echo readonly  ?> /></td>
+						<th>dinero</th>
+						<td><select type="text" id= "id_dn" name="id_dn" value="<?php echo $id_dn; ?>" <?php if ($id_dn) echo readonly  ?> class="combobox">
+							<option value="">Select one...</option>
+							<?php foreach ($rows_dn as $row_dn) { ?>
+							<option value="<?php echo $row_dn->id_dn; ?>"><?php if ($id_dn)echo $row_dn->name_dn;  else $row_dn->id_dn; ?></option>
+							<?php } ?>
+							</select>
+						</td>
 					</tr>
                     
 					<th class="ss-th-width">Monto</th> 
-					<td><input type="text" name="Monto" value="<?php echo $Monto; ?>" class="ss-field-width " /></td>
+					<td><input type="text" name="Monto" value="<?php echo $Monto; ?>" class="ss-field-width numero" /></td>
 					</tr>
 					<th class="ss-th-width">Razon</th> 
 					<td><input type="text" name="Razon" value="<?php echo $Razon; ?>" class="ss-field-width " /></td>
-					</tr>
-					<th class="ss-th-width">Gasto_ingreso</th> 
-					<td><input type="text" name="Gasto_ingreso" value="<?php echo $Gasto_ingreso; ?>" class="ss-field-width " /></td>
 					</tr>
 					<th class="ss-th-width">fecha</th> 
 					<td><input type="text" name="fecha" value="<?php echo $fecha; ?>" class="ss-field-width fecha" /></td>

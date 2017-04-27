@@ -2,9 +2,10 @@
 error_reporting(0);
 function tran_rt_list() {
     ?>
-    <link type="text/css" href="<?php echo WP_PLUGIN_URL; ?>/transportes-plugin/style-admin.css" rel="stylesheet" />
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.13/datatables.min.css"/>
  	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css">
+	<link type="text/css" href="<?php echo WP_PLUGIN_URL; ?>/transportes-plugin/style-admin.css" rel="stylesheet" />
+    
 	<script src="//code.jquery.com/jquery-1.12.4.js"></script>
 	<script src="//code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 	<script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.13/datatables.min.js"></script>
@@ -19,9 +20,9 @@ function tran_rt_list() {
         </div>
         <?php
         global $wpdb;
-        $table_name = $wpdb->prefix . "rt";
+        $table_name = $wpdb->prefix ."rt";
 		
-        $rows = $wpdb->get_results("SELECT id_rt,  name_rt , ciudad_orig , comuna_orig , ciudad_dest , comuna_orig , kms , precioBase , precioExtencion  from $table_name   ");
+        $rows = $wpdb->get_results("SELECT id_rt, $table_name.name_rt ,$table_name.ciudad_orig ,$table_name.comuna_orig ,$table_name.ciudad_dest ,$table_name.comuna_orig ,$table_name.kms ,$table_name.precioBase ,$table_name.precioExtencion  from $table_name   ");
         ?>
         <table id ="table_rt" $table_name class='wp-list-table widefat fixed striped posts'>
             <thead>
@@ -30,9 +31,9 @@ function tran_rt_list() {
 			<?php
 			?>
 				<th class="manage-column ss-list-width">Nombre Ruta</th>
-				<th class="manage-column ss-list-width">Ciudad Origen</th>
+				<th class="manage-column ss-list-width">Provincia Origen</th>
 				<th class="manage-column ss-list-width">Comuna Origen</th>
-				<th class="manage-column ss-list-width">Ciudad Destino</th>
+				<th class="manage-column ss-list-width">Provincia Destino</th>
 				<th class="manage-column ss-list-width">Comuna Destino</th>
 				<th class="manage-column ss-list-width">Kms Aprox.</th>
 				<th class="manage-column ss-list-width">Precio</th>

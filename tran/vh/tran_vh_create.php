@@ -1,7 +1,7 @@
 <?php
 
 function tran_vh_create() {
-	$name = $_POST["name"];
+	$name_vh = $_POST["name_vh"];
 	$tipo = $_POST["tipo"];
 	$Tonelaje = $_POST["Tonelaje"];
 	$Patente = $_POST["Patente"];
@@ -26,7 +26,7 @@ function tran_vh_create() {
 	$page_volver= "tran_vh_list";
 	 //insert
 	global $wpdb;
-	
+    
     if (isset($_POST['insert'])) {
 		
         
@@ -34,15 +34,16 @@ function tran_vh_create() {
 
         $wpdb->insert(
                 $table_name, //table
-                array(  'name' => $name , 'tipo' => $tipo , 'Tonelaje' => $Tonelaje , 'Patente' => $Patente , 'Marca' => $Marca , 'Modelo' => $Modelo , 'Año' => $Año , 'FechaCompra' => $FechaCompra , 'estanque' => $estanque , 'zona' => $zona , 'rendimiento' => $rendimiento , 'fecUltMantencion' => $fecUltMantencion , 'fecRevTecnica' => $fecRevTecnica , 'fecGases' => $fecGases , 'fecPermCirculacion' => $fecPermCirculacion , 'fecCambioAceite' => $fecCambioAceite , 'fecCambioFiltro' => $fecCambioFiltro , 'neumaticoRepuesto' => $neumaticoRepuesto , 'herramientas' => $herramientas , 'chalecoReflectante' => $chalecoReflectante  ), //data
+                array(  'name_vh' => $name_vh , 'tipo' => $tipo , 'Tonelaje' => $Tonelaje , 'Patente' => $Patente , 'Marca' => $Marca , 'Modelo' => $Modelo , 'Año' => $Año , 'FechaCompra' => $FechaCompra , 'estanque' => $estanque , 'zona' => $zona , 'rendimiento' => $rendimiento , 'fecUltMantencion' => $fecUltMantencion , 'fecRevTecnica' => $fecRevTecnica , 'fecGases' => $fecGases , 'fecPermCirculacion' => $fecPermCirculacion , 'fecCambioAceite' => $fecCambioAceite , 'fecCambioFiltro' => $fecCambioFiltro , 'neumaticoRepuesto' => $neumaticoRepuesto , 'herramientas' => $herramientas , 'chalecoReflectante' => $chalecoReflectante  ), //data
                 array('%s', '%s') //data format	 		
         );
         $id_vh =$wpdb->insert_id;
 		$message.="Vehiculos inserted: ".$id_vh;
     }
     ?>
-    <link type="text/css" href="<?php echo WP_PLUGIN_URL; ?>/transportes-plugin/style-admin.css" rel="stylesheet" />
+    
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css">
+	<link type="text/css" href="<?php echo WP_PLUGIN_URL; ?>/transportes-plugin/style-admin.css" rel="stylesheet" />
 	<script src="//code.jquery.com/jquery-1.12.4.js"></script>
 	<script src="//code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 	<script src="<?php echo WP_PLUGIN_URL; ?>/transportes-plugin/js/combobox.js"></script>
@@ -64,7 +65,7 @@ function tran_vh_create() {
             <table class='wp-list-table widefat fixed'>
 				<tr>
                     <th class="ss-th-width">Código Vehiculo</th>
-					<td><input type="text" name="name" value="<?php echo $name; ?>" class="ss-field-width " /></td>
+					<td><input type="text" name="name_vh" value="<?php echo $name_vh; ?>" class="ss-field-width " /></td>
                 </tr>
 				<tr>
                     <th class="ss-th-width">tipo</th>
@@ -174,6 +175,9 @@ function tran_vh_create() {
 		$( ".fecha" ).datepicker();
 		$( ".numero" ).spinner();
 		$("#tabs" ).tabs();
+		$('.combobox').each( function( index, element ){
+			$("option[value="+$(this).attr("value")+"]", this).attr('selected','selected');
+		});
 		
 	</script>
     <?php

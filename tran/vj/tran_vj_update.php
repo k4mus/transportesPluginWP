@@ -4,6 +4,7 @@ function tran_vj_update() {
     global $wpdb;
     $table_name = $wpdb->prefix ."vj";
     $id_vj = $_GET["id_vj"];
+	$name_vj = $_POST["name_vj"];
 	$nombreEmpresa = $_POST["nombreEmpresa"];
 	$fecha = $_POST["fecha"];
 	//volver
@@ -15,9 +16,9 @@ function tran_vj_update() {
 		
         $wpdb->update(
                 $table_name, //table
-				array(  'nombreEmpresa' => $nombreEmpresa, 'fecha' => $fecha), //data
+				array(  'name_vj' => $name_vj, 'nombreEmpresa' => $nombreEmpresa, 'fecha' => $fecha), //data
                 array('id_vj' => $id_vj ), //where
-				array('%s','%s'), //data format
+				array('%s','%s','%s'), //data format
                 array('%s') //where format
         );
     }
@@ -25,17 +26,19 @@ function tran_vj_update() {
     else if (isset($_POST['delete'])) {
         $wpdb->query($wpdb->prepare("DELETE FROM $table_name WHERE id_vj = %s", $id_vj));
     } else {//selecting value to update	
-        $results = $wpdb->get_results($wpdb->prepare("SELECT id_vj , nombreEmpresa , fecha  from $table_name where id_vj=%s", $id_vj));
+        $results = $wpdb->get_results($wpdb->prepare("SELECT id_vj , name_vj , nombreEmpresa , fecha  from $table_name where id_vj=%s", $id_vj));
         foreach ($results as $r) {
             $id_vj = $r->id_vj;
+			$name_vj = $r->name_vj;
 			$nombreEmpresa = $r->nombreEmpresa;
 			$fecha = $r->fecha;
         }
     }
     ?>
-    <link type="text/css" href="<?php echo WP_PLUGIN_URL; ?>/transportes-plugin/style-admin.css" rel="stylesheet" />
+    
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/free-jqgrid/4.13.6/css/ui.jqgrid.min.css">
+	<link type="text/css" href="<?php echo WP_PLUGIN_URL; ?>/transportes-plugin/style-admin.css" rel="stylesheet" />
 	<script src="//code.jquery.com/jquery-1.12.4.js"></script>
 	<script src="//code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/free-jqgrid/4.13.6/js/jquery.jqgrid.min.js"></script>
@@ -67,6 +70,9 @@ function tran_vj_update() {
 						<td><input type="text" name="id_vj" value="<?php echo $id_vj; ?>" disabled /></td>
 					</tr>
                     
+					<th class="ss-th-width">codVIaje</th> 
+					<td><input type="text" name="name_vj" value="<?php echo $name_vj; ?>" class="ss-field-width " /></td>
+					</tr>
 					<th class="ss-th-width">empresa</th> 
 					<td><input type="text" name="nombreEmpresa" value="<?php echo $nombreEmpresa; ?>" class="ss-field-width " /></td>
 					</tr>

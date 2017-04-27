@@ -1,6 +1,7 @@
 <?php
 
 function tran_ot_create() {
+	$name_ot = $_POST["name_ot"];
 	$rutEmpOrig = $_POST["rutEmpOrig"];
 	$nomEmporig = $_POST["nomEmporig"];
 	$telEmpOrig = $_POST["telEmpOrig"];
@@ -31,7 +32,7 @@ function tran_ot_create() {
 	$page_volver= "tran_ot_list";
 	 //insert
 	global $wpdb;
-	
+    
 	$rows_rt = $wpdb->get_results("SELECT id_rt, name_rt from ".$wpdb->prefix ."rt");  
     if (isset($_POST['insert'])) {
 		
@@ -40,15 +41,16 @@ function tran_ot_create() {
 
         $wpdb->insert(
                 $table_name, //table
-                array(  'rutEmpOrig' => $rutEmpOrig , 'nomEmporig' => $nomEmporig , 'telEmpOrig' => $telEmpOrig , 'id_rt' => $id_rt , 'dirEmpOrig' => $dirEmpOrig , 'ciudEmpOrig' => $ciudEmpOrig , 'nomPerOrig' => $nomPerOrig , 'fechaOrig' => $fechaOrig , 'rutEmpDest' => $rutEmpDest , 'nomEmpDest' => $nomEmpDest , 'telEmpDest' => $telEmpDest , 'dirEmpDest' => $dirEmpDest , 'ciudEmpDest' => $ciudEmpDest , 'nomPerDest' => $nomPerDest , 'fechaDest' => $fechaDest , 'formaPago' => $formaPago , 'cuentaCte' => $cuentaCte , 'boletaFactura' => $boletaFactura , 'nroPiezas' => $nroPiezas , 'pesoCarga' => $pesoCarga , 'largoCarga' => $largoCarga , 'anchoCarga' => $anchoCarga , 'altoCarga' => $altoCarga , 'documentos' => $documentos , 'instrucciones' => $instrucciones  ), //data
+                array(  'name_ot' => $name_ot , 'rutEmpOrig' => $rutEmpOrig , 'nomEmporig' => $nomEmporig , 'telEmpOrig' => $telEmpOrig , 'id_rt' => $id_rt , 'dirEmpOrig' => $dirEmpOrig , 'ciudEmpOrig' => $ciudEmpOrig , 'nomPerOrig' => $nomPerOrig , 'fechaOrig' => $fechaOrig , 'rutEmpDest' => $rutEmpDest , 'nomEmpDest' => $nomEmpDest , 'telEmpDest' => $telEmpDest , 'dirEmpDest' => $dirEmpDest , 'ciudEmpDest' => $ciudEmpDest , 'nomPerDest' => $nomPerDest , 'fechaDest' => $fechaDest , 'formaPago' => $formaPago , 'cuentaCte' => $cuentaCte , 'boletaFactura' => $boletaFactura , 'nroPiezas' => $nroPiezas , 'pesoCarga' => $pesoCarga , 'largoCarga' => $largoCarga , 'anchoCarga' => $anchoCarga , 'altoCarga' => $altoCarga , 'documentos' => $documentos , 'instrucciones' => $instrucciones  ), //data
                 array('%s', '%s') //data format	 		
         );
         $id_ot =$wpdb->insert_id;
 		$message.="Orden de Transporte inserted: ".$id_ot;
     }
     ?>
-    <link type="text/css" href="<?php echo WP_PLUGIN_URL; ?>/transportes-plugin/style-admin.css" rel="stylesheet" />
+    
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css">
+	<link type="text/css" href="<?php echo WP_PLUGIN_URL; ?>/transportes-plugin/style-admin.css" rel="stylesheet" />
 	<script src="//code.jquery.com/jquery-1.12.4.js"></script>
 	<script src="//code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 	<script src="<?php echo WP_PLUGIN_URL; ?>/transportes-plugin/js/combobox.js"></script>
@@ -69,6 +71,10 @@ function tran_ot_create() {
             <p> </p>
             <table class='wp-list-table widefat fixed'>
 				<tr>
+                    <th class="ss-th-width">Codigo OT</th>
+					<td><input type="text" name="name_ot" value="<?php echo $name_ot; ?>" class="ss-field-width t" /></td>
+                </tr>
+				<tr>
                     <th class="ss-th-width">Rut Empresa Origen</th>
 					<td><input type="text" name="rutEmpOrig" value="<?php echo $rutEmpOrig; ?>" class="ss-field-width rut" /></td>
                 </tr>
@@ -85,7 +91,7 @@ function tran_ot_create() {
 					<td><select type="text" id= "id_rt" name="id_rt" value="<?php echo $id_rt; ?>  " class="combobox">
 						<option value="">Select one...</option>
 						<?php foreach ($rows_rt as $row_rt) { ?>
-						<option value="<?php echo $row_rt->id_rt; ?>"><?php echo $row_rt->name_rt; ?></option>
+						<option value="<?php echo $row_rt->id_rt; ?>"><?php if ($id_rt)echo $row_rt->name_rt;  else $row_rt->id_rt; ?></option>
 						<?php } ?>
 						</select>
 					</td>
@@ -190,6 +196,9 @@ function tran_ot_create() {
 		$( ".fecha" ).datepicker();
 		$( ".numero" ).spinner();
 		$("#tabs" ).tabs();
+		$('.combobox').each( function( index, element ){
+			$("option[value="+$(this).attr("value")+"]", this).attr('selected','selected');
+		});
 		
 	</script>
     <?php

@@ -1,0 +1,231 @@
+{
+"tablas":[
+	{
+	   "titulo": "Trabajadores",
+	   "autor": "fmoreno",
+	   "plugin":"transportes-plugin",
+	   "schema":"tran",
+	   "tableName":"tb",
+	   "indice":{"name":"id_tb",  "alias":"ID" },
+	   "unique":"id_tb",
+	   "foraneas":[],
+	   "columnas": [
+	     	{ "name":"name_tb",  "alias":"Código Trabajador", "clase":""},
+			{ "name":"rut",  "alias":"Rut Trabajador", "clase":"rut"},
+	        { "name":"fechaIng",  "alias":"Fecha Ingreso", "clase":"fecha"},       
+			{ "name":"cargo",  "alias":"Cargo", "clase":"radio", "opcion":["Chofer","Pioneta"]}       
+		],
+		"tabs":[]
+	},
+	{
+	   "titulo": "Vehiculos",
+	   "autor": "fmoreno",
+	   "plugin":"transportes-plugin",
+	   "schema":"tran",
+	   "tableName":"vh",
+	   "indice":{"name":"id_vh",  "alias":"ID" },
+	   "unique":"id_vh",
+	   "foraneas":[],
+	   "columnas": [
+	     	{ "name":"name_vh",  "alias":"Código Vehiculo", "clase":""},
+	        { "name":"tipo",  "alias":"tipo", "clase":"radio", "opcion":["FURGON","CAMION", "REMOLQUE", "SEMIREMOLQUE", "TRACTO"]},
+			{ "name":"Tonelaje",  "alias":"Tonelaje", "clase":"numero"},
+			{ "name":"Patente",  "alias":"Patente", "clase":""},
+			{ "name":"Marca",  "alias":"Marca", "clase":""},
+			{ "name":"Modelo",  "alias":"Modelo", "clase":""},
+			{ "name":"Año",  "alias":"Año", "clase":""},
+			{ "name":"FechaCompra",  "alias":"Fecha Compra", "clase":"fecha"},
+			{ "name":"estanque",  "alias":"Código Vehiculo", "clase":"numero"},
+			{ "name":"zona",  "alias":"Zona de Servicio", "clase":"radio", "opcion":["Norte","Centro", "Sur"]},
+			{ "name":"rendimiento",  "alias":"Rendimiento (kms/lt)", "clase":"numero"},
+			{ "name":"fecUltMantencion",  "alias":"Fecha Ultima mantención", "clase":"fecha"},
+			{ "name":"fecRevTecnica",  "alias":"Revisión Tecnica", "clase":"fecha"},
+			{ "name":"fecGases",  "alias":"Control de Gases", "clase":"fecha"},
+			{ "name":"fecPermCirculacion",  "alias":"Permiso Circulación", "clase":"fecha"},
+			{ "name":"fecCambioAceite",  "alias":"Último Cambio de Aceite", "clase":"fecha"},
+			{ "name":"fecCambioFiltro",  "alias":"Cambio Filtro", "clase":"fecha"},
+			{ "name":"neumaticoRepuesto",  "alias":"Neumático Repuesto", "clase":"radio", "opcion":["Si","No"]},
+			{ "name":"herramientas",  "alias":"Herramientas", "clase":"radio", "opcion":["Si","No"]},
+			{ "name":"chalecoReflectante",  "alias":"Chaleco Reflectante", "clase":"radio", "opcion":["Si","No"]}
+
+		],
+		"tabs":[]		
+	},
+	{
+	   "titulo": "Rutas",
+	   "autor": "fmoreno",
+	   "plugin":"transportes-plugin",
+	   "schema":"tran",
+	   "tableName":"rt",
+	   "indice":{"name":"id_rt",  "alias":"ID" },
+	   "unique":"id_rt",
+	   "foraneas":[],
+	   "columnas": [
+	     	{ "name":"name_rt",  	 "alias":"Nombre Ruta", "clase":""},
+	        { "name":"ciudad_orig",  "alias":"Provincia Origen", "clase":"combobox", "table":"ciudad"},
+	        { "name":"comuna_orig",  "alias":"Comuna Origen", "clase":"combobox", "table":"comuna"},
+	        { "name":"ciudad_dest",  "alias":"Provincia Destino", "clase":"combobox", "table":"ciudad"},
+	        { "name":"comuna_orig",  "alias":"Comuna Destino", "clase":"combobox", "table":"comuna"},
+	        { "name":"kms",  "alias":"Kms Aprox.", "clase":"numero"},
+	        { "name":"precioBase",  "alias":"Precio", "clase":"numero"},
+			{ "name":"precioExtencion",  "alias":"Precio Extención", "clase":"numero"}
+		],
+		"tabs":[]		
+	},
+	{
+	   "titulo": "Dineros",
+	   "autor": "fmoreno",
+	   "plugin":"transportes-plugin",
+	   "schema":"tran",
+	   "tableName":"dn",
+	   "indice":{"name":"id_dn",  "alias":"ID" },
+	   "unique":"id_dn",
+	   "foraneas":[],
+	   "columnas": [
+	     	{ "name":"name_dn",  "alias":"Concepto", "clase":""},
+	        { "name":"signo",  "alias":"gasto/ingreso", "clase":"radio", "opcion":["1","-1"] } 
+	    ],
+		"tabs":[]		
+	},
+		{
+	   "titulo": "Orden de Transporte",
+	   "autor": "fmoreno",
+	   "plugin":"transportes-plugin",
+	   "schema":"tran",
+	   "tableName":"ot",
+	   "indice":{"name":"id_ot",  "alias":"ID" },
+	   "unique":"id_ot",
+	   "foraneas":[],
+	   "columnas": [
+	   		{ "name":"name_ot",  "alias":"Codigo OT", "clase":"t"},
+			{ "name":"rutEmpOrig",  "alias":"Rut Empresa Origen", "clase":"rut"},
+			{ "name":"nomEmporig",  "alias":"Nombre Empresa Origen", "clase":""},
+	        { "name":"telEmpOrig",  "alias":"Telefono Origen", "clase":"numero"},
+			{ "name":"id_rt",  		"alias":"Ruta", "clase":"combobox", "table":"rt"},
+			{ "name":"dirEmpOrig",  "alias":"Direccion Origen", "clase":""},
+			{ "name":"ciudEmpOrig",  "alias":"Ciudad Origen", "clase":""},
+			{ "name":"nomPerOrig",  "alias":"Persona que Entrega ", "clase":""},
+			{ "name":"fechaOrig",  "alias":"Fecha Entrega", "clase":"fecha"},
+			{ "name":"rutEmpDest",  "alias":"Rut Empresa Destino", "clase":""},
+			{ "name":"nomEmpDest",  "alias":"Nombre Empresa Destino", "clase":""},
+	        { "name":"telEmpDest",  "alias":"Telefono Destino", "clase":""},
+			{ "name":"dirEmpDest",  "alias":"Direccion Destino", "clase":""},
+			{ "name":"ciudEmpDest",  "alias":"Ciudad Destino", "clase":""},
+			{ "name":"nomPerDest",  "alias":"Persona que Retira", "clase":""},
+			{ "name":"fechaDest",  "alias":"Fecha Entrega", "clase":"fecha"},
+			{ "name":"formaPago",  "alias":"Forma de Pago", "clase":""},
+			{ "name":"cuentaCte",  "alias":"Cuenta Corriente", "clase":""},
+			{ "name":"boletaFactura",  "alias":"Boleta/Factura", "clase":"radio", "opcion":["Boleta","Factura"]},
+			{ "name":"nroPiezas",  "alias":"N° de Piezas", "clase":"numero"},
+			{ "name":"pesoCarga",  "alias":"Peso(Kg)", "clase":"numero"},
+			{ "name":"largoCarga",  "alias":"Largo(m)", "clase":"numero"},
+			{ "name":"anchoCarga",  "alias":"Ancho(m)", "clase":"numero"},
+			{ "name":"altoCarga",  "alias":"Alto(m)", "clase":"numero"},
+			{ "name":"documentos",  "alias":"Documentos asociados", "clase":""},
+			{ "name":"instrucciones",  "alias":"Instrucciones", "clase":""}
+			
+		],
+		"tabs":[]
+	},
+	{
+	   "titulo": "Orden de Viaje",
+	   "autor": "fmoreno",
+	   "plugin":"transportes-plugin",
+	   "schema":"tran",
+	   "tableName":"vj",
+	   "indice":{"name":"id_vj",  "alias":"ID" },
+	   "unique":"id_vj",
+	   "foraneas":[],
+	   "columnas": [
+	     	{ "name":"name_vj",  "alias":"codVIaje", "clase":""},
+	        { "name":"nombreEmpresa",  "alias":"empresa", "clase":""},
+	        { "name":"fecha",  "alias":"fecha", "clase":"fecha"}       
+		],
+		"tabs":[
+			{"name":"dnTab", "fun":"tran_vjDn_list($id_vj)", "titulo":"Dineros" },
+			{"name":"tbTab", "fun":"tran_vjTb_list($id_vj)", "titulo":"Trabajadores" },
+			{"name":"vhTab", "fun":"tran_vjVh_list($id_vj)", "titulo":"Vehiculos" },
+			{"name":"otTab", "fun":"", "titulo":"Orden de Transporte" }
+		]		
+	},
+	{
+	   "titulo": "Orden de Viaje-Dineros",
+	   "autor": "fmoreno",
+	   "plugin":"transportes-plugin",
+	   "schema":"tran",
+	   "tableName":"vjDn",
+	   "indice":{"name":"id_vjDn",  "alias":"ID" },
+	   "foraneas":[
+		   {"name":"id_vj",  "alias":"viaje", "table":"vj"},
+		   {"name":"id_dn",  "alias":"dinero", "table":"dn"}
+		],
+	   "unique":"id_vjDn",
+	   "columnas": [
+	     	{ "name":"Monto",  "alias":"Monto", "clase":"numero"},
+			{ "name":"Razon",  "alias":"Razon", "clase":""},
+			{ "name":"fecha",  "alias":"fecha", "clase":"fecha"}       
+		],
+		"tabs":[]		
+	},
+	{
+	   "titulo": "Orden de Viaje-Vehiculo",
+	   "autor": "fmoreno",
+	   "plugin":"transportes-plugin",
+	   "schema":"tran",
+	   "tableName":"vjVh",
+	   "indice":{"name":"id_vjVh",  "alias":"ID" },
+	   "foraneas":[
+		   {"name":"id_vj",  "alias":"ID_viaje", "table":"vj"},
+		   {"name":"id_vh",  "alias":"ID_vehiculo", "table":"vh"}
+		],
+	   "unique":"id_vjVh",
+	   "columnas": [
+	     	{ "name":"km",  "alias":"Kilomentros al inicio", "clase":""},
+			{ "name":"fecha",  "alias":"fecha", "clase":"fecha"},
+			{ "name":"estanque",  "alias":"Estanque", "clase":"radio" ,"opcion":["1/4","1/2","3/4","lleno"]},
+			{ "name":"obvservacion",  "alias":"Obvservaci�n", "clase":""}	               
+		],
+		"tabs":[]		
+	},
+	{
+	   "titulo": "Orden de Viaje-Trabajadores",
+	   "autor": "fmoreno",
+	   "plugin":"transportes-plugin",
+	   "schema":"tran",
+	   "tableName":"vjTb",
+	   "indice":{"name":"id_vjTb",  "alias":"ID" },
+	   "foraneas":[
+		   {"name":"id_vj",  "alias":"ID_VJ","table":"vj"},
+		   {"name":"id_tb",  "alias":"ID_TB","table":"tb"}
+		],
+	   "unique":"id_vjTb",
+	   "columnas": [
+	     	{ "name":"Rol",  "alias":"empresa", "clase":""},
+			{ "name":"Razon",  "alias":"empresa", "clase":""},
+			{ "name":"Gasto_ingreso",  "alias":"empresa", "clase":""},
+	        { "name":"fecha",  "alias":"fecha", "clase":"fecha"}       
+		],
+		"tabs":[]		
+	},
+	{
+	   "titulo": "Orden de Transporte - Ruta",
+	   "autor": "fmoreno",
+	   "plugin":"transportes-plugin",
+	   "schema":"tran",
+	   "tableName":"otRt",
+	   "indice":{"name":"id_otRt",  "alias":"ID" },
+	   "foraneas":[
+		   {"name":"id_ot",  "alias":"ID_OrdenTrans", "table":"ot"},
+		   {"name":"id_rt",  "alias":"ID_ruta", "table":"rt"}
+		],
+	   "unique":"id_otRt",
+	   "columnas": [
+	     	{ "name":"Monto",  "alias":"Monto", "clase":""},
+			{ "name":"Razon",  "alias":"Razon", "clase":""},
+			{ "name":"Gasto_ingreso",  "alias":"Gasto", "clase":""},
+	        { "name":"fecha",  "alias":"fecha", "clase":"fecha"}       
+		],
+		"tabs":[]		
+	}
+]
+}

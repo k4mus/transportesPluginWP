@@ -1,7 +1,7 @@
 <?php
 
 function tran_tb_create() {
-	$name = $_POST["name"];
+	$name_tb = $_POST["name_tb"];
 	$rut = $_POST["rut"];
 	$fechaIng = $_POST["fechaIng"];
 	$cargo = $_POST["cargo"];
@@ -10,7 +10,7 @@ function tran_tb_create() {
 	$page_volver= "tran_tb_list";
 	 //insert
 	global $wpdb;
-	
+    
     if (isset($_POST['insert'])) {
 		
         
@@ -18,15 +18,16 @@ function tran_tb_create() {
 
         $wpdb->insert(
                 $table_name, //table
-                array(  'name' => $name , 'rut' => $rut , 'fechaIng' => $fechaIng , 'cargo' => $cargo  ), //data
+                array(  'name_tb' => $name_tb , 'rut' => $rut , 'fechaIng' => $fechaIng , 'cargo' => $cargo  ), //data
                 array('%s', '%s') //data format	 		
         );
         $id_tb =$wpdb->insert_id;
 		$message.="Trabajadores inserted: ".$id_tb;
     }
     ?>
-    <link type="text/css" href="<?php echo WP_PLUGIN_URL; ?>/transportes-plugin/style-admin.css" rel="stylesheet" />
+    
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css">
+	<link type="text/css" href="<?php echo WP_PLUGIN_URL; ?>/transportes-plugin/style-admin.css" rel="stylesheet" />
 	<script src="//code.jquery.com/jquery-1.12.4.js"></script>
 	<script src="//code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 	<script src="<?php echo WP_PLUGIN_URL; ?>/transportes-plugin/js/combobox.js"></script>
@@ -48,7 +49,7 @@ function tran_tb_create() {
             <table class='wp-list-table widefat fixed'>
 				<tr>
                     <th class="ss-th-width">Código Trabajador</th>
-					<td><input type="text" name="name" value="<?php echo $name; ?>" class="ss-field-width " /></td>
+					<td><input type="text" name="name_tb" value="<?php echo $name_tb; ?>" class="ss-field-width " /></td>
                 </tr>
 				<tr>
                     <th class="ss-th-width">Rut Trabajador</th>
@@ -78,6 +79,9 @@ function tran_tb_create() {
 		$( ".fecha" ).datepicker();
 		$( ".numero" ).spinner();
 		$("#tabs" ).tabs();
+		$('.combobox').each( function( index, element ){
+			$("option[value="+$(this).attr("value")+"]", this).attr('selected','selected');
+		});
 		
 	</script>
     <?php

@@ -2,9 +2,10 @@
 error_reporting(0);
 function tran_vh_list() {
     ?>
-    <link type="text/css" href="<?php echo WP_PLUGIN_URL; ?>/transportes-plugin/style-admin.css" rel="stylesheet" />
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.13/datatables.min.css"/>
  	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css">
+	<link type="text/css" href="<?php echo WP_PLUGIN_URL; ?>/transportes-plugin/style-admin.css" rel="stylesheet" />
+    
 	<script src="//code.jquery.com/jquery-1.12.4.js"></script>
 	<script src="//code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 	<script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.13/datatables.min.js"></script>
@@ -19,9 +20,9 @@ function tran_vh_list() {
         </div>
         <?php
         global $wpdb;
-        $table_name = $wpdb->prefix . "vh";
+        $table_name = $wpdb->prefix ."vh";
 		
-        $rows = $wpdb->get_results("SELECT id_vh,  name , tipo , Tonelaje , Patente , Marca , Modelo , Año , FechaCompra , estanque , zona , rendimiento , fecUltMantencion , fecRevTecnica , fecGases , fecPermCirculacion , fecCambioAceite , fecCambioFiltro , neumaticoRepuesto , herramientas , chalecoReflectante  from $table_name   ");
+        $rows = $wpdb->get_results("SELECT id_vh, $table_name.name_vh ,$table_name.tipo ,$table_name.Tonelaje ,$table_name.Patente ,$table_name.Marca ,$table_name.Modelo ,$table_name.Año ,$table_name.FechaCompra ,$table_name.estanque ,$table_name.zona ,$table_name.rendimiento ,$table_name.fecUltMantencion ,$table_name.fecRevTecnica ,$table_name.fecGases ,$table_name.fecPermCirculacion ,$table_name.fecCambioAceite ,$table_name.fecCambioFiltro ,$table_name.neumaticoRepuesto ,$table_name.herramientas ,$table_name.chalecoReflectante  from $table_name   ");
         ?>
         <table id ="table_vh" $table_name class='wp-list-table widefat fixed striped posts'>
             <thead>
@@ -59,7 +60,7 @@ function tran_vh_list() {
 					</td>
 					<?php
 					?>
-					<td class="manage-column ss-list-width"><?php echo $row->name; ?></td>
+					<td class="manage-column ss-list-width"><?php echo $row->name_vh; ?></td>
 					<td class="manage-column ss-list-width"><?php echo $row->tipo; ?></td>
 					<td class="manage-column ss-list-width"><?php echo $row->Tonelaje; ?></td>
 					<td class="manage-column ss-list-width"><?php echo $row->Patente; ?></td>

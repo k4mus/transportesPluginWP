@@ -18,6 +18,7 @@ function ot_options_install() {
 	
 	CREATE TABLE $table_name (
             `id_ot` MEDIUMINT NOT NULL AUTO_INCREMENT,
+				`name_ot` varchar(50) CHARACTER SET utf8,
 				`rutEmpOrig` varchar(50) CHARACTER SET utf8,
 				`nomEmporig` varchar(50) CHARACTER SET utf8,
 				`telEmpOrig` MEDIUMINT,
