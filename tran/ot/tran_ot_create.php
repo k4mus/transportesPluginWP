@@ -91,7 +91,7 @@ function tran_ot_create() {
 					<td><select type="text" id= "id_rt" name="id_rt" value="<?php echo $id_rt; ?>  " class="combobox">
 						<option value="">Select one...</option>
 						<?php foreach ($rows_rt as $row_rt) { ?>
-						<option value="<?php echo $row_rt->id_rt; ?>"><?php if ($id_rt)echo $row_rt->name_rt;  else $row_rt->id_rt; ?></option>
+						<option value="<?php echo $row_rt->id_rt; ?>"><?php if ($row_rt->name_rt)echo $row_rt->name_rt;  else echo $row_rt->id_rt; ?></option>
 						<?php } ?>
 						</select>
 					</td>
@@ -190,16 +190,13 @@ function tran_ot_create() {
 		</div>
 		<a href="<?php echo admin_url('admin.php?page='.$page_volver) ?>">&laquo; Volver</a>
     </div>
-	
-	
-    <script>
+	<script>
 		$( ".fecha" ).datepicker();
 		$( ".numero" ).spinner();
 		$("#tabs" ).tabs();
 		$('.combobox').each( function( index, element ){
 			$("option[value="+$(this).attr("value")+"]", this).attr('selected','selected');
 		});
-		
 	</script>
     <?php
 }

@@ -22,7 +22,11 @@ function tran_tb_list() {
         global $wpdb;
         $table_name = $wpdb->prefix ."tb";
 		
-        $rows = $wpdb->get_results("SELECT id_tb, $table_name.name_tb ,$table_name.rut ,$table_name.fechaIng ,$table_name.cargo  from $table_name   ");
+        $rows = $wpdb->get_results("SELECT id_tb,
+		 
+		$table_name.name_tb ,$table_name.rut ,$table_name.fechaIng ,$table_name.cargo  
+		from $table_name 
+		  ");
         ?>
         <table id ="table_tb" $table_name class='wp-list-table widefat fixed striped posts'>
             <thead>

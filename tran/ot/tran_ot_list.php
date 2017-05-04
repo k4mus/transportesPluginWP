@@ -22,7 +22,11 @@ function tran_ot_list() {
         global $wpdb;
         $table_name = $wpdb->prefix ."ot";
 		
-        $rows = $wpdb->get_results("SELECT id_ot, $table_name.name_ot ,$table_name.rutEmpOrig ,$table_name.nomEmporig ,$table_name.telEmpOrig ,$table_name.id_rt ,$table_name.dirEmpOrig ,$table_name.ciudEmpOrig ,$table_name.nomPerOrig ,$table_name.fechaOrig ,$table_name.rutEmpDest ,$table_name.nomEmpDest ,$table_name.telEmpDest ,$table_name.dirEmpDest ,$table_name.ciudEmpDest ,$table_name.nomPerDest ,$table_name.fechaDest ,$table_name.formaPago ,$table_name.cuentaCte ,$table_name.boletaFactura ,$table_name.nroPiezas ,$table_name.pesoCarga ,$table_name.largoCarga ,$table_name.anchoCarga ,$table_name.altoCarga ,$table_name.documentos ,$table_name.instrucciones  from $table_name   ");
+        $rows = $wpdb->get_results("SELECT id_ot,
+		 
+		$table_name.name_ot ,$table_name.rutEmpOrig ,$table_name.nomEmporig ,$table_name.telEmpOrig ,$table_name.id_rt ,$table_name.dirEmpOrig ,$table_name.ciudEmpOrig ,$table_name.nomPerOrig ,$table_name.fechaOrig ,$table_name.rutEmpDest ,$table_name.nomEmpDest ,$table_name.telEmpDest ,$table_name.dirEmpDest ,$table_name.ciudEmpDest ,$table_name.nomPerDest ,$table_name.fechaDest ,$table_name.formaPago ,$table_name.cuentaCte ,$table_name.boletaFactura ,$table_name.nroPiezas ,$table_name.pesoCarga ,$table_name.largoCarga ,$table_name.anchoCarga ,$table_name.altoCarga ,$table_name.documentos ,$table_name.instrucciones  
+		from $table_name 
+		  ");
         ?>
         <table id ="table_ot" $table_name class='wp-list-table widefat fixed striped posts'>
             <thead>

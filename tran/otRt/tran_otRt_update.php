@@ -37,7 +37,11 @@ function tran_otRt_update() {
     else if (isset($_POST['delete'])) {
         $wpdb->query($wpdb->prepare("DELETE FROM $table_name WHERE id_otRt = %s", $id_otRt));
     } else {//selecting value to update	
-        $results = $wpdb->get_results($wpdb->prepare("SELECT id_otRt  ,id_ot  ,id_rt , Monto , Razon , Gasto_ingreso , fecha  from $table_name where id_otRt=%s", $id_otRt));
+        $results = $wpdb->get_results($wpdb->prepare("
+		SELECT id_otRt 
+		 ,id_ot  ,id_rt ,
+		 Monto , Razon , Gasto_ingreso , fecha 
+		from $table_name where id_otRt=%s", $id_otRt));
         foreach ($results as $r) {
             $id_otRt = $r->id_otRt;
 			$id_ot = $r->id_ot;
@@ -84,7 +88,7 @@ function tran_otRt_update() {
 						<td><select type="text" id= "id_ot" name="id_ot" value="<?php echo $id_ot; ?>" <?php if ($id_ot) echo readonly  ?> class="combobox">
 							<option value="">Select one...</option>
 							<?php foreach ($rows_ot as $row_ot) { ?>
-							<option value="<?php echo $row_ot->id_ot; ?>"><?php if ($id_ot)echo $row_ot->name_ot;  else $row_ot->id_ot; ?></option>
+							<option value="<?php echo $row_ot->id_ot; ?>"><?php if ($row_ot->name_ot)echo $row_ot->name_ot;  else echo $row_ot->id_ot; ?></option>
 							<?php } ?>
 							</select>
 						</td>
@@ -94,7 +98,7 @@ function tran_otRt_update() {
 						<td><select type="text" id= "id_rt" name="id_rt" value="<?php echo $id_rt; ?>" <?php if ($id_rt) echo readonly  ?> class="combobox">
 							<option value="">Select one...</option>
 							<?php foreach ($rows_rt as $row_rt) { ?>
-							<option value="<?php echo $row_rt->id_rt; ?>"><?php if ($id_rt)echo $row_rt->name_rt;  else $row_rt->id_rt; ?></option>
+							<option value="<?php echo $row_rt->id_rt; ?>"><?php if ($row_rt->name_rt)echo $row_rt->name_rt;  else echo $row_rt->id_rt; ?></option>
 							<?php } ?>
 							</select>
 						</td>

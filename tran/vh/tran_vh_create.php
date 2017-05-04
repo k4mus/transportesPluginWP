@@ -57,7 +57,7 @@ function tran_vh_create() {
 		endif; ?>
 		<div id="tabs">
 		  <ul>
-			<li><a href="#tabs-1">Orden de Transporte</a></li>
+			<li><a href="#tabs-1">Vehiculos</a></li>
 		  </ul>
 		<div id="tabs-1">
         <form method="post" action="<?php echo $_SERVER['REQUEST_URI']; ?>">
@@ -70,11 +70,14 @@ function tran_vh_create() {
 				<tr>
                     <th class="ss-th-width">tipo</th>
 					<td>
-						<input type="radio" name="tipo" value="FURGON"/>FURGON
-						<input type="radio" name="tipo" value="CAMION"/>CAMION
-						<input type="radio" name="tipo" value="REMOLQUE"/>REMOLQUE
-						<input type="radio" name="tipo" value="SEMIREMOLQUE"/>SEMIREMOLQUE
-						<input type="radio" name="tipo" value="TRACTO"/>TRACTO
+						<select type="text" id= "tipo" name="tipo" value="<?php echo $tipo; ?>  " class="combobox">
+						<option value="">Select one...</option>
+						<option value="FURGON">FURGON</option>
+						<option value="CAMION">CAMION</option>
+						<option value="REMOLQUE">REMOLQUE</option>
+						<option value="SEMIREMOLQUE">SEMIREMOLQUE</option>
+						<option value="TRACTO">TRACTO</option>
+						</select>	
 					</td>
                 </tr>
 				<tr>
@@ -169,16 +172,13 @@ function tran_vh_create() {
 		</div>
 		<a href="<?php echo admin_url('admin.php?page='.$page_volver) ?>">&laquo; Volver</a>
     </div>
-	
-	
-    <script>
+	<script>
 		$( ".fecha" ).datepicker();
 		$( ".numero" ).spinner();
 		$("#tabs" ).tabs();
 		$('.combobox').each( function( index, element ){
 			$("option[value="+$(this).attr("value")+"]", this).attr('selected','selected');
 		});
-		
 	</script>
     <?php
 }

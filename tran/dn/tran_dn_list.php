@@ -22,7 +22,11 @@ function tran_dn_list() {
         global $wpdb;
         $table_name = $wpdb->prefix ."dn";
 		
-        $rows = $wpdb->get_results("SELECT id_dn, $table_name.name_dn ,$table_name.signo  from $table_name   ");
+        $rows = $wpdb->get_results("SELECT id_dn,
+		 
+		$table_name.name_dn ,$table_name.signo  
+		from $table_name 
+		  ");
         ?>
         <table id ="table_dn" $table_name class='wp-list-table widefat fixed striped posts'>
             <thead>

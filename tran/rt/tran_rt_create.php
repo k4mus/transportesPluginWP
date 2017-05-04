@@ -49,7 +49,7 @@ function tran_rt_create() {
 		endif; ?>
 		<div id="tabs">
 		  <ul>
-			<li><a href="#tabs-1">Orden de Transporte</a></li>
+			<li><a href="#tabs-1">Rutas</a></li>
 		  </ul>
 		<div id="tabs-1">
         <form method="post" action="<?php echo $_SERVER['REQUEST_URI']; ?>">
@@ -64,7 +64,7 @@ function tran_rt_create() {
 					<td><select type="text" id= "ciudad_orig" name="ciudad_orig" value="<?php echo $ciudad_orig; ?>  " class="combobox">
 						<option value="">Select one...</option>
 						<?php foreach ($rows_ciudad as $row_ciudad) { ?>
-						<option value="<?php echo $row_ciudad->id_ciudad; ?>"><?php if ($ciudad_orig)echo $row_ciudad->name_ciudad;  else $row_ciudad->id_ciudad; ?></option>
+						<option value="<?php echo $row_ciudad->id_ciudad; ?>"><?php if ($row_ciudad->name_ciudad)echo $row_ciudad->name_ciudad;  else echo $row_ciudad->id_ciudad; ?></option>
 						<?php } ?>
 						</select>
 					</td>
@@ -74,7 +74,7 @@ function tran_rt_create() {
 					<td><select type="text" id= "comuna_orig" name="comuna_orig" value="<?php echo $comuna_orig; ?>  " class="combobox">
 						<option value="">Select one...</option>
 						<?php foreach ($rows_comuna as $row_comuna) { ?>
-						<option value="<?php echo $row_comuna->id_comuna; ?>"><?php if ($comuna_orig)echo $row_comuna->name_comuna;  else $row_comuna->id_comuna; ?></option>
+						<option value="<?php echo $row_comuna->id_comuna; ?>"><?php if ($row_comuna->name_comuna)echo $row_comuna->name_comuna;  else echo $row_comuna->id_comuna; ?></option>
 						<?php } ?>
 						</select>
 					</td>
@@ -84,7 +84,7 @@ function tran_rt_create() {
 					<td><select type="text" id= "ciudad_dest" name="ciudad_dest" value="<?php echo $ciudad_dest; ?>  " class="combobox">
 						<option value="">Select one...</option>
 						<?php foreach ($rows_ciudad as $row_ciudad) { ?>
-						<option value="<?php echo $row_ciudad->id_ciudad; ?>"><?php if ($ciudad_dest)echo $row_ciudad->name_ciudad;  else $row_ciudad->id_ciudad; ?></option>
+						<option value="<?php echo $row_ciudad->id_ciudad; ?>"><?php if ($row_ciudad->name_ciudad)echo $row_ciudad->name_ciudad;  else echo $row_ciudad->id_ciudad; ?></option>
 						<?php } ?>
 						</select>
 					</td>
@@ -94,7 +94,7 @@ function tran_rt_create() {
 					<td><select type="text" id= "comuna_orig" name="comuna_orig" value="<?php echo $comuna_orig; ?>  " class="combobox">
 						<option value="">Select one...</option>
 						<?php foreach ($rows_comuna as $row_comuna) { ?>
-						<option value="<?php echo $row_comuna->id_comuna; ?>"><?php if ($comuna_orig)echo $row_comuna->name_comuna;  else $row_comuna->id_comuna; ?></option>
+						<option value="<?php echo $row_comuna->id_comuna; ?>"><?php if ($row_comuna->name_comuna)echo $row_comuna->name_comuna;  else echo $row_comuna->id_comuna; ?></option>
 						<?php } ?>
 						</select>
 					</td>
@@ -118,16 +118,13 @@ function tran_rt_create() {
 		</div>
 		<a href="<?php echo admin_url('admin.php?page='.$page_volver) ?>">&laquo; Volver</a>
     </div>
-	
-	
-    <script>
+	<script>
 		$( ".fecha" ).datepicker();
 		$( ".numero" ).spinner();
 		$("#tabs" ).tabs();
 		$('.combobox').each( function( index, element ){
 			$("option[value="+$(this).attr("value")+"]", this).attr('selected','selected');
 		});
-		
 	</script>
     <?php
 }

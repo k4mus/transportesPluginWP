@@ -26,7 +26,14 @@ function tran_vjTb_list($id_vj,$id_tb) {
 		if(!$iid_vj)$iid_vj=$table_name .".id_vj";	
 		$iid_tb=$id_tb;
 		if(!$iid_tb)$iid_tb=$table_name .".id_tb";	
-        $rows = $wpdb->get_results("SELECT id_vjTb, " .$wpdb->prefix ."vj.name_vj, " .$wpdb->prefix ."tb.name_tb, $table_name.Rol ,$table_name.Razon ,$table_name.Gasto_ingreso ,$table_name.fecha  from $table_name   left join " .$wpdb->prefix ."vj on " .$wpdb->prefix ."vj.id_vj = $table_name.id_vj    left join " .$wpdb->prefix ."tb on " .$wpdb->prefix ."tb.id_tb = $table_name.id_tb    where  $table_name.id_vj=$iid_vj  AND    $table_name.id_tb=$iid_tb    ");
+        $rows = $wpdb->get_results("SELECT id_vjTb,
+		 " .$wpdb->prefix ."vj.name_vj, " .$wpdb->prefix ."tb.name_tb, 
+		$table_name.Rol ,$table_name.Razon ,$table_name.Gasto_ingreso ,$table_name.fecha  
+		from $table_name 
+		  left join " .$wpdb->prefix ."vj on " .$wpdb->prefix ."vj.id_vj = $table_name.id_vj    left join " .$wpdb->prefix ."tb on " .$wpdb->prefix ."tb.id_tb = $table_name.id_tb    
+		where  $table_name.id_vj=$iid_vj  AND  
+		 $table_name.id_tb=$iid_tb  
+		 ");
         ?>
         <table id ="table_vjTb" $table_name class='wp-list-table widefat fixed striped posts'>
             <thead>

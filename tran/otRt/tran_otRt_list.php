@@ -26,7 +26,14 @@ function tran_otRt_list($id_ot,$id_rt) {
 		if(!$iid_ot)$iid_ot=$table_name .".id_ot";	
 		$iid_rt=$id_rt;
 		if(!$iid_rt)$iid_rt=$table_name .".id_rt";	
-        $rows = $wpdb->get_results("SELECT id_otRt, " .$wpdb->prefix ."ot.name_ot, " .$wpdb->prefix ."rt.name_rt, $table_name.Monto ,$table_name.Razon ,$table_name.Gasto_ingreso ,$table_name.fecha  from $table_name   left join " .$wpdb->prefix ."ot on " .$wpdb->prefix ."ot.id_ot = $table_name.id_ot    left join " .$wpdb->prefix ."rt on " .$wpdb->prefix ."rt.id_rt = $table_name.id_rt    where  $table_name.id_ot=$iid_ot  AND    $table_name.id_rt=$iid_rt    ");
+        $rows = $wpdb->get_results("SELECT id_otRt,
+		 " .$wpdb->prefix ."ot.name_ot, " .$wpdb->prefix ."rt.name_rt, 
+		$table_name.Monto ,$table_name.Razon ,$table_name.Gasto_ingreso ,$table_name.fecha  
+		from $table_name 
+		  left join " .$wpdb->prefix ."ot on " .$wpdb->prefix ."ot.id_ot = $table_name.id_ot    left join " .$wpdb->prefix ."rt on " .$wpdb->prefix ."rt.id_rt = $table_name.id_rt    
+		where  $table_name.id_ot=$iid_ot  AND  
+		 $table_name.id_rt=$iid_rt  
+		 ");
         ?>
         <table id ="table_otRt" $table_name class='wp-list-table widefat fixed striped posts'>
             <thead>

@@ -50,7 +50,11 @@ function tran_ot_update() {
     else if (isset($_POST['delete'])) {
         $wpdb->query($wpdb->prepare("DELETE FROM $table_name WHERE id_ot = %s", $id_ot));
     } else {//selecting value to update	
-        $results = $wpdb->get_results($wpdb->prepare("SELECT id_ot , name_ot , rutEmpOrig , nomEmporig , telEmpOrig , id_rt , dirEmpOrig , ciudEmpOrig , nomPerOrig , fechaOrig , rutEmpDest , nomEmpDest , telEmpDest , dirEmpDest , ciudEmpDest , nomPerDest , fechaDest , formaPago , cuentaCte , boletaFactura , nroPiezas , pesoCarga , largoCarga , anchoCarga , altoCarga , documentos , instrucciones  from $table_name where id_ot=%s", $id_ot));
+        $results = $wpdb->get_results($wpdb->prepare("
+		SELECT id_ot 
+		,
+		 name_ot , rutEmpOrig , nomEmporig , telEmpOrig , id_rt , dirEmpOrig , ciudEmpOrig , nomPerOrig , fechaOrig , rutEmpDest , nomEmpDest , telEmpDest , dirEmpDest , ciudEmpDest , nomPerDest , fechaDest , formaPago , cuentaCte , boletaFactura , nroPiezas , pesoCarga , largoCarga , anchoCarga , altoCarga , documentos , instrucciones 
+		from $table_name where id_ot=%s", $id_ot));
         foreach ($results as $r) {
             $id_ot = $r->id_ot;
 			$name_ot = $r->name_ot;
@@ -129,7 +133,7 @@ function tran_ot_update() {
 					<td><select type="text" id= "id_rt" name="id_rt" value="<?php echo $id_rt; ?>  " class="combobox">
 						<option value="">Select one...</option>
 						<?php foreach ($rows_rt as $row_rt) { ?>
-						<option value="<?php echo $row_rt->id_rt; ?>"><?php if ($id_rt)echo $row_rt->name_rt;  else $row_rt->id_rt; ?></option>
+						<option value="<?php echo $row_rt->id_rt; ?>"><?php if ($row_rt->name_rt)echo $row_rt->name_rt;  else echo $row_rt->id_rt; ?></option>
 						<?php } ?>
 						</select>
 					</td>

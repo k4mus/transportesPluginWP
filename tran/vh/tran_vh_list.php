@@ -22,7 +22,11 @@ function tran_vh_list() {
         global $wpdb;
         $table_name = $wpdb->prefix ."vh";
 		
-        $rows = $wpdb->get_results("SELECT id_vh, $table_name.name_vh ,$table_name.tipo ,$table_name.Tonelaje ,$table_name.Patente ,$table_name.Marca ,$table_name.Modelo ,$table_name.Año ,$table_name.FechaCompra ,$table_name.estanque ,$table_name.zona ,$table_name.rendimiento ,$table_name.fecUltMantencion ,$table_name.fecRevTecnica ,$table_name.fecGases ,$table_name.fecPermCirculacion ,$table_name.fecCambioAceite ,$table_name.fecCambioFiltro ,$table_name.neumaticoRepuesto ,$table_name.herramientas ,$table_name.chalecoReflectante  from $table_name   ");
+        $rows = $wpdb->get_results("SELECT id_vh,
+		 
+		$table_name.name_vh ,$table_name.tipo ,$table_name.Tonelaje ,$table_name.Patente ,$table_name.Marca ,$table_name.Modelo ,$table_name.Año ,$table_name.FechaCompra ,$table_name.estanque ,$table_name.zona ,$table_name.rendimiento ,$table_name.fecUltMantencion ,$table_name.fecRevTecnica ,$table_name.fecGases ,$table_name.fecPermCirculacion ,$table_name.fecCambioAceite ,$table_name.fecCambioFiltro ,$table_name.neumaticoRepuesto ,$table_name.herramientas ,$table_name.chalecoReflectante  
+		from $table_name 
+		  ");
         ?>
         <table id ="table_vh" $table_name class='wp-list-table widefat fixed striped posts'>
             <thead>

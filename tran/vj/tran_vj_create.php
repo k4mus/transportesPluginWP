@@ -40,7 +40,7 @@ function tran_vj_create() {
 		endif; ?>
 		<div id="tabs">
 		  <ul>
-			<li><a href="#tabs-1">Orden de Transporte</a></li>
+			<li><a href="#tabs-1">Orden de Viaje</a></li>
 		  </ul>
 		<div id="tabs-1">
         <form method="post" action="<?php echo $_SERVER['REQUEST_URI']; ?>">
@@ -65,16 +65,13 @@ function tran_vj_create() {
 		</div>
 		<a href="<?php echo admin_url('admin.php?page='.$page_volver) ?>">&laquo; Volver</a>
     </div>
-	
-	
-    <script>
+	<script>
 		$( ".fecha" ).datepicker();
 		$( ".numero" ).spinner();
 		$("#tabs" ).tabs();
 		$('.combobox').each( function( index, element ){
 			$("option[value="+$(this).attr("value")+"]", this).attr('selected','selected');
 		});
-		
 	</script>
     <?php
 }

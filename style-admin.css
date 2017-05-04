@@ -6,12 +6,9 @@
 .custom-combobox {
 position: relative;
 display: inline;
-padding: .5em 2em .3em .3em;
+padding: .5em 4em .5em .1em;
 }
-.ui-button {
-    padding: 2em 2em .5em .2em;
-    display: inline;
-}
+
 .custom-combobox-toggle {
 position: absolute;
 top: 0;

@@ -22,7 +22,11 @@ function tran_vj_list() {
         global $wpdb;
         $table_name = $wpdb->prefix ."vj";
 		
-        $rows = $wpdb->get_results("SELECT id_vj, $table_name.name_vj ,$table_name.nombreEmpresa ,$table_name.fecha  from $table_name   ");
+        $rows = $wpdb->get_results("SELECT id_vj,
+		 
+		$table_name.name_vj ,$table_name.nombreEmpresa ,$table_name.fecha  
+		from $table_name 
+		  ");
         ?>
         <table id ="table_vj" $table_name class='wp-list-table widefat fixed striped posts'>
             <thead>

@@ -22,7 +22,11 @@ function tran_rt_list() {
         global $wpdb;
         $table_name = $wpdb->prefix ."rt";
 		
-        $rows = $wpdb->get_results("SELECT id_rt, $table_name.name_rt ,$table_name.ciudad_orig ,$table_name.comuna_orig ,$table_name.ciudad_dest ,$table_name.comuna_orig ,$table_name.kms ,$table_name.precioBase ,$table_name.precioExtencion  from $table_name   ");
+        $rows = $wpdb->get_results("SELECT id_rt,
+		 
+		$table_name.name_rt ,$table_name.ciudad_orig ,$table_name.comuna_orig ,$table_name.ciudad_dest ,$table_name.comuna_orig ,$table_name.kms ,$table_name.precioBase ,$table_name.precioExtencion  
+		from $table_name 
+		  ");
         ?>
         <table id ="table_rt" $table_name class='wp-list-table widefat fixed striped posts'>
             <thead>

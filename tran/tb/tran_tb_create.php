@@ -41,7 +41,7 @@ function tran_tb_create() {
 		endif; ?>
 		<div id="tabs">
 		  <ul>
-			<li><a href="#tabs-1">Orden de Transporte</a></li>
+			<li><a href="#tabs-1">Trabajadores</a></li>
 		  </ul>
 		<div id="tabs-1">
         <form method="post" action="<?php echo $_SERVER['REQUEST_URI']; ?>">
@@ -62,8 +62,11 @@ function tran_tb_create() {
 				<tr>
                     <th class="ss-th-width">Cargo</th>
 					<td>
-						<input type="radio" name="cargo" value="Chofer"/>Chofer
-						<input type="radio" name="cargo" value="Pioneta"/>Pioneta
+						<select type="text" id= "cargo" name="cargo" value="<?php echo $cargo; ?>  " class="combobox">
+						<option value="">Select one...</option>
+						<option value="Chofer">Chofer</option>
+						<option value="Pioneta">Pioneta</option>
+						</select>	
 					</td>
                 </tr>
             </table>
@@ -73,16 +76,13 @@ function tran_tb_create() {
 		</div>
 		<a href="<?php echo admin_url('admin.php?page='.$page_volver) ?>">&laquo; Volver</a>
     </div>
-	
-	
-    <script>
+	<script>
 		$( ".fecha" ).datepicker();
 		$( ".numero" ).spinner();
 		$("#tabs" ).tabs();
 		$('.combobox').each( function( index, element ){
 			$("option[value="+$(this).attr("value")+"]", this).attr('selected','selected');
 		});
-		
 	</script>
     <?php
 }

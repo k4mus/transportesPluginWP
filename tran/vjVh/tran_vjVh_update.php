@@ -37,7 +37,11 @@ function tran_vjVh_update() {
     else if (isset($_POST['delete'])) {
         $wpdb->query($wpdb->prepare("DELETE FROM $table_name WHERE id_vjVh = %s", $id_vjVh));
     } else {//selecting value to update	
-        $results = $wpdb->get_results($wpdb->prepare("SELECT id_vjVh  ,id_vj  ,id_vh , km , fecha , estanque , obvservacion  from $table_name where id_vjVh=%s", $id_vjVh));
+        $results = $wpdb->get_results($wpdb->prepare("
+		SELECT id_vjVh 
+		 ,id_vj  ,id_vh ,
+		 km , fecha , estanque , obvservacion 
+		from $table_name where id_vjVh=%s", $id_vjVh));
         foreach ($results as $r) {
             $id_vjVh = $r->id_vjVh;
 			$id_vj = $r->id_vj;
@@ -84,7 +88,7 @@ function tran_vjVh_update() {
 						<td><select type="text" id= "id_vj" name="id_vj" value="<?php echo $id_vj; ?>" <?php if ($id_vj) echo readonly  ?> class="combobox">
 							<option value="">Select one...</option>
 							<?php foreach ($rows_vj as $row_vj) { ?>
-							<option value="<?php echo $row_vj->id_vj; ?>"><?php if ($id_vj)echo $row_vj->name_vj;  else $row_vj->id_vj; ?></option>
+							<option value="<?php echo $row_vj->id_vj; ?>"><?php if ($row_vj->name_vj)echo $row_vj->name_vj;  else echo $row_vj->id_vj; ?></option>
 							<?php } ?>
 							</select>
 						</td>
@@ -94,7 +98,7 @@ function tran_vjVh_update() {
 						<td><select type="text" id= "id_vh" name="id_vh" value="<?php echo $id_vh; ?>" <?php if ($id_vh) echo readonly  ?> class="combobox">
 							<option value="">Select one...</option>
 							<?php foreach ($rows_vh as $row_vh) { ?>
-							<option value="<?php echo $row_vh->id_vh; ?>"><?php if ($id_vh)echo $row_vh->name_vh;  else $row_vh->id_vh; ?></option>
+							<option value="<?php echo $row_vh->id_vh; ?>"><?php if ($row_vh->name_vh)echo $row_vh->name_vh;  else echo $row_vh->id_vh; ?></option>
 							<?php } ?>
 							</select>
 						</td>

@@ -25,7 +25,11 @@ function tran_dn_update() {
     else if (isset($_POST['delete'])) {
         $wpdb->query($wpdb->prepare("DELETE FROM $table_name WHERE id_dn = %s", $id_dn));
     } else {//selecting value to update	
-        $results = $wpdb->get_results($wpdb->prepare("SELECT id_dn , name_dn , signo  from $table_name where id_dn=%s", $id_dn));
+        $results = $wpdb->get_results($wpdb->prepare("
+		SELECT id_dn 
+		,
+		 name_dn , signo 
+		from $table_name where id_dn=%s", $id_dn));
         foreach ($results as $r) {
             $id_dn = $r->id_dn;
 			$name_dn = $r->name_dn;

@@ -27,7 +27,11 @@ function tran_tb_update() {
     else if (isset($_POST['delete'])) {
         $wpdb->query($wpdb->prepare("DELETE FROM $table_name WHERE id_tb = %s", $id_tb));
     } else {//selecting value to update	
-        $results = $wpdb->get_results($wpdb->prepare("SELECT id_tb , name_tb , rut , fechaIng , cargo  from $table_name where id_tb=%s", $id_tb));
+        $results = $wpdb->get_results($wpdb->prepare("
+		SELECT id_tb 
+		,
+		 name_tb , rut , fechaIng , cargo 
+		from $table_name where id_tb=%s", $id_tb));
         foreach ($results as $r) {
             $id_tb = $r->id_tb;
 			$name_tb = $r->name_tb;
@@ -79,8 +83,11 @@ function tran_tb_update() {
 					</tr>
 					<th class="ss-th-width">Cargo</th> 
 					<td>
-						<input type="radio" name="cargo" value="Chofer" <?php if ($cargo=="Chofer") echo 'checked' ?> />Chofer
-						<input type="radio" name="cargo" value="Pioneta" <?php if ($cargo=="Pioneta") echo 'checked' ?> />Pioneta
+						<select type="text" id= "cargo" name="cargo" value="<?php echo $cargo; ?>  " class="combobox">
+						<option value="">Select one...</option>
+						<option value="Chofer">Chofer</option>
+						<option value="Pioneta">Pioneta</option>
+						</select>	
 					</td>
 					</tr>
                 </table>

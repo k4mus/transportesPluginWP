@@ -26,7 +26,11 @@ function tran_vj_update() {
     else if (isset($_POST['delete'])) {
         $wpdb->query($wpdb->prepare("DELETE FROM $table_name WHERE id_vj = %s", $id_vj));
     } else {//selecting value to update	
-        $results = $wpdb->get_results($wpdb->prepare("SELECT id_vj , name_vj , nombreEmpresa , fecha  from $table_name where id_vj=%s", $id_vj));
+        $results = $wpdb->get_results($wpdb->prepare("
+		SELECT id_vj 
+		,
+		 name_vj , nombreEmpresa , fecha 
+		from $table_name where id_vj=%s", $id_vj));
         foreach ($results as $r) {
             $id_vj = $r->id_vj;
 			$name_vj = $r->name_vj;

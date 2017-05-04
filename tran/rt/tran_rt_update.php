@@ -35,7 +35,11 @@ function tran_rt_update() {
     else if (isset($_POST['delete'])) {
         $wpdb->query($wpdb->prepare("DELETE FROM $table_name WHERE id_rt = %s", $id_rt));
     } else {//selecting value to update	
-        $results = $wpdb->get_results($wpdb->prepare("SELECT id_rt , name_rt , ciudad_orig , comuna_orig , ciudad_dest , comuna_orig , kms , precioBase , precioExtencion  from $table_name where id_rt=%s", $id_rt));
+        $results = $wpdb->get_results($wpdb->prepare("
+		SELECT id_rt 
+		,
+		 name_rt , ciudad_orig , comuna_orig , ciudad_dest , comuna_orig , kms , precioBase , precioExtencion 
+		from $table_name where id_rt=%s", $id_rt));
         foreach ($results as $r) {
             $id_rt = $r->id_rt;
 			$name_rt = $r->name_rt;
@@ -87,7 +91,7 @@ function tran_rt_update() {
 					<td><select type="text" id= "ciudad_orig" name="ciudad_orig" value="<?php echo $ciudad_orig; ?>  " class="combobox">
 						<option value="">Select one...</option>
 						<?php foreach ($rows_ciudad as $row_ciudad) { ?>
-						<option value="<?php echo $row_ciudad->id_ciudad; ?>"><?php if ($ciudad_orig)echo $row_ciudad->name_ciudad;  else $row_ciudad->id_ciudad; ?></option>
+						<option value="<?php echo $row_ciudad->id_ciudad; ?>"><?php if ($row_ciudad->name_ciudad)echo $row_ciudad->name_ciudad;  else echo $row_ciudad->id_ciudad; ?></option>
 						<?php } ?>
 						</select>
 					</td>
@@ -96,7 +100,7 @@ function tran_rt_update() {
 					<td><select type="text" id= "comuna_orig" name="comuna_orig" value="<?php echo $comuna_orig; ?>  " class="combobox">
 						<option value="">Select one...</option>
 						<?php foreach ($rows_comuna as $row_comuna) { ?>
-						<option value="<?php echo $row_comuna->id_comuna; ?>"><?php if ($comuna_orig)echo $row_comuna->name_comuna;  else $row_comuna->id_comuna; ?></option>
+						<option value="<?php echo $row_comuna->id_comuna; ?>"><?php if ($row_comuna->name_comuna)echo $row_comuna->name_comuna;  else echo $row_comuna->id_comuna; ?></option>
 						<?php } ?>
 						</select>
 					</td>
@@ -105,7 +109,7 @@ function tran_rt_update() {
 					<td><select type="text" id= "ciudad_dest" name="ciudad_dest" value="<?php echo $ciudad_dest; ?>  " class="combobox">
 						<option value="">Select one...</option>
 						<?php foreach ($rows_ciudad as $row_ciudad) { ?>
-						<option value="<?php echo $row_ciudad->id_ciudad; ?>"><?php if ($ciudad_dest)echo $row_ciudad->name_ciudad;  else $row_ciudad->id_ciudad; ?></option>
+						<option value="<?php echo $row_ciudad->id_ciudad; ?>"><?php if ($row_ciudad->name_ciudad)echo $row_ciudad->name_ciudad;  else echo $row_ciudad->id_ciudad; ?></option>
 						<?php } ?>
 						</select>
 					</td>
@@ -114,7 +118,7 @@ function tran_rt_update() {
 					<td><select type="text" id= "comuna_orig" name="comuna_orig" value="<?php echo $comuna_orig; ?>  " class="combobox">
 						<option value="">Select one...</option>
 						<?php foreach ($rows_comuna as $row_comuna) { ?>
-						<option value="<?php echo $row_comuna->id_comuna; ?>"><?php if ($comuna_orig)echo $row_comuna->name_comuna;  else $row_comuna->id_comuna; ?></option>
+						<option value="<?php echo $row_comuna->id_comuna; ?>"><?php if ($row_comuna->name_comuna)echo $row_comuna->name_comuna;  else echo $row_comuna->id_comuna; ?></option>
 						<?php } ?>
 						</select>
 					</td>

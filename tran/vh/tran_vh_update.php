@@ -43,7 +43,11 @@ function tran_vh_update() {
     else if (isset($_POST['delete'])) {
         $wpdb->query($wpdb->prepare("DELETE FROM $table_name WHERE id_vh = %s", $id_vh));
     } else {//selecting value to update	
-        $results = $wpdb->get_results($wpdb->prepare("SELECT id_vh , name_vh , tipo , Tonelaje , Patente , Marca , Modelo , Año , FechaCompra , estanque , zona , rendimiento , fecUltMantencion , fecRevTecnica , fecGases , fecPermCirculacion , fecCambioAceite , fecCambioFiltro , neumaticoRepuesto , herramientas , chalecoReflectante  from $table_name where id_vh=%s", $id_vh));
+        $results = $wpdb->get_results($wpdb->prepare("
+		SELECT id_vh 
+		,
+		 name_vh , tipo , Tonelaje , Patente , Marca , Modelo , Año , FechaCompra , estanque , zona , rendimiento , fecUltMantencion , fecRevTecnica , fecGases , fecPermCirculacion , fecCambioAceite , fecCambioFiltro , neumaticoRepuesto , herramientas , chalecoReflectante 
+		from $table_name where id_vh=%s", $id_vh));
         foreach ($results as $r) {
             $id_vh = $r->id_vh;
 			$name_vh = $r->name_vh;
@@ -105,11 +109,14 @@ function tran_vh_update() {
 					</tr>
 					<th class="ss-th-width">tipo</th> 
 					<td>
-						<input type="radio" name="tipo" value="FURGON" <?php if ($tipo=="FURGON") echo 'checked' ?> />FURGON
-						<input type="radio" name="tipo" value="CAMION" <?php if ($tipo=="CAMION") echo 'checked' ?> />CAMION
-						<input type="radio" name="tipo" value="REMOLQUE" <?php if ($tipo=="REMOLQUE") echo 'checked' ?> />REMOLQUE
-						<input type="radio" name="tipo" value="SEMIREMOLQUE" <?php if ($tipo=="SEMIREMOLQUE") echo 'checked' ?> />SEMIREMOLQUE
-						<input type="radio" name="tipo" value="TRACTO" <?php if ($tipo=="TRACTO") echo 'checked' ?> />TRACTO
+						<select type="text" id= "tipo" name="tipo" value="<?php echo $tipo; ?>  " class="combobox">
+						<option value="">Select one...</option>
+						<option value="FURGON">FURGON</option>
+						<option value="CAMION">CAMION</option>
+						<option value="REMOLQUE">REMOLQUE</option>
+						<option value="SEMIREMOLQUE">SEMIREMOLQUE</option>
+						<option value="TRACTO">TRACTO</option>
+						</select>	
 					</td>
 					</tr>
 					<th class="ss-th-width">Tonelaje</th> 
